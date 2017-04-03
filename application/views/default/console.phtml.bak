@@ -1,0 +1,192 @@
+<?php
+global $config;
+global $lang;
+global $debugMode;
+global $ieBrowser;
+global $util;
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title><?php
+echo $lang ['ECMAppName'];
+?></title>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"> 
+<link id="page_favicon" href="favicon.ico" rel="icon" type="image/x-icon" />
+		<?php
+		
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/ecmCoreCSS.css' );
+		if($config['wordwrap']) {
+			$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/wordwrap.css' );	
+		}
+		$this->headLink ()->appendStylesheet ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/resources/css/ext-all.css' );
+		
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/ColumnTree.css' );
+		
+		//$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/search.css' );
+		//$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/grid.css' );
+		//$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/tab.css' );
+		//$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/columnlist.css' );
+
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/Ext.ux.ColorField.css' );
+		$this->headLink ()->appendStylesheet ( '/' . $config ['runtimeJS'] . '/jscalendar/calendar-system.css' );
+
+		$theme = $util->getTheme ( $config ['theme'] );
+		
+		if ($theme != '') {
+			$this->headLink ()->appendStylesheet ( $theme );
+		}
+		
+		echo $this->headLink ();
+		
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/md5.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/jquery/jquery-1.3.2.min.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/jscalendar/calendar.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/jscalendar/lang/calendar-th.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/adapter/ext/ext-base.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ext-all.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/source/locale/ext-lang-th.js' );
+		
+		if($config['libVersion']['ext'] == '2.2') {
+			$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ExtFixBug.js' );
+		}
+        
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.wam.PropertyGrid.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/Ext.ux.wam.ColorField.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.DateField.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.CheckColumn.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ColumnTree.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/cookie.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/functions.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/Portal.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/PortalColumn.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Portlet.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/sample-grid.js' );
+		//$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/persist-js/persist.js' );
+		
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.securitySearch.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/persist-js/persist.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ECMPersist.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.PersistStateProvider.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.GroupSummary.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/ecm-js/main-js'. $this->PLM );
+		
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/adminExtJS.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/rankManagement.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/rankManagement.js' );
+		
+		
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/menu/EditableItem.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/menu/RangeMenu.js' );
+		
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/GridFilters.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/Filter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/StringFilter.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/ux/grid/filter/DateFilter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/ListFilter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/NumericFilter.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/ux/grid/filter/BooleanFilter.js' );
+
+        $this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.row.js' );
+        $this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/FileUploadField.js' );
+		//$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.Reset.File.js' );
+		
+		if ($debugMode && $ieBrowser) {
+			$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/firebug/firebug.js' );
+		}
+        
+        /*
+        if ($debugMode && $ieBrowser) {
+            $this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/firebuglite/firebug-lite.js' );
+        }
+        */
+		
+		//$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/firebug/firebugx.js' );
+		//$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ecmCoreJS.js' );
+		
+
+		echo $this->headScript ();
+		?>
+ 		<style type="text/css">
+html,body {
+	font: normal 12px verdana;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	overflow: hidden;
+	height: 100%;
+}
+</style>
+<link rel="alternate" type="application/rss+xml" title="BenefitECM RSS" href="/<?php echo $config['appName']?>/rss/published" />
+</head>
+<body style="margin: 0px;"
+	<?php
+	//$bubbleMsg = $util->bubbleMsg('Benefit&copy; ECM','Application Initialized');
+	//echo "onload=\"Ext.ECM.init();{$bubbleMsg}\"";
+	echo "onload=\"Ext.ECM.init();\"";
+	?>
+	>
+<div id="msg-div"></div>
+<div id="north" align="left">
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td width="172"><img
+			src="/<?php
+			echo $config ['appName'];
+			?>/images/logo/<?
+			echo $config ['logo'];
+			?>.gif"
+			alt="Benefit&copy; ECM&trade;" /></td>
+		<td align="right">
+		<table width="100%" align="right">
+			<tr align="right">
+				<td align="right">
+				<table>
+					<tr>
+						<td><span class="personalInfoBar"><img src="./images/uid.gif" />
+										<?php
+										echo $this->fullname;
+										?> </span></td>
+						<td><span class="personalInfoBar"><img src="./images/gid.gif" />
+										<?php
+										echo $this->orgname;
+										?> </span></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			<tr align="right">
+				<td align="right">
+				<table>
+					<tr>
+						<td><?php
+						if ($this->orggroup != '') {
+							echo "<span class=\"personalInfoBar\"><img
+											src=\"./images/groupIcon.gif\" />{$this->orggroup}</span>";
+						}
+						?></td>
+						<td><span class="personalInfoBar"><img src="./images/roleIcon.gif" />
+										<?php
+										echo $this->rolename;
+										?></span></td>
+						<td><span class="personalInfoBar"><img
+							src="./images/calendarIcon.gif" /> <?php
+							echo $this->workingYear;
+							?> </span></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</td>
+		<td align="right" width="1"><img src="./images/logoutIcon.gif"
+			style="cursor: pointer;" onclick="logout();" alt="Logout" /></td>
+	</tr>
+</table>
+</div>
+<div id="adminHome"></div>
+<form id="logoutForm" name="logoutForm" method="POST"
+	action="/<?php	echo $config ['appName'];?>/login/logout"><input type="hidden" name="confirmLogout" value="" /></form>
+</body>
+</html>

@@ -1,0 +1,99 @@
+window.moveTo(0,0);
+if (document.all) 
+{
+	top.window.resizeTo(screen.availWidth,screen.availHeight);
+}
+else if (document.layers||document.getElementById) 
+{
+	if (top.window.outerHeight<screen.availHeight||top.window.outerWidth<screen.availWidth)
+	{
+		top.window.outerHeight = screen.availHeight;
+		top.window.outerWidth = screen.availWidth;
+	}
+}
+
+            function openRoomBooking(date)
+            {
+                $.modal({
+                    url: '/ECM/room/booking/?date='+date,
+                    //content: '',
+                    title: 'จองห้องประชุม ',
+                    maxWidth: 800,
+                    width: 600,
+                    height: 560
+//                    , buttons: {
+//                        'บันทึก': function(win) {
+//                            if(validate_form()){
+//                                alert('ok');
+//                            }else{
+//                                alert('fail');
+//                            }
+                            //win.closeModal();
+//                        },
+//                        'ยกเลิก': function(win) {
+//                            win.closeModal();
+//                        }
+//                    }
+                });
+            }
+
+            function openRoomBookingDetail(id)
+            {
+                $.modal({
+                    url: '/ECM/room/booking/?id='+id,
+                    //content: '',
+                    title: 'แก้ไขการจองห้องประชุม',
+                    maxWidth: 800,
+                    width: 600,
+                    height: 560//,
+//                    buttons: {
+//                        '<img src="/<?=$config ['appName']?>/reservation/images/icons/btn_print.gif" width="16" height="16"> พิมพ์': function(win) {
+//                            win.closeModal();
+//                        },
+//                        'บันทึก': function(win) {
+//                            win.closeModal();
+//                        },
+//                        'ยกเลิก': function(win) {
+//                            win.closeModal();
+//                        }
+//                    }
+                });
+            }
+			
+			
+
+            function openRoomDetail(id, name)
+            {
+                $.modal({
+                    url: '/ECM/room/room-detail/?id=' + id,
+                    //content: '',
+                    title: name,
+                    maxWidth: 800,
+                    width: 600,
+                    height: 500,
+                    buttons: {
+                        'ปิด': function(win) {
+                            win.closeModal();
+                        }
+                    }
+                });
+                //$(this).getModalWindow().loadModalContent('/<?php echo $config ['appName']?>/room/room-detail/?id=' + id);
+            }
+			
+            function openFoodDetail(id, name)
+            {
+                $.modal({
+                    url: '/ECM/room/food-detail/?id=' + id,
+                    //content: '',
+                    title: name,
+                    maxWidth: 800,
+                    width: 600,
+                    height: 500,
+                    buttons: {
+                        'ปิด': function(win) {
+                            win.closeModal();
+                        }
+                    }
+                });
+                //$(this).getModalWindow().loadModalContent('/<?php echo $config ['appName']?>/room/room-detail/?id=' + id);
+            }

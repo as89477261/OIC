@@ -1,0 +1,25 @@
+<div>
+	<table border="1">
+	<thead>
+		<tr>
+			<th></th>
+			<? BEGIN(FOREACH,driver) ?>
+			<th>{first_name} {last_name}</th>
+			<? END(FOREACH) ?>
+		</tr>
+	</thead>
+	<tbody>
+		<? BEGIN(FOREACH,data_report) ?>
+		<tr>
+			<td>Ле {year}</td>
+			<? BEGIN(FOREACH,count_data) ?>
+			<td>
+				{data}
+			</td>
+			<? END(FOREACH) ?>
+		</tr>
+		<? END(FOREACH) ?>
+	</tbody>
+
+</table>
+</div>

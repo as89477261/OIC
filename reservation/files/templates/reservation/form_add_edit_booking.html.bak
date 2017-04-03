@@ -1,0 +1,217 @@
+<script type="text/javascript">
+	$("#booking_go_date").datepick(datepickDefaults);
+	$("#booking_back_date").datepick(datepickDefault);
+	$("#booking_go_date").datepick('option',{'minDate':$.datepick.today()});
+	$("#booking_back_date").datepick('option',{'minDate':$.datepick.today()});
+	$("#modal").css("z-index", 100);
+    $(".datepicker").css({'z-index':parseInt($("#modal").css("z-index"))+1000000});
+</script>
+
+<script type='text/javascript' src='resources/js/autocomplete/thickbox-compressed.js'></script>
+<script type='text/javascript' src='resources/js/autocomplete/jquery.autocomplete.js'></script>
+
+<link rel="stylesheet" type="text/css" href="resources/css/autocomplete/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/autocomplete/thickbox.css" />
+
+<script type="text/javascript">
+$().ready(function() {
+	$("#chief_name").autocomplete("{MainUrl}?fid=find-cheif-id",{
+		formatItem: function(data, i, n, value) {
+			return value.split(":")[1];
+		},
+		formatResult: function(data, value) {
+			return value.split(":")[1];
+		},
+		returnKeyOut: "#chief_id",
+		max:40
+	});
+	$("[name=booking[province]] option:eq(1)").attr('selected', 'selected');
+	$("[name=booking[province]]").attr('disabled', 'disabled');
+	checkType(0);
+});
+function checkTime()
+{
+		var goHour = $('#booking\\.go_hour').val();
+		var goMinute = $('#booking\\.go_minute').val();
+		var backHour = $('#booking\\.back_hour').val();
+		var backMinute = $('#booking\\.back_minute').val();
+		var goDate = $('#booking_go_date').val();
+		var backDate = $('#booking_back_date').val();
+		var newGoDate = goDate.split('-');
+		var newBackDate = backDate.split('-');
+		var goDateString = (newGoDate[2]-543)+','+newGoDate[1]+','+newGoDate[0];
+		var backDateString = (newBackDate[2]-543)+','+newBackDate[1]+','+newGoDate[0];
+		var myGoDate = new Date(goDateString);
+		var myBackDate = new Date(backDateString);
+		var date1Comp = myGoDate.getTime(); // milliseconds
+		var date2Comp = myBackDate.getTime();
+		var flag = false;
+		if(date1Comp<=date2Comp)
+		{
+		    
+		    var goTime = goHour+'.'+goMinute;
+		    var backTime = backHour+'.'+backMinute;
+		    var timeDiff = goTime-backTime;
+		    if(timeDiff>=0)
+		    {
+			alert('ช่วงเวลาที่คุณเดินทางไปมีค่ามากกว่าช่วงเวลาที่คุณเดินทางกลับ กรุณาเลือกช่วงเวลาใหม่');
+			flag = false;
+		    }
+		    else
+		    {
+			flag = true;
+		    }
+		}
+		return flag;
+}
+
+function checkType(typeId)
+{
+	if(typeId==1)
+	{
+		$("[name=booking[province]]").removeAttr('disabled');
+		$("[name=booking[province]] option:eq(0)").attr('selected', 'selected')
+		$("[name=booking[province]] option:eq(1)").css({'display':'none'});
+		vrules = [
+			['booking[account_name]', 'ชื่อผู้จอง', STRING, YES, null],
+			['booking[position_name]', 'ตำแหน่ง', STRING, YES, null],
+			['booking[deparment_name]', 'หน่วยงาน', STRING, YES, null],
+			['booking[phone]', 'เบอร์โทร', STRING, YES, null],
+			['booking[goto]', 'ชื่อสถานที่ปลายทาง', STRING, YES, null],
+			['booking[road]', 'ถนน', STRING, YES, null],
+			['booking[zone]', 'เขต', STRING, YES, null],
+			['booking[person]', 'จำนวนผู้เดินทาง', STRING, YES, null],
+			['booking[chief_name]', 'หัวหน้าตามสายงาน', STRING, YES, null]
+			
+		];
+		document.forms['action_booking'].onsubmit = function()
+		{
+//		    if(checkTime()==true)
+			
+			return validateForm(this, vrules) && checkTime();
+			
+//		    else
+//			return false;
+		};
+	}
+	else
+	{
+		$("[name=booking[province]] option:eq(1)").attr('selected', 'selected').show();
+		$("[name=booking[province]]").attr('disabled', 'disabled');	
+		vrules = [
+			['booking[account_name]', 'ชื่อผู้จอง', STRING, YES, null],
+			['booking[position_name]', 'ตำแหน่ง', STRING, YES, null],
+			['booking[deparment_name]', 'หน่วยงาน', STRING, YES, null],
+			['booking[phone]', 'เบอร์โทร', STRING, YES, null],
+			['booking[goto]', 'ชื่อสถานที่ปลายทาง', STRING, YES, null],
+			['booking[road]', 'ถนน', STRING, YES, null],
+			['booking[zone]', 'เขต', STRING, YES, null],
+			['booking[person]', 'จำนวนผู้เดินทาง', STRING, YES, null],
+			['booking[chief_name]', 'หัวหน้าตามสายงาน', STRING, YES, null]
+		];
+		document.forms['action_booking'].onsubmit = function()
+		{
+		   //if(checkTime()==true)
+		       return validateForm(this, vrules) && checkTime();
+		       
+		};
+	}
+}
+</script>
+
+<div class="content60">
+	<form name="action_booking" action="{MainUrl}?fid={fid}&booking_id={booking/booking_id}" method="POST" class="form" id="action_booking">
+		<input type="hidden" name="fn" value="save" />
+		<div class="columns">
+			<div class="colx2-left">
+				<p class="required">
+					<label for="sbooking.account_id">ชื่อผู้จอง</label>
+					<input class="full-width" type="text" name="booking[account_name]" id="booking.account_name" value="{booking/account_name}" />
+					<input class="full-width" type="hidden" name="booking[account_id]" id="booking.account_id" value="{booking/account_id}" />
+					<label for="booking.position_id">ตำแหน่ง</label>
+					<input class="full-width" type="text" name="booking[position_name]" id="booking.position_name"  value="{booking/position_name}" />
+					<input class="full-width" type="hidden" name="booking[position_id]" id="booking.position_id"  value="{booking/position_id}" />
+					<label for="booking.department_id">หน่วยงาน</label>
+					<input class="full-width" type="text" name="booking[deparment_name]" id="booking.department_name"  value="{booking/deparment_name}" />
+					<input class="full-width" type="hidden" name="booking[deparment_id]" id="booking.department_id"  value="{booking/deparment_id}" />
+					<label for="booking.phone">เบอร์โทร</label>
+					<input class="full-width" type="text" name="booking[phone]" id="booking.phone"  value="{booking/phone}" />
+				</p>
+				<div class="columns">
+				<p>
+					<input type="radio" name="booking[type]" onclick="checkType(0);" value="0" id="booking.type-0" <? BEGIN(CASE,booking/type) ?><? CASE(0) ?>checked="checked"<? END(CASE) ?> />
+						   <label for="booking.type-0">กทม./นนทบุรี</label>
+						   </p>
+						   <p>
+					<input type="radio" name="booking[type]" onclick="checkType(1)" value="1" id="booking.type-1" <? BEGIN(CASE,booking/type) ?><? CASE(1) ?>checked="checked"<? END(CASE) ?> />
+						   <label for="booking.type-1">ต่างจังหวัด</label>
+						   </p>
+				</div>
+			 <p class="required">
+				<label for="booking_goto">ชื่อสถานที่ปลายทาง</label>
+				<input class="full-width" type="text" name="booking[goto]" id="booking_goto"  value="{booking/goto}" />
+				</p>
+				<p>
+				<label for="booking.address">เลขที่</label>
+				<input class="full-width" type="text" name="booking[address]" id="booking.address"  value="{booking/address}" />
+				</p>
+				 <p class="required">
+				<label for="booking.road">ถนน</label>
+				<input class="full-width" type="text" name="booking[road]" id="booking.road"  value="{booking/road}" />
+				<label for="booking.zone">เขต</label>
+				<input class="full-width" type="text" name="booking[zone]" id="booking.zone"  value="{booking/zone}" />
+			</p>
+			</div>
+			<div class="colx2-right"><p class="required">
+				<label for="simple-action">จังหวัด</label>			  
+				<select name="booking[province]"  id="booking.province">
+					{booking/province_list,OPTIONS}
+				</select>
+			<p class="required">
+				<label for="simple-action">จุดประสงค์</label>
+				<input class="full-width" type="text" name="booking[objective]" id="booking.objective"  value="{booking/objective}" />
+					<label for="simple-action">จำนวนผู้เดินทาง</label>
+					<input class="full-width" type="text" name="booking[person]" id="booking.person"  value="{booking/person}" />
+				</p>
+				<p class="input-with-button">
+					<label for="simple-action">วันที่ไป</label>
+						<input type="text" name="booking[go_date]" id="booking_go_date"  value="{booking/go_date}" readonly="readonly" />
+				</p>
+				<p>
+					<label for="simple-action">เวลาไป</label>
+					<select name="booking[go_hour]" id="booking.go_hour" onchange="checkTime();">
+						{booking/go_hours_list,OPTIONS}
+					</select>
+					<select name="booking[go_minute]" id="booking.go_minute" onchange="checkTime();">
+					{booking/go_minute_list,OPTIONS}
+					</select>
+
+				</p>
+				<p class="input-with-button">
+					<label for="simple-action">วันที่กลับ</label>
+					<!-- <span class="input-type-text"> -->
+						<input type="text" name="booking[back_date]" id="booking_back_date" value="{booking/back_date}" readonly="readonly" />
+						<input type="hidden" id="altBackDateFormat" name="altBackDateFormat" />
+						<!-- <a href="javascript:void(0);" id="booking_back_date_img">
+							<img height="16" width="16" src="resources/images/icons/fugue/calendar-month.png" alt="" />
+						</a>
+					</span> -->
+				</p>
+				<p>
+					<label for="simple-action">เวลากลับ</label>
+					<select name="booking[back_hour]" id="booking.back_hour" onchange="checkTime();">
+					{booking/back_hours_list,OPTIONS}
+					</select>
+					<select name="booking[back_minute]" id="booking.back_minute" onchange="checkTime();">
+					{booking/back_minute_list,OPTIONS}
+					</select>
+				</p>
+				<p class="required">
+					<label for="simple-action">หัวหน้าตามสายงาน</label>
+					<input class="full-width" type="hidden" name="booking[chief_id]" id="chief_id"  value="{booking/chief_id}" />
+					<input class="full-width" type="text" name="booking[chief_name]" id="chief_name"  value="{booking/chief_name}" />
+				</p>
+			</div>
+		</div>
+	</form>
+</div>

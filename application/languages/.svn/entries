@@ -1,0 +1,52 @@
+8
+
+dir
+407
+http://192.168.1.18/ECM/Branch/Revolution/application/languages
+http://192.168.1.18/ECM
+
+
+
+2009-08-25T05:50:11.984375Z
+405
+zelda
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+54fe2830-83b3-844e-bcbc-4e7e24f87afd
+
+main_th.php
+file
+
+
+
+
+2009-09-16T08:25:50.580613Z
+6a26ab37c58d7ed8b51fbcb546f6bee8
+2009-08-25T05:50:11.984375Z
+405
+zelda
+
+main_en.php
+file
+
+
+
+
+2009-09-16T08:25:50.637616Z
+41e00683e8d04c9f381859bb44cb944c
+2009-01-07T03:11:50.875000Z
+292
+zelda
+

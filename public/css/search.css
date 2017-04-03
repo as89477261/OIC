@@ -1,0 +1,253 @@
+body
+{
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-bottom:0px;
+}
+form
+{
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-bottom:0px;
+}
+table.main
+{
+	border: solid black 2px;
+}
+table.section
+{
+
+	border: solid white 1px;
+}
+table.viewtopic
+{
+	font-size:12px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	border: solid #21A6FF 1px;
+}
+table.thumbitem
+{
+	font-size:10px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	border: solid #E6E6E6 2px;
+}
+table.thumbmouseover
+{
+	font-size:10px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	border: solid #8CFFC6 2px;
+}
+table.searchresult
+{
+	font-size:12px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	border: solid #8080C0 2px;
+}
+table.showmessage
+{
+	font-size:12px;
+	font-weight:bold;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	border: solid #B7A900 2px;	
+}
+table.modeheader
+{
+	font-size:15px;
+	font-weight:bold;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	border: solid white 2px;
+}
+table.default
+{
+	font-size:12px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+table.smalldefault
+{
+	font-size:11px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+a.smalldefault
+{
+	font-size:11px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+table.userinfo
+{
+	font-size:11px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+tr.colheader
+{
+	font-weight:bold;
+}
+tr.colheader_white
+{
+	color:white;
+	font-weight:bold;
+}
+tr.hide
+{
+	display:none;
+}
+td.lastupdate
+{
+	font-size:10px;
+}
+td.header
+{
+	font-size:12px;
+	font-weight:bold;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+td.subject1
+{
+	font-size:11px;
+	color:blue;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+td.subject2
+{
+	font-size:11px;
+	color:blue;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+hr
+{
+	height:1px;
+	color:#E2E2E2;
+}
+ul
+{
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-BOTTOM: 0px;
+	PADDING-TOP: 0px;
+	MARGIN: 1px 0px 0px 15px;
+	DISPLAY: list-item;
+	LIST-STYLE-TYPE: none;
+}
+ul.ulheader
+{
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-BOTTOM: 0px;
+	PADDING-TOP: 0px;
+	MARGIN: 1px 0px 0px 0px;
+	DISPLAY: list-item;
+	LIST-STYLE-TYPE: none;
+}
+li
+{
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-BOTTOM: 0px;
+	PADDING-TOP: 0px;
+	MARGIN: 1px 0px 0px 0px;
+	DISPLAY: list-item;
+	LIST-STYLE-TYPE: none;
+}
+input 
+{
+	font-size:12px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+textarea
+{
+	font-size:12px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+select 
+{
+	font-size:12px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
+img
+{
+	border:0px;
+}
+a
+{
+	Font-Family: Verdana,Geneva,Arial, Helvetica,Sans-Serif;
+	Font-Size:12px;
+	Text-Decoration: None
+}
+a.control
+{
+	font-weight:bold;
+}
+	a:Link {	
+		color:black;
+	} 
+	a:Visited {	
+		color:black;
+	}
+	a:Active {
+		color:black;
+	}
+	a:Hover {
+		color:blue;
+	}
+
+.smalldesc
+{
+	font-size:10px;
+	color:#808080;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;	
+}
+
+.littledesc
+{
+	font-size:3px;
+	color:white;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;	
+}
+
+input {
+	font-size:11px;
+	color:black;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;	
+	height:20px;
+}
+input.noborder {
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+	border: 0px solid #7F9DB9;
+}
+.smallfont {
+	font-size:10px;
+}

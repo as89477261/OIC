@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/ECM/!svn/ver/395/Branch/Revolution/public/js/build/source/ux/grid/filter
+END
+BooleanFilter.js
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/ECM/!svn/ver/395/Branch/Revolution/public/js/build/source/ux/grid/filter/BooleanFilter.js
+END
+Filter.js
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/ECM/!svn/ver/395/Branch/Revolution/public/js/build/source/ux/grid/filter/Filter.js
+END
+NumericFilter.js
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/ECM/!svn/ver/395/Branch/Revolution/public/js/build/source/ux/grid/filter/NumericFilter.js
+END
+StringFilter.js
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/ECM/!svn/ver/395/Branch/Revolution/public/js/build/source/ux/grid/filter/StringFilter.js
+END
+ListFilter.js
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/ECM/!svn/ver/395/Branch/Revolution/public/js/build/source/ux/grid/filter/ListFilter.js
+END
+DateFilter.js
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/ECM/!svn/ver/395/Branch/Revolution/public/js/build/source/ux/grid/filter/DateFilter.js
+END

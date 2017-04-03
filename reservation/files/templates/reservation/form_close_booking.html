@@ -1,0 +1,25 @@
+<form name="action_booking" action="{MainUrl}?fid={fid}&booking_id={booking/booking_id}" method="POST" class="form">
+    <input type="hidden" name="fn" value="save" />
+    <div class="columns">
+        <div class="colx2-left">
+			<input type="hidden" name="booking[go_date]" id="booking_go_date"  value="{booking/go_date}" />
+			<input type="hidden" name="booking[back_date]" id="booking_back_date" value="{booking/back_date}" />
+			<input type="hidden" name="booking[status]" id="booking_status" value="CLS" />
+
+            <p>
+                <label for="simple-action">เลขไมล์เริ่มต้น</label>
+                <input class="full-width" type="text" name="booking[mile_start]" id="booking.mile_start" value="{booking/mile_start}" />
+            </p>
+        </div>
+        <div class="colx2-right">
+            <p>
+                <label for="booking.mile_stop">เลขไมล์สิ้นสุด</label>
+                <input class="full-width" type="text" name="booking[mile_stop]" id="booking.mile_stop" value="{booking/mile_stop}" />
+            </p>
+            <p>
+                <label for="simple-action">รายละเอียด</label>
+                <textarea class="full-width" type="text" name="booking[comment_detail]" id="booking.comment_detail">{booking/comment_detail}</textarea>
+            </p>
+        </div>
+    </div>
+</form>

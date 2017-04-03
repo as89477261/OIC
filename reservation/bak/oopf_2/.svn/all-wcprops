@@ -1,0 +1,221 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/godfather/!svn/ver/318/trunk/app/files/oopf
+END
+constants_framework.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/constants_framework.php
+END
+CModelSearchHelper.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CModelSearchHelper.php
+END
+conf_web_interface.ini
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/godfather/!svn/ver/2/trunk/app/files/oopf/conf_web_interface.ini
+END
+utils_testing.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/utils_testing.php
+END
+utils_web.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/utils_web.php
+END
+CTemplateMacro.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CTemplateMacro.php
+END
+CWebInterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CWebInterface.php
+END
+FirePHP.class.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/godfather/!svn/ver/77/trunk/app/files/oopf/FirePHP.class.php
+END
+conf_template_manager.ini
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/godfather/!svn/ver/2/trunk/app/files/oopf/conf_template_manager.ini
+END
+oopf.php
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/oopf.php
+END
+CModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/godfather/!svn/ver/317/trunk/app/files/oopf/CModel.php
+END
+CAppInterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CAppInterface.php
+END
+conf_form_generator.ini
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/godfather/!svn/ver/2/trunk/app/files/oopf/conf_form_generator.ini
+END
+CBizModel.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/godfather/!svn/ver/152/trunk/app/files/oopf/CBizModel.php
+END
+CTemplateManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CTemplateManager.php
+END
+CDataStoreMsSql.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/godfather/!svn/ver/317/trunk/app/files/oopf/CDataStoreMsSql.php
+END
+CFormProfileReader.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CFormProfileReader.php
+END
+CFormInputHtml.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CFormInputHtml.php
+END
+utils_datetime.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/utils_datetime.php
+END
+CFormGenerator.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CFormGenerator.php
+END
+CDataStoreMySql.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/godfather/!svn/ver/78/trunk/app/files/oopf/CDataStoreMySql.php
+END
+CApplicationLogic.php
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/godfather/!svn/ver/318/trunk/app/files/oopf/CApplicationLogic.php
+END
+CSession.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CSession.php
+END
+CFormInput.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CFormInput.php
+END
+utils_string.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/utils_string.php
+END
+CDataStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/godfather/!svn/ver/317/trunk/app/files/oopf/CDataStore.php
+END
+CTemplateFunctionThai.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CTemplateFunctionThai.php
+END
+CSessionHandlerDataStore.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/godfather/!svn/ver/316/trunk/app/files/oopf/CSessionHandlerDataStore.php
+END
+CTemplateParser.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CTemplateParser.php
+END
+CFormInputChoiceManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CFormInputChoiceManager.php
+END
+constants_wi.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/constants_wi.php
+END
+utils_framework.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/godfather/!svn/ver/78/trunk/app/files/oopf/utils_framework.php
+END
+CDataStoreOracle.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/godfather/!svn/ver/317/trunk/app/files/oopf/CDataStoreOracle.php
+END
+CTemplateFunction.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CTemplateFunction.php
+END
+fb.php
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/godfather/!svn/ver/77/trunk/app/files/oopf/fb.php
+END
+CDataStore_.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/godfather/!svn/ver/3/trunk/app/files/oopf/CDataStore_.php
+END

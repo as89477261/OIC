@@ -1,0 +1,620 @@
+/*
+ * Ext JS Library 2.0.2
+ * Copyright(c) 2006-2008, Ext JS, LLC.
+ * licensing@extjs.com
+ * 
+ * http://extjs.com/license
+ */
+html,body {
+	font: normal 12px verdana;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	overflow: hidden;
+	height: 100%;
+}
+
+body {
+	font-family: tahoma;
+	padding: 20px;
+	padding-top: 32px;
+	font-size: 13px;
+}
+
+body.subProgram {
+	margin: 0;
+	font-family: tahoma;
+	padding: 0px;
+	padding-top: 0px;
+	font-size: 13px;
+}
+
+p {
+	margin-bottom: 15px;
+}
+
+h1 {
+	font-size: large;
+	margin-bottom: 20px;
+}
+
+h2 {
+	font-size: 14px;
+	color: #333;
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+.example-info {
+	width: 150px;
+	border: 1px solid #c3daf9;
+	border-top: 1px solid #DCEAFB;
+	border-left: 1px solid #DCEAFB;
+	background: #ecf5fe url(info-bg.gif) repeat-x;
+	font-size: 10px;
+	padding: 8px;
+}
+
+pre.code {
+	background: #F8F8F8;
+	border: 1px solid #e8e8e8;
+	padding: 10px;
+	margin: 10px;
+	margin-left: 0px;
+	border-left: 5px solid #e8e8e8;
+	font-size: 12px !important;
+	line-height: 14px !important;
+}
+
+.msg .x-box-mc {
+	font-size: 14px;
+}
+
+#msg-div {
+	position: absolute;
+	left: 35%;
+	top: 10px;
+	width: 250px;
+	z-index: 20000;
+}
+
+.x-grid3-row-body p {
+	margin: 5px 5px 10px 5px !important;
+}
+
+.spanMenu {
+	font-size: 11px;
+	cursor: pointer;
+}
+
+.personalInfoBar {
+	font-size: 11px;
+	cursor: pointer;
+}
+
+.imgMenu {
+	cursor: pointer;
+}
+
+p {
+	margin: 5px;
+}
+
+.settings {
+	background-image: url(../images/ICONs/folder_wrench.png);
+}
+
+.nav {
+	background-image: url(../images/icons/folder_go.png);
+}
+
+.reportNav {
+	background-image: url(../images/icons/loglist.gif);
+}
+
+.utilityNav {
+	background-image: url(../images/icons/utility.png);
+}
+
+.setupNav {
+	background-image: url(../images/icons/cog.png);
+}
+
+.x-portal .x-panel-dd-spacer {
+	margin-bottom: 10px;
+}
+
+.x-portlet {
+	margin-bottom: 10px;
+}
+
+/* Clean up the look of the portlets */
+.x-portlet .x-panel-ml {
+	padding-left: 2px;
+}
+
+.x-portlet .x-panel-mr {
+	padding-right: 2px;
+}
+
+.x-portlet .x-panel-bl {
+	padding-left: 2px;
+}
+
+.x-portlet .x-panel-br {
+	padding-right: 2px;
+}
+
+.x-portlet .x-panel-body {
+	background: white;
+}
+
+.x-portlet .x-panel-mc {
+	padding-top: 2px;
+}
+
+.x-portlet .x-panel-bc .x-panel-footer {
+	padding-bottom: 2px;
+}
+
+.x-portlet .x-panel-nofooter .x-panel-bc {
+	height: 2px;
+}
+
+.blist {
+	background-image: url(../images/icons/utility.png) !important;
+}
+
+.homeIcon {
+	background-image: url(../images/home.gif) !important;
+}
+
+.systemIcon {
+	background-image: url(../images/mnuIcon/systemIcon.png) !important;
+}
+
+.toolsIcon {
+	background-image: url(../images/mnuIcon/toolsIcon.png) !important;
+}
+
+.calendarIcon {
+	background-image: url(../images/mnuIcon/calendarIcon.gif) !important;
+}
+
+.workflowIcon {
+	background-image: url(../images/mnuIcon/workflowIcon.png) !important;
+}
+
+.documentFlowIcon {
+	background-image: url(../images/mnuIcon/documentFlowIcon.gif) !important
+		;
+}
+
+.documentImageIcon {
+	background-image: url(../images/mnuIcon/documentImageIcon.gif)
+		!important;
+}
+
+.genCommandIcon {
+	background-image: url(../images/mnuIcon/app.png) !important;
+}
+
+.genbookIcon {
+	background-image: url(../images/icons/genbook.png) !important;
+}
+
+.replyIcon {
+	background-image: url(../images/icons/replybook.gif) !important;
+}
+
+.knowledgeBaseIcon {
+	background-image: url(../images/mnuIcon/knowledgeBaseIcon.gif)
+		!important;
+}
+
+.addonIcon {
+	background-image: url(../images/mnuIcon/addonIcon.png) !important;
+}
+
+.reportIcon {
+	background-image: url(../images/mnuIcon/reportIcon.gif) !important;
+}
+
+.mainOrgIcon {
+	background-image: url(../images/icons/mainOrg.gif) !important;
+}
+
+.subOrgIcon {
+	background-image: url(../images/icons/subOrg.gif) !important;
+}
+
+.roleIcon {
+	background-image: url(../images/icons/role.gif) !important;
+}
+
+.governerRoleIcon {
+	background-image: url(../images/icons/governerRole.gif) !important;
+}
+
+.userIcon {
+	background-image: url(../images/icons/user.gif) !important;
+}
+
+.cabinetIcon {
+	background-image: url(../images/icons/cabinet.gif) !important;
+}
+
+.drawerIcon {
+	background-image: url(../images/icons/drawer.gif) !important;
+}
+
+.folderIcon {
+	background-image: url(../images/icons/folder.gif) !important;
+}
+
+.publishedIcon {
+	background-image: url(../images/icons/published.gif) !important;
+}
+
+.documentIcon {
+	background-image: url(../images/icons/documents.gif) !important;
+}
+
+.docCheckoutIcon {
+	background-image: url(../images/icons/docCheckout.jpg) !important;
+}
+
+.shortcutIcon {
+	background-image: url(../images/icons/shortcut.png) !important;
+}
+
+.expireIcon {
+	background-image: url(../images/icons/lastdate.gif) !important;
+}
+
+.checkinIcon {
+	background-image: url(../images/icons/checkin.jpg) !important;
+}
+
+.checkoutIcon {
+	background-image: url(../images/icons/checkout.jpg) !important;
+}
+
+.seealsoIcon {
+	background-image: url(../images/icons/folder_go.png) !important;
+}
+
+.borrowIcon {
+	background-image: url(../images/icons/arrow-up.gif) !important;
+}
+
+.returnIcon {
+	background-image: url(../images/icons/arrow-down.gif) !important;
+}
+
+.restoreIcon {
+	background-image: url(../images/icons/outbox.png) !important;
+}
+
+.unreceiveIcon {
+	background-image: url(../images/icons/unreceived.gif) !important;
+}
+
+.receiveIcon {
+	background-image: url(../images/icons/received.png) !important;
+}
+
+.trashIcon {
+	background-image: url(../images/icons/recyclebin.gif) !important;
+}
+
+.emptyRecyclebinIcon {
+	background-image: url(../images/icons/trash.png) !important;
+}
+
+.searchFolderIcon {
+	background-image: url(../images/icons/searchFolder.gif) !important;
+}
+
+.abortFolderIcon {
+	background-image: url(../images/icons/abort.png) !important;
+}
+
+.draftFolderIcon {
+	background-image: url(../images/icons/draft.png) !important;
+}
+
+.sentFolderIcon {
+	background-image: url(../images/icons/sent.png) !important;
+}
+
+.commitFolderIcon {
+	background-image: url(../images/icons/outbox.png) !important;
+}
+
+.trackFolderIcon {
+	background-image: url(../images/icons/history.png) !important;
+}
+
+.registerBookFolderIcon {
+	background-image: url(../images/icons/regBook.gif) !important;
+}
+
+.workHomeFolderIcon {
+	background-image: url(../images/icons/folder.png) !important;
+}
+
+.DMSHomeFolderIcon {
+	background-image: url(../images/icons/dms.gif) !important;
+}
+
+.KBHomeFolderIcon {
+	background-image: url(../images/icons/mainOrg.png) !important;
+}
+
+.KBCategoryIcon {
+	background-image: url(../images/icons/kb.gif) !important;
+}
+
+.knowledgeIcon {
+	background-image: url(../images/icons/info.gif) !important;
+}
+
+.myDocumentIcon {
+	background-image: url(../images/icons/mydoc.gif) !important;
+}
+
+.saveIcon {
+	background-image: url(../images/icons/save.gif) !important;
+}
+
+.cancelIcon {
+	background-image: url(../images/icons/cross.gif) !important;
+}
+
+.addIcon {
+	background-image: url(../images/icons/icon_add.gif) !important;
+}
+
+.editIcon {
+	background-image: url(../images/icons/icon_edit.png) !important;
+}
+
+.editRegNoIcon {
+	background-image: url(../images/icons/icon_design.png) !important;
+}
+
+.deleteIcon {
+	background-image: url(../images/icons/icon_delete.gif) !important;
+}
+
+.propertyIcon {
+	background-image: url(../images/icons/property.png) !important;
+}
+.upIcon {
+	background-image: url(../images/icons/icon_up.gif) !important;
+}
+
+.downIcon {
+	background-image: url(../images/icons/icon_down.gif) !important;
+}
+
+.toggleIcon {
+	background-image: url(../images/icons/icon_toggle.gif) !important;
+}
+
+.refreshIcon {
+	background-image: url(../images/icons/icon_refresh.png) !important;
+}
+
+.mappingIcon {
+	background-image: url(../images/icons/icon_mapping.png) !important;
+}
+
+.passwordIcon {
+	background-image: url(../images/icons/icon_password.gif) !important;
+}
+
+.structureIcon {
+	background-image: url(../images/icons/icon_structure.gif) !important;
+}
+
+.designIcon {
+	background-image: url(../images/icons/icon_design.png) !important;
+}
+
+.viewIcon {
+	background-image: url(../images/icons/icon_view.png) !important;
+}
+
+.acceptIcon {
+	background-image: url(../images/icons/icon_accept.png) !important;
+}
+
+.forbidIcon {
+	background-image: url(../images/icons/forbid.gif) !important;
+}
+
+
+.forwardIcon {
+	background-image: url(../images/icons/icon_forward.png) !important;
+}
+
+.auditIcon {
+	background-image: url(../images/icons/audit.png) !important;
+}
+
+.sendbackIcon {
+	background-image: url(../images/icons/icon_sendback.png) !important;
+}
+
+.checkmarkIcon {
+	background-image: url(../images/icons/icon_message.gif) !important;
+}
+
+.approveIcon {
+	background-image: url(../images/icons/approve.gif) !important;
+}
+
+.rejectIcon {
+	background-image: url(../images/icons/reject.gif) !important;
+}
+
+.searchIcon {
+	background-image: url(../images/icons/icon_search.png) !important;
+}
+
+.infoIcon {
+	background-image: url(../images/icons/icon_info.png) !important;
+}
+
+.bookmarkIcon {
+	background-image: url(../images/icons/icon_bookmark.gif) !important;
+}
+
+.pauseIcon {
+	background-image: url(../images/icons/icon_pause.png) !important;
+}
+
+.excelIcon {
+	background-image: url(../images/icons/icon_excel.gif) !important;
+}
+
+.wordIcon {
+	background-image: url(../images/icons/icon_word.gif) !important;
+}
+
+.commandIcon {
+	background-image: url(../images/icons/icon_command.gif) !important;
+}
+
+.circIcon {
+	background-image: url(../images/icons/circ.gif) !important;
+}
+
+.assignIcon {
+	background-image: url(../images/icons/assign.png) !important;
+}
+
+.historyIcon {
+	background-image: url(../images/icons/icon_history.gif) !important;
+}
+
+.closeJobIcon {
+	background-image: url(../images/icons/icon_closejob.png) !important;
+}
+
+.images-view .x-panel-body {
+	background: white;
+	font: 11px Arial, Helvetica, sans-serif;
+}
+
+.images-view .thumb {
+	background: #dddddd;
+	padding: 3px;
+}
+
+.images-view .thumb img {
+	height: 60px;
+	width: 60px;
+	float: left;
+}
+
+.images-view .thumb span {
+	display: inline;
+	float: right;
+	width: 175;
+	text-align: right;
+	overflow: hidden;
+}
+
+.images-view .thumb-wrap {
+	float: left;
+	margin: 4px;
+	margin-right: 0;
+	padding: 5px;
+	width: 85%;
+}
+
+.images-view .thumb-wrap span {
+	display: inline;
+	text-align: right;
+	width: 175;
+	overflow: hidden;
+}
+
+.images-view .thumb-wrap div {
+	background: white;
+	height: 60px;
+	width: 90%;
+}
+
+.images-view .x-view-over {
+	border: 1px solid #dddddd;
+	background: #efefef
+		url(../images/row-over.gif)
+		repeat-x left top;
+	padding: 4px;
+}
+
+.images-view .x-view-selected {
+	background: #eff5fb url(../images/selected.gif) no-repeat right bottom;
+	border: 1px solid #99bbe8;
+	padding: 4px;
+}
+
+.images-view .x-view-selected .thumb {
+	background: transparent;
+}
+
+.images-view .loading-indicator {
+	font-size: 11px;
+	background-image: url('../js/resources/images/default/grid/loading.gif')
+		;
+	background-repeat: no-repeat;
+	background-position: left;
+	padding-left: 20px;
+	margin: 10px;
+}
+
+.portletCommandSpan {
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.unapproved-row {
+	background-color: #FFC6D1;
+	font-weight: bold;
+}
+
+.aborted-row {
+    color: #FF0000;
+    font-weight: bold;
+    text-decoration: line-through;
+}
+
+td.normalCalendar {
+	background-color: #FFFFE0;
+}
+
+td.todayCalendar {
+	background-color: #B0E0E6;
+}
+
+td.disabledCalendar {
+	background-color: #CECECE;
+}
+
+td.weekendCalendar {
+	background-color: #FFB2B2;
+}
+
+.calendarTextTBar {
+	font-size: 11px;
+}
+
+.starIcon {
+	background-image: url(../images/icon/star.gif) !important;
+}
+
+

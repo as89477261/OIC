@@ -1,0 +1,23 @@
+
+errorLang = 'th';
+errorPrefix = ['Design Error: ', ''];
+errorSuffix = [' (โปรดแจ้งผู้ดูแลระบบ)', ''];
+ERRMSG_ISREQUIRED_PREFIX = 'โปรดระบุ "';
+ERRMSG_ISREQUIRED_SUFFIX = '" ด้วย';
+ERRMSG_PLEASESPECIFY_PREFIX = 'โปรดระบุ "';
+ERRMSG_PLEASESPECIFY_SUFFIX = '" ด้วย';
+ERRMSG_ISINVALID_PREFIX = 'ค่าของ "';
+ERRMSG_ISINVALID_MIDDLE = '" ไม่ใช่ ';
+ERRMSG_ISINVALID_SUFFIX = ' ที่ถูกต้อง';
+ERRMSG_ISINVALID_TYPE = new Array();
+ERRMSG_ISINVALID_TYPE[STRING] = 'string';				// never been used
+ERRMSG_ISINVALID_TYPE[VAL_STRING] = 'string';				// never been used
+ERRMSG_ISINVALID_TYPE[NUM_STRING] = 'string';				// never been used
+ERRMSG_ISINVALID_TYPE[INTEGER] = 'จำนวนเต็ม';
+ERRMSG_ISINVALID_TYPE[FLOAT] = 'ตัวเลข';
+ERRMSG_ISINVALID_TYPE[EMAIL] = 'อีเมล์';
+ERRMSG_ISINVALID_TYPE[DATE] = 'วันที่';
+ERRMSG_ISINVALID_TYPE[ID] = 'รหัส หรือ ID';
+ERRMSG_ISINCORRECT_PREFIX = 'ค่าของ "';
+ERRMSG_ISINCORRECT_MIDDLE = '" ไม่ถูกต้อง โปรดระบุค่า "';
+ERRMSG_ISINCORRECT_SUFFIX = '" อีกครั้ง';

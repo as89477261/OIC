@@ -1,0 +1,134 @@
+<?php
+global $config;
+global $lang;
+global $debugMode;
+global $ieBrowser;
+global $util;
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style type="text/css">
+		<!--
+		
+		-->
+</style>
+<title><?php
+echo $lang ['ECMAppName'];
+?></title><?php
+       $this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/ecmCoreCSS.css' );
+		$this->headLink ()->appendStylesheet ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/resources/css/ext-all.css' );
+		
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/ColumnTree.css' );
+		$this->headLink ()->appendStylesheet ( '/' . $config ['runtimeJS'] . '/jscalendar/calendar-system.css' );
+		
+		$theme = $util->getTheme ( $config ['theme'] );
+		
+		if ($theme != '') {
+			$this->headLink ()->appendStylesheet ( $theme );
+		}
+		
+		echo $this->headLink ();
+		
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/md5.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/jscalendar/calendar.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/jscalendar/lang/calendar-th.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/adapter/ext/ext-base.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ext-all.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/source/locale/ext-lang-th.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/Ext.ux.wam.PropertyGrid.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/Ext.ux.wam.ColorField.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/Ext.ux.DateField.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ColumnTree.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/cookie.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/Portal.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/PortalColumn.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/Portlet.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/sample-grid.js' );
+		//$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/persist-js/persist.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/ecm-js/main-js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/adminExtJS.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/rankManagement.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/rankManagement.js' );
+		
+		
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/menu/EditableItem.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/menu/RangeMenu.js' );
+		
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/grid/GridFilters.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/grid/filter/Filter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/grid/filter/StringFilter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/grid/filter/DateFilter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/grid/filter/ListFilter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/grid/filter/NumericFilter.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ux/grid/filter/BooleanFilter.js' );
+				
+		if ($debugMode && $ieBrowser) {
+			$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/firebug/firebug.js' );
+		}
+		
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/js/ux.row.js' );
+		//$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/firebug/firebugx.js' );
+		//$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ecmCoreJS.js' );
+		
+
+		echo $this->headScript ();
+        ?>
+        <style type="text/css">
+html,body {
+    font: normal 12px verdana;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    overflow: hidden;
+    height: 100%;
+    background-image: url(/<?php echo $config['appName']; ?>/images/bg/pdmo.jpg);
+	background-repeat: no-repeat;
+	background-attachment:fixed;
+	background-position: center center
+}
+
+</style>
+<script type="text/javascript">
+function popupMIS(name,url){
+    var winname   = 'oldApp'+name;
+    src = url;
+    var winconfig = 'toolbar=no,location=no,directories=no,status=yes,menubar=no,'+
+    'scrollbars=yes,resizable=no,copyhistory=no';
+    winObj = window.open(src,winname,winconfig);
+    winObj.opener = self;
+    winObj.focus();
+}
+</script>
+</head>
+<body  >
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<center>
+    <table>
+        <tr>
+            <td><a href="/<?php echo $config['appName']; ?>/Index" target="_blank"><img src="/<?php echo $config['appName']; ?>/images/app-select/bt_01.gif" alt='ระบบสารบรรณอิเล็กทรอนิกส์'  /></a> </td>
+        	<td><a href="/<?php echo $config['appName']; ?>/Index?PLM=DMS" target="_blank"><img src="/<?php echo $config['appName']; ?>/images/app-select/bt_02.gif" alt='ระบบคลังข้อมูล' /></a></td>
+        </tr>
+        <tr>
+            <td onclick="popupMIS('carReserve','<?php echo $config['applicationURL']['carReserve'] ?>?loginName=<?php echo $this->loginName; ?>&mu_code=DC210')"><img src="/<?php echo $config['appName']; ?>/images/app-select/bt_03.gif" alt='ระบบจองรถ' /></td>
+            <td onclick="popupMIS('roomReserver','<?php echo $config['applicationURL']['carReserve'] ?>?loginName=<?php echo $this->loginName; ?>&mu_code=DR210')"><img src="/<?php echo $config['appName']; ?>/images/app-select/bt_04.gif" alt='ระบบจองห้อง Notebook Projector กล้องดิจิตอล กล้องวิดีโอ' /></td>
+        </tr>
+        <tr>
+            <td onclick="popupMIS('carReserve','<?php echo $config['applicationURL']['carReserve'] ?>?loginName=<?php echo $this->loginName; ?>&mu_code=32130');"><img src="/<?php echo $config['appName']; ?>/images/app-select/bt_05.gif" alt='ระบบขอเบิกพัสดุ' /></td>
+            <td onclick="popupMIS('carReserve','');"><a href="#"><img src="/<?php echo $config['appName']; ?>/images/app-select/bt_06.gif" alt='สอบถาม-ค้นหารายการพัสดุ' /></a></td>
+        </tr>
+    </table>
+    </center>
+</body>
+</html>

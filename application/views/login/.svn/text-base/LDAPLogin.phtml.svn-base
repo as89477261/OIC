@@ -1,0 +1,137 @@
+<?php 
+global $config;
+global $lang;
+global $debugMode;
+global $ieBrowser;
+global $util;
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"> 
+		<title><?php echo $lang ['ECMAppName'];?></title>
+		<?php
+		$this->headLink ()->appendStylesheet ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/resources/css/ext-all.css' );
+		$this->headLink ()->appendStylesheet ( '/'.$config['appName'].'/css/ecmCoreCSS.css' );
+		
+		$theme = $util->getTheme($config['theme']);
+		if($theme != '') {
+			$this->headLink()->appendStylesheet($theme);
+		}
+		
+		echo $this->headLink ();
+		
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/md5.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/adapter/ext/ext-base.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/ext-all.js' );
+		/*if ($debugMode && $ieBrowser) {
+			$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/firebug/firebug.js' );
+		}*/
+
+		echo $this->headScript ();
+		?>
+		<style type="text/css">
+		<!--
+		body {
+			background-image: url(/<?php echo $config['appName']; ?>/images/bg/<?php echo $this->bg; ?>.jpg);
+			background-repeat: no-repeat;
+			background-attachment:fixed;
+			background-position: center center
+		}
+		
+		.centerDIV{
+			text-align: center;
+			margin-left: auto;
+    		margin-right: auto;
+			width:275px;
+			margin-top: 20%;
+		}
+		
+		-->
+		</style>
+		<script type="text/javascript">
+		
+		function clearLoginForm() {
+			document.forms.loginForm.reset();
+		}
+		
+		Ext.onReady(function(){
+					
+			Ext.QuickTips.init();
+			Ext.form.Field.prototype.msgTarget = 'side';
+			
+			var frmLogon = new Ext.form.FormPanel({
+				id: 'frmLogon',
+				labelWidth: 75, // label settings here cascade unless overridden
+				method: 'POST',
+				frame:true,
+				title: '<?php echo $lang['common']['logonTo']; ?><?php echo $lang['ECMAppName']; ?>',
+				bodyStyle:'padding:5px 5px 0',
+				width: 275,
+				defaults: {width: 150},
+				defaultType: 'textfield',
+		
+				items: [new Ext.form.Hidden({
+					id: 'fldSalt',
+					name: 'fldSalt',
+					value: '<?php echo md5 ( time () );	?>'
+				}),	{
+					id: 'fldUid',
+					fieldLabel: '<?php echo $lang['common']['loginName']; ?>',
+					name: 'fldUid',
+					allowBlank:false
+				},{
+					id: 'fldPwd',
+					fieldLabel: '<?php echo $lang['common']['password']; ?>',
+					inputType: 'password',
+					name: 'fldPwd'
+				}],
+		
+				buttons: [{
+					id: 'btnLogon',
+					text: '<?php echo $lang['common']['logon']; ?>',
+					onClick: function() {
+						Ext.MessageBox.show({
+							msg: 'Logging in, please wait...',
+							progressText: 'Processing...',
+							width:300,
+							wait:true,
+							waitConfig: {interval:200},
+							icon:'ext-mb-download'
+						});
+						Ext.getCmp('frmLogon').getForm().getEl().dom.submit();
+						Ext.getCmp('frmLogon').hide();
+					}
+				},{
+					id: 'btnCancel',
+					text: '<?php echo $lang['common']['cancel']; ?>',
+					onClick: function() {
+						Ext.getCmp('frmLogon').getForm().getEl().dom.reset();
+					}
+				}]
+			});
+			
+			frmLogon.render(Ext.get('loginDiv'));
+
+			var logonKeyNav = new Ext.KeyNav(Ext.getCmp('frmLogon').getEl(), {
+			    "enter" : function(e){
+				    Ext.getCmp('btnLogon').onClick();
+			    },
+			    scope : this
+			});
+			<?php
+				if($debugMode) {
+					Logger::log(0,0,'Event : Login Panel Loaded',true,false);
+				}
+			?>
+		});
+		</script>
+	</head>
+	<body>
+		<div id="loginContainerDiv" class="centerDIV">
+			<div id="loginDiv" ></div>
+			<center><font color="#FF0000"><?php echo $this->loginMessage; ?></font></center>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<?php
+global $config;
+global $policy;
+?>
+<style>
+	.table td{
+		height:20px;
+	}
+</style>
+<script>
+
+    function validate_form()
+    {
+        if ($('#f_foodcode').val() == '') {
+            alert('กรุณาระบุรหัส');
+            return false;
+        }
+        if ($('#f_foodname').val() == '') {
+            alert('กรุณาระบุชื่ออาหาร');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+<form action="/<?= $config ['appName'] ?>/room/edit-food" method="post">
+<input type="hidden" name="f_rowid_food" id="f_rowid_food" value="<?php echo $this->food['F_ROWID_FOOD']; ?>">
+<table class="table" width="500">
+    <tr>
+        <td style="width:130px;"><b>รหัส</b> : </td>
+        <td><input type="text" name="f_foodcode" id="f_foodcode" value="<?php echo $this->food['F_FOODCODE']; ?>" style="width:300px;" maxlength="250" /></td>
+    </tr>
+    <tr>
+        <td style="width:130px;"><b>ชื่อ</b> : </td>
+        <td><input type="text" name="f_foodname" id="f_foodname" value="<?php echo $this->food['F_FOODNAME']; ?>" style="width:300px;" maxlength="250" /></td>
+    </tr>
+</table>
+<?php
+if($policy->isRoomAdmin()){
+	echo '<button onclick="return validate_form();">บันทึก</button>';
+}else{
+?>
+<script>
+$('#f_roomname').attr('readonly','readonly');
+</script>
+<?php
+}
+?>
+</form>

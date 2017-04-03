@@ -1,0 +1,78 @@
+<?php
+global $config; 
+?>
+<html>
+	<head>
+		<title>BenefitECM</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"> 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="refresh" content="2; url=/<?php echo $config['appName'];?>/<?php echo $config['defaultAppConsole'];?>">
+		<?php 
+		//echo $this->headTitle();
+		
+		$this->headLink ()->appendStylesheet ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/resources/css/ext-all.css' );
+		//$this->headLink ()->appendStylesheet ( '/'.$config['runtimeJS'].'/css/ecmCoreCSS.css' );
+		echo $this->headLink ();
+		
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/md5.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/adapter/ext/ext-base.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/ext-all.js' );
+		
+	    echo $this->headScript();
+	    
+	    echo $this->headLink()->appendStylesheet("/{$config['appName']}/css/logon.css");
+	    echo $this->headStyle();
+	    
+	    ?>
+		<style type="text/css">
+	    	body {
+				background-image: url(/<?php echo $config['appName'];?>/images/bg/bgg.gif);
+			}
+			
+			#redirectwrap{
+				background: #F0F5FA;
+				border: 1px solid #C2CFDF;
+				margin: 200px auto 0 auto;
+				text-align: left;
+				width: 520px;
+			}
+			
+			#redirectwrap h4{
+				background: #D0DDEA;
+				border-bottom: 1px solid #C2CFDF;
+				color: #3A4F6C;
+				font-size: 14px;
+				margin: 0;
+				padding: 5px;
+			}
+			
+			#redirectwrap p{
+				margin: 0;
+				padding: 5px;
+			}
+			
+			#redirectwrap p.redirectfoot{
+				background: #E3EBF4;
+				border-top: 1px solid #C2CFDF;
+				text-align: center;
+			}
+	    </style>
+	</head>
+	<body>
+		<center>
+			<div id="redirectwrap">
+				<h4>Welcome!!!</h4>
+				<img src="/<?php echo $config['appName'];?>/images/splash/splash.png" />
+				<center>
+					<img src="/<?php echo $config['appName'];?>/images/loader/loader01.gif" />
+				</center>
+				<br/>
+				<!-- <p>You are now logged in<br><br>Please wait while we transfer you...</p> -->
+				<p class="redirectfoot"><a href="/<?php echo $config['appName']?>/<?php echo $config['defaultAppConsole'];?>">Skip</a></p>
+			</div>
+		</center>
+	</body>
+</html>
+
+
+

@@ -1,0 +1,157 @@
+<?php 
+global $config;
+global $lang;
+global $debugMode;
+global $ieBrowser;
+global $util;
+
+echo $this->docType();
+?>
+<HTML>
+<HEAD>
+<TITLE><?php echo $lang ['ECMAppName'];?></TITLE>
+<link id="page_favicon" href="favicon.ico" rel="icon" type="image/x-icon" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<?php
+		$this->headLink ()->appendStylesheet ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/resources/css/ext-all.css' );
+		//$this->headLink ()->appendStylesheet ( '/'.$config['appName'].'/css/ecmCoreCSS.css' );
+		
+		echo $this->headLink ();
+		
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/md5.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/adapter/ext/ext-base.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/ext-all.js' );
+		
+		/*if ($debugMode && $ieBrowser) {
+			$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/firebug/firebug.js' );
+		}*/
+
+		echo $this->headScript ();
+?>
+<style type="text/css">
+<!--
+body {
+	background-image: url(/<?php  echo $config['appName'];?>/images/login/oic/bg.gif);
+}
+.Content {
+	FONT-SIZE: 10px; COLOR: #333333; FONT-FAMILY: "Verdana", "Tahoma", "Helvetica", "sans-serif"; TEXT-DECORATION: none
+}
+.style14 {FONT-SIZE: 10px; COLOR: #333333; FONT-FAMILY: "Verdana", "Tahoma", "Helvetica", "sans-serif"; TEXT-DECORATION: none; font-weight: bold; }
+-->
+</style>
+<script type="text/javascript">
+		function loginPerform() {
+			//alert('login');
+			//var elSalt = Ext.get('fldSalt');
+			//var elPassword = Ext.get('fldPwd');
+			//elPassword.setValue(hex_md5(elSalt.getValue() + hex_md5(elPassword.getValue())));
+			//document.forms.loginForm.fldPwd.value = hex_md5(document.forms.loginForm.fldSalt.value + hex_md5(document.forms.loginForm.fldPwd.value));
+			//document.forms.loginForm.pwd.value = '';
+			document.forms.loginForm.btnLogon.disabled = true;
+			document.forms.loginForm.submit();
+		}
+		
+		function clearLoginForm() {
+			document.forms.loginForm.reset();
+		}
+		
+		Ext.onReady(function(){
+			//Ext.QuickTips.init();
+			//Ext.form.Field.prototype.msgTarget = 'side';
+			/*************** Login Failed Dialog Script : BEGIN ***********************/
+			<?php
+			if(trim($this->loginMessage) != '') {
+			?>
+			Ext.MessageBox.show({
+	    		title: 'Login Error',
+	    		msg: '<?php echo $this->loginMessage;?>',
+	    		buttons: Ext.MessageBox.OK,
+	    		icon: Ext.MessageBox.INFO
+	    	});
+			<?php
+			} else {
+			?>
+			Ext.MessageBox.show({
+				title: 'ประกาศ',
+				msg: 'ข้อมูลระบบงานเดิม(โครงสร้างเก่า - ก่อน 1 ก.ค. 52)สามารถเรียกดูได้ที่<br/><a href="http://backoffice.oic.or.th/ECMOld/" target="_blank">http://backoffice.oic.or.th</a>',
+				buttons: Ext.MessageBox.OK,
+				icon: Ext.MessageBox.INFO
+			});
+			<?php
+			}
+			?>
+			/*************** Login Failed Dialog Script : END ***********************/				
+			var logonKeyNav = new Ext.KeyNav(Ext.get('loginForm'), {
+			    "enter" : function(e){
+					loginPerform();
+			    },
+			    scope : this
+			});			
+		});
+</script>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" style="margin: 0" >
+<!-- ImageReady Slices -->
+<form action="/<?php echo $config['appName'];?>/login/process" name="loginForm" id="loginForm" method="POST" >
+<input type="hidden" name="fldSalt" id="fldSalt"  value="<?php echo md5 ( time () );?>" />
+<TABLE WIDTH=900 BORDER=0 align="center" CELLPADDING=0 CELLSPACING=0>
+<TR>
+		<TD>
+			<IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/default_01.gif" WIDTH=900 HEIGHT=226 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD><TABLE WIDTH=900 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+          <TR>
+            <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login_01.gif" WIDTH=509 HEIGHT=385 ALT=""></TD>
+            <TD><TABLE WIDTH=391 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+                <TR>
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__01.gif" WIDTH=58 HEIGHT=116 ALT=""></TD>
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__02.gif" WIDTH=261 HEIGHT=116 ALT=""></TD>
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__03.gif" WIDTH=72 HEIGHT=116 ALT=""></TD>
+                </TR>
+                <TR>
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__04.gif" WIDTH=58 HEIGHT=113 ALT=""></TD>
+                  <TD width="261" height="113" background="/<?php  echo $config['appName'];?>/images/login/oic/login__05.gif"><table width="90%" border="0" align="center" cellpadding="1" cellspacing="5">
+                    <tr>
+                      <td width="80"><div align="right" class="style14">
+                          <div align="left">USERNAME</div>
+                      </div></td>
+                      <td width="1"><input name="fldUid" type="text" autocomplete="Off"  id="fldUid" size="15" maxlength="50"></td>
+                    </tr>
+                    <tr>
+                      <td><div align="right" class="style14">
+                          <div align="left">PASSWORD</div>
+                      </div></td>
+                      <td width="1"><input name="fldPwd" type="password" autocomplete="Off" id="fldPwd" size="15" maxlength="50" ></td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td><input name="btnLogon" type="button" class="style14" id="btnLogon" value="LOGIN"  onclick="loginPerform()" />
+                          <input name="btnReset" type="reset" class="style14" id="btnReset" value="RESET" /></td>
+                    </tr>
+                     <!-- <tr>
+                    	<td colspan="2">&nbsp;<font color="#FF0000"><?php echo $this->loginMessage; ?></font></td>
+                    </tr>-->
+                  </table></TD>
+
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__06.gif" WIDTH=72 HEIGHT=113 ALT=""></TD>
+                </TR>
+                <TR>
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__07.gif" WIDTH=58 HEIGHT=156 ALT=""></TD>
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__08.gif" WIDTH=261 HEIGHT=156 ALT=""></TD>
+                  <TD><IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/login__09.gif" WIDTH=72 HEIGHT=156 ALT=""></TD>
+                </TR>
+            </TABLE></TD>
+          </TR>
+        </TABLE></TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="/<?php  echo $config['appName'];?>/images/login/oic/default_03.gif" WIDTH=900 HEIGHT=64 ALT=""></TD>
+	</TR>
+</TABLE>
+</form>
+<!-- End ImageReady Slices -->
+</BODY>
+</HTML>

@@ -1,0 +1,703 @@
+<?php
+global $config;
+/*
+$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext' . $config ['libVersion'] ['ext'] . '/adapter/ext/ext-base.js' );
+$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext' . $config ['libVersion'] ['ext'] . '/ext-all.js' );
+$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext' . $config ['libVersion'] ['ext'] . '/source/locale/ext-lang-th.js' );
+
+if ($config ['libVersion'] ['ext'] == '2.2') {
+	$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ExtFixBug.js' );
+}
+
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.wam.PropertyGrid.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.wam.ColorField.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.DateField.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.CheckColumn.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ColumnTree.js' );
+$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/cookie.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/functions.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Portal.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/PortalColumn.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Portlet.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/sample-grid.js' );
+//$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/persist-js/persist.js' );
+
+
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.securitySearch.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/persist-js/persist.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ECMPersist.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.PersistStateProvider.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.GroupSummary.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/ecm-js/main-js' . $this->PLM );
+
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/adminExtJS.js' );
+$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/rankManagement.js' );
+$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/rankManagement.js' );
+
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/menu/EditableItem.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/menu/RangeMenu.js' );
+
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/GridFilters.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/Filter.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/StringFilter.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/DateFilter.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/ListFilter.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/NumericFilter.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux/grid/filter/BooleanFilter.js' );
+
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/ux.row.js' );
+$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/FileUploadField.js' );
+
+echo $this->headScript ();*/
+?>
+<link rel="stylesheet" type="text/css"
+	href="/<?=$config ['appName']?>/css/search.css" />
+<link rel="stylesheet" type="text/css"
+	href="/<?=$config ['appName']?>/css/grid.css" />
+<link rel="stylesheet" type="text/css"
+	href="/<?=$config ['appName']?>/css/tab.css" />
+<link type="text/css" rel="stylesheet"
+	href="/<?=$config ['appName']?>/css/columnlist.css" />
+<!--<script language="JavaScript"
+	src="/<?=$config ['runtimeJS']?>/jquery/jquery-1.3.2.min.js"></script>
+--><script language="JavaScript">
+			function loadResult() {
+				//alert(document.getElementById(keywords).value);
+				//alert(document.getElementById(keywords).value);
+				$("#frmSearching2").load("/<?=$config ['appName']?>/portlet/get-portlet-content/", 
+					{ 
+						'portletClass' : 'DMSPortlet',
+						'portletMethod' : 'portletContent',
+						'keySearch' : Url.encode(set_keyword_list2('keywords', 'keyword_list')),
+						'qMode' : 'normal',
+						'folder': $('#cb_folder').attr('checked'),
+						'document': $('#cb_doc').attr('checked'),
+						'shortcut': $('#cb_shortcut').attr('checked'),
+						'name': $('#cb_name').attr('checked'),
+						'description': $('#cb_description').attr('checked'),
+						'keyword': $('#cb_keyword').attr('checked'),
+						'startDateFrom' : $('#begindate').val(),
+						'startDateTo' : $('#enddate').val()
+					} 
+				);
+			}
+			function changeTabselect(objtd) {
+				document.getElementById('tab1').className = 'tab';
+				document.getElementById('tab2').className = 'tab';
+				if (objtd == 'tab1') {
+					document.getElementById('searchIndex').style.display = 'list-item';
+					document.getElementById('searchForm').style.display = 'none';
+				} else {
+					document.getElementById('searchIndex').style.display = 'none';
+					document.getElementById('searchForm').style.display = 'list-item';
+				}
+			    	document.getElementById(objtd).className = 'selected';
+			}
+			function addOption(selectObject,optionText,optionValue) {
+			    var optionObject = new Option(optionText, optionValue);
+			    var optionRank = selectObject.options.length;
+			    selectObject.options[optionRank]=optionObject;
+			}
+			function deleteOption(selectObject,optionRank) {
+			    if (selectObject.options.length!=0) { 
+			        selectObject.options[optionRank]=null; 
+			    }
+			}
+			function k_add(keyword_list, condition_operator, keyword) {
+				var list = document.getElementById(keyword_list);
+				var cond = document.getElementById(condition_operator);
+				var condition = cond.options[cond.selectedIndex].text;
+				var keyword = document.getElementById(keyword);
+				if (keyword.value.length < 1) { 
+				} else {
+					if (list.options.length > 0) {
+						list.options[list.options.length - 1].value = list.options[list.options.length - 1].value + '|' + condition;
+						list.options[list.options.length - 1].text  = list.options[list.options.length - 1].text + ' (' + condition + ')';
+					}
+					addOption(list, keyword.value.replace(/ /gi,''), keyword.value.replace(/ /gi,''));
+					keyword.value = '';
+				}
+			}
+			function k_del(keyword_list) {
+				var list = document.getElementById(keyword_list);
+				if (list.options.length < 1) alert('กรุณาระบุคำค้น');
+				else {
+					if (list.selectedIndex < 0) alert('กรุณาระบุคำค้น');
+					else {
+						if (list.selectedIndex == (list.options.length - 1) && list.selectedIndex != 0) {
+							var beforeOption = list.options[list.selectedIndex - 1]
+							var strvalue         = beforeOption.value;
+							var strvaluearr     = strvalue.split('|');
+							beforeOption.value = strvaluearr[0];
+							beforeOption.text = strvaluearr[0];
+						}
+						deleteOption(list,list.selectedIndex);
+					}
+				}
+			}
+
+			function set_keyword_list2(keywords, keyword_list) {
+				k_add('keyword_list', 'condition_operator', 'keyword');
+				
+				var result = false;
+				var keyword = '';
+				var list = document.getElementById(keyword_list);
+				for (i = 0; i < list.options.length; i++) {
+					var optionItem = list.options[i];
+					if (keyword != '') keyword = keyword + '^';
+					keyword = keyword + optionItem.value;
+				}
+				document.getElementById(keywords).value = keyword;
+				return keyword;
+			}
+
+			
+			function set_keyword_list(keywords, keyword_list) {
+				k_add('keyword_list', 'condition_operator', 'keyword');
+				
+				var result = false;
+				var keyword = '';
+				var list = document.getElementById(keyword_list);
+				for (i = 0; i < list.options.length; i++) {
+					var optionItem = list.options[i];
+					if (keyword != '') keyword = keyword + '^';
+					keyword = keyword + optionItem.value;
+				}
+				var cbDocDate = document.getElementById('cb_docdate').checked;
+				//var docDate = document.getElementById('docdate').value;
+				var beginDate = document.getElementById('begindate').value;
+				var endDate = document.getElementById('enddate').value;
+				if ((keyword == '') && (!cbDocDate) && (beginDate != '')) {
+					alert('กรุณาระบุคำค้น');
+					return false;					
+				} else if ((keyword == '') && (cbDocDate && docDate == '') && (beginDate == '')){ 
+					alert ('กรุณาระบุคำค้น');
+					return false;
+				} else {
+					document.getElementById(keywords).value = keyword;
+					var cbName = document.getElementById('cb_name').checked;
+					var cbDescription = document.getElementById('cb_description').checked;
+					var cbKeyword = document.getElementById('cb_keyword').checked;
+					var rbType = document.getElementById('rb_type').checked;
+					var cbFolder = document.getElementById('cb_folder').checked;
+					var cbSCFolder = document.getElementById('cb_scfolder').checked;
+					var cbDoc = document.getElementById('cb_doc').checked;
+					var cbSCDoc = document.getElementById('cb_scdoc').checked;
+					var cbReceiveFrom = document.getElementById('cb_receivefrom').checked;
+					var cbStoreLocation = document.getElementById('cb_storelocation').checked;
+					
+					if ((!cbName) && (!cbDescription) && (!cbKeyword) && (!rbType) && (!cbReceiveFrom) && (!cbStoreLocation) && (!cbDocDate)) {
+						alert('กรุณาระบุคำค้น');
+					} else if ((!cbFolder) && (!cbSCFolder) && (!cbDoc) && (!cbSCDoc)) {
+						alert('กรุณาระบุคำค้น');
+					}
+					else {
+						return true;
+					}
+				}
+			}
+			function hideSection(button, sectionName, itemCount, flag) {
+				if (button.getAttribute('state') == 'open') {
+					button.setAttribute('src', '/<?=$config ['appName']?>/images/down.gif');
+					button.setAttribute('state', 'close');
+					var displayvalue = 'none';
+					document.getElementById(flag).value = false;
+				} else {
+					button.setAttribute('src', '/<?=$config ['appName']?>/images/up.gif');
+					button.setAttribute('state', 'open');
+					var displayvalue = 'list-item';
+					document.getElementById(flag).value = true;
+				}
+				for (i = 1; i <= itemCount; i++) {
+					var section = document.getElementById(sectionName + i);
+					section.style.display = displayvalue;
+				}
+			}
+			function sethideSection(sectionName, itemCount, flag) {
+				var section = document.getElementById(sectionName);
+				hideSection(section, sectionName + '_', itemCount, flag);
+			}
+			function change_form_action(objrb, frmName, actionLink) {
+				var frameObj = document.getElementById(frmName);
+				if (frameObj.state != actionLink) {
+					frameObj.action = actionLink;
+					frameObj.state = actionLink;
+					hideSection(document.getElementById('sectionSource'), 'sectionSource_', 2, 'sourced');
+				}
+			}
+			function getLimitList() {
+				var objLimitSelect = document.getElementById('limit_select');
+				var msg='';
+				for(i = 0; i < objLimitSelect.options.length; i++) {
+					if (msg.length > 0) msg = msg + ',';
+					msg = msg + objLimitSelect.options[i].value;
+				}
+				return msg;
+			}
+			function addLimitSelect(optionText, optionValue) {
+				var objLimitSelect = document.getElementById('limit_select');
+				addOption(objLimitSelect,optionText,optionValue);
+			}
+			function delLimitSelect() {
+				var objLimitSelect = document.getElementById('limit_select');
+				if (objLimitSelect.selectedIndex > -1)
+					deleteOption(objLimitSelect, objLimitSelect.selectedIndex);
+			}
+			function openTopicDialog(src) {
+				var msg = getLimitList();
+				if (msg.length > 0) 
+					var currentlist = '&tplist=' + msg;
+				selecttopicDialog(src + currentlist);
+			}
+			function selecttopicDialog(src) {
+			 	showModalDialog(src,window,'status:false;dialogWidth:600px;dialogHeight:550px');
+			}
+			function getSearchCondition() {
+				if (!set_keyword_list('keywords', 'keyword_list')) return false;
+				var limitCondition = document.getElementById('limitCondition');
+				limitCondition.value = getLimitList();
+				return true;
+			}
+			function addSearchTemplate() {
+				var txtSearchs = document.getElementById('searchs');
+				var txtSearchTemplate = document.getElementById('search_template');
+
+				if (set_keyword_list('searchs', 'keyword_list')) {
+					if (txtSearchTemplate.value != '') {
+						var linkHref = 'postsearchtemplate.php?mode=add&sqlvalue=' + txtSearchs.value + '&name=' + txtSearchTemplate.value;
+						window.location.href = linkHref;
+					} else {
+						alert('กรุณาระบุคำค้น');
+					}
+				}
+			}
+			function deleteSearchTemplate() {
+				var cboListSearchTemplate = document.getElementById('list_search_template').value;
+				var arrSplitValue = new Array();
+				var searchid;
+				
+				arrSplitValue = cboListSearchTemplate.split('@@@');
+				searchid = arrSplitValue[0];
+				var linkHref = 'postsearchtemplate.php?mode=delete&searchid=' + searchid;
+				window.location.href = linkHref;
+			}
+			function gotoSearching() {
+				var cboListSearchTemplate = document.getElementById('list_search_template');
+				var txtKeywords = document.getElementById('keywords');
+				var sqlValue = cboListSearchTemplate.value;
+				
+				arrSplitValue = sqlValue.split('@@@');
+				txtKeywords.value = arrSplitValue[1];
+
+				if (arrSplitValue[0] != 0) {
+					window.document.forms.frmSearch.submit();
+				}
+			}
+		</script>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+	<tr>
+		<td height="1"
+			background="/<?=$config ['appName']?>/images/spacer1.gif"
+			bgcolor="#E6E6E6"></td>
+	</tr>
+	<tr>
+		<td>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="1" height="1"
+					background="/<?=$config ['appName']?>/images/spacerline.gif"></td>
+				<td background="/<?=$config ['appName']?>/images/spacerline.gif">
+				<!--<table border="0" cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						<td width="5"
+							background="/<?=$config ['appName']?>/images/spacerline.gif">&nbsp;</td>
+						<td width="93" height="22" align="center" valign="middle"
+							id="tab1" class="selected">ค้นหา</td>
+						<td width="93" height="22" align="center" valign="middle"
+							id="tab2" class="tab" onmouseover="this.style.cursor='hand';"
+							onclick="window.location.href ='' . $fsearchlink . '';">ค้นหาจากฟอร์ม</td>
+						<td width="93" height="22" align="center" valign="middle"
+							id="tab3" class="tab" onmouseover="this.style.cursor='hand';"
+							onclick="window.location.href ='' . $fullsearchlink . '';">ค้นจากเนื้อเอกสาร</td>
+						<td background="/<?=$config ['appName']?>/images/spacerline.gif">&nbsp;</td>
+					</tr>
+				</table>-->
+				</td>
+				<td width="1" height="1"
+					background="/<?=$config ['appName']?>/images/spacerline.gif"></td>
+			</tr>
+			<tr>
+				<td width="1"
+					background="/<?=$config ['appName']?>/images/spacer1.gif"
+					bgcolor="#919B9C"></td>
+				<td>
+				<form method="POST"
+					action="/<?=$config ['appName']?>/portlet/get-portlet-content/"
+					id="frmSearch" target="frmSearching"
+					onsubmit="return getSearchCondition();"><input type="hidden"
+					name="portletClass" value="DMSPortlet"> <input type="hidden"
+					name="portletMethod" value="portletContent"> <input type="hidden"
+					name="keySearch" value=""> <input type="hidden" name="keywords"
+					id="keywords" value=""> <input type="hidden" name="qMode" value="">
+				<input type="hidden" name="searchs" id="searchs" value=""> <input
+					type="hidden" name="limitCondition" id="limitCondition" value=""> <input
+					type="hidden" name="rangedate" id="rangedate" value="false"> <input
+					type="hidden" name="rangedocdate" id="rangedocdate" value="false">
+				<input type="hidden" name="limited" id="limited" value="false"> <input
+					type="hidden" name="sourced" id="sourced" value="false"> <input
+					type="hidden" name="typed" id="typed" value="false"> <input
+					type="hidden" name="templated" id="templated" value="false"> <input
+					type="hidden" name="orderbyed" id="orderbyed" value="false">
+				<table width="100%" height="100%" border="0" cellspacing="0"
+					cellpadding="4" id="searchIndex">
+					<tr>
+						<td width="150" valign="top">
+
+						<table width="100%" border="0" cellspacing="0" cellpadding="2">
+							<tr>
+								<td style="color: blue;">คำค้น</td>
+							</tr>
+							<tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr>
+								<td colspan="2"><select name="keyword_list" id="keyword_list"
+									size="5" style="width: 18em;">
+								</select></td>
+							</tr>
+							<tr>
+								<td width="76%" valign="middle"><select
+									name="condition_operator" id="condition_operator"
+									style="width: 5em;">
+									<option selected>and</option>
+									<option>or</option>
+									<option>and not</option>
+									<option>or not</option>
+								</select> <input type="text" name="keyword" id="keyword"
+									style="width: 8em; height: 19px;"></td>
+								<td width="24%" align="right" valign="middle"><a
+									href="javascript:k_add('keyword_list', 'condition_operator', 'keyword');">เพิ่ม</a>
+								| <a href="javascript:k_del('keyword_list');">ลบ</a></td>
+							</tr>
+
+							<!-- ######################################################### -->
+							<tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr>
+							<!-- ######################################################### -->
+							
+							<!--tr style="display:none;">
+								<td style="color: blue;">กลุ่มคำเดิมที่เคยค้นหา</td>
+								<td align="right" style="color: blue;"><img
+									src="/<?=$config ['appName']?>/images/up.gif" width="11"
+									height="7" state="open" id="sectionSearchTemplate"
+									onmouseover="this.style.cursor ='hand';"
+									onclick="hideSection(this, 'sectionSearchTemplate_', 3, 'templated');">
+								<img src="images/up.gif" width="11" height="7" state="open"
+									id="sectionSearchTemplate" style="display: none;"></td>
+							</tr>
+							<tr id="sectionSearchTemplate_1" style="display:none;">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr id="sectionSearchTemplate_3" style="display:none;">
+								<td colspan="2"><select style="width: 10em;"></select>&nbsp;<input
+									type="button" name="delete_search_template"
+									id="delete_search_template" value="เรียกดู"
+									style="width: 4em; height: 2em;"
+									onclick="deleteSearchTemplate();"></td>
+								<td width="24%" align="right" valign="middle"></td>
+							</tr>
+							<tr id="sectionSearchTemplate_2" style="display:none;">
+								<td colspan="2"><input type="text" name="search_template"
+									id="search_template" style="width: 13em;"> &nbsp;<input
+									type="button" name="add_search_template"
+									id="add_search_template" value="บันทึก"
+									style="width: 4em; height: 2em;" onclick="addSearchTemplate();">
+								</td>
+							</tr-->
+							
+							<!-- ######################################################### -->
+							<!--tr>
+								<td height="1" colspan="2" background="images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr-->
+							<!-- ######################################################### -->
+							<tr>
+								<td valign="middle" style="color: blue;">ประเภทการค้นหา</td>
+								<td align="right" valign="middle" style="color: blue;"><img
+									src="images/up.gif" width="11" height="7" state="open"
+									id="sectionType" onmouseover="this.style.cursor = 'hand';"
+									onclick="hideSection(this, 'sectionType_', 2, 'typed');"> <img
+									src="images/up.gif" width="11" height="7" state="open"
+									id="sectionType" style="display: none;"></td>
+							</tr>
+							<tr id="sectionType_1">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr id="sectionType_2">
+								<td colspan="2" valign="middle">
+								<table border="0">
+									<tr>
+										<td><input name="cb_folder" id="cb_folder" type="checkbox"
+											class="noborder" value="folder" checked>ดัชนี</td>
+										<!--td><input name="cb_scfolder" id="cb_scfolder" type="checkbox"
+											class="noborder" value="scfolder" checked>Shortcut ดัชนี</td-->
+									</tr>
+									<tr>
+										<td><input name="cb_doc" id="cb_doc" type="checkbox"
+											class="noborder" value="doc" checked>เอกสาร</td>
+										<!--td><input name="cb_scdoc" id="cb_scdoc" type="checkbox"
+											class="noborder" value="scdoc" checked>Shortcut เอกสาร</td-->
+									<tr>
+                                    <tr>
+										<td><input name="cb_shortcut" id="cb_shortcut" type="checkbox"
+											class="noborder" value="scfolder" checked>Shortcut</td>
+									</tr>
+								</table>
+								</td>
+							</tr>
+							<!-- ######################################################### -->
+							<tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr>
+							<!-- ######################################################### -->
+							<tr>
+								<td valign="middle" style="color: blue;">แหล่งคำค้น</td>
+								<td align="right" valign="middle" style="color: blue;"><img
+									src="/<?=$config ['appName']?>/images/up.gif" width="11"
+									height="7" state="open" id="sectionSource"
+									onmouseover="this.style.cursor = 'hand';"
+									onclick="hideSection(this, 'sectionSource_', 2, 'sourced');"> <img
+									src="/<?=$config ['appName']?>/images/up.gif" width="11"
+									height="7" state="open" id="sectionSource"
+									style="display: none;"></td>
+							</tr>
+							<tr id="sectionSource_1">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr id="sectionSource_2">
+								<td colspan="2" valign="middle">
+								<table border="0">
+									<tr>
+										<td><input name="cb_name" id="cb_name" type="checkbox"
+											class="noborder" value="name" checked>ชื่อ</td>
+										<!--td><input name="cb_receivefrom" id="cb_receivefrom"
+											type="checkbox" class="noborder" value="receivefrom" checked>ที่มา</td-->
+									</tr>
+									<tr>
+										<td><input name="cb_description" id="cb_description"
+											type="checkbox" class="noborder" value="description" checked>รายละเอียด</td>
+										<!--td><input name="cb_storelocation" id="cb_storelocation"
+											type="checkbox" class="noborder" value="storelocation"
+											checked> ที่เก็บเอกสาร</td-->
+									</tr>
+									<tr>
+										<td><input name="cb_keyword" id="cb_keyword" type="checkbox"
+											class="noborder" value="keywords" checked>คำค้น</td>
+										<!--td><input name="cb_docdate" id="cb_docdate" type="checkbox"
+											class="noborder" value="docdate" checked>วันที่เอกสาร</td-->
+									</tr>
+									<tr>
+										<!--td><input name="rb_type" id="rb_type" type="checkbox"
+											class="noborder" value="1" checked>หน้าเอกสาร</td-->
+									</tr>
+								</table>
+								</td>
+							</tr>
+                            <!-- ######################################################### -->
+							<tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr>
+							<!-- ######################################################### -->
+							
+							<!--tr style="display:none;">
+								<td valign="middle" style="color: blue;">กำหนดขอบเขตการค้นหา</td>
+								<td align="right" valign="middle" style="color: blue;"><img
+									src="/<?=$config ['appName']?>/images/up.gif" width="11"
+									height="7" state="open" id="sectionLimit"
+									onmouseover="this.style.cursor = 'hand';"
+									onclick="hideSection(this, 'sectionLimit_', 3, 'limited');"></td>
+							</tr>
+							<tr id="sectionLimit_1" style="display:none;">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr id="sectionLimit_2" style="display:none;">
+								<td colspan="2" valign="middle"><select name="limit_topic"
+									id="limit_select" size="5" style="width: 18em;">
+								</select></td>
+							</tr>
+							<tr id="sectionLimit_3" align="right" style="display:none;">
+								<td colspan="2" valign="middle"><a
+									href="javascript:openTopicDialog('' . $selecttopiclink . '');">เพิ่ม</a>
+								| <a href="javascript:delLimitSelect();">ลบ</a></td>
+							</tr-->
+							
+							<!-- ######################################################### -->
+							<!--tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr-->
+							<!-- ######################################################### -->
+							<tr>
+								<td valign="middle" style="color: blue;">วันที่สร้างเอกสาร</td>
+								<td align="right" valign="middle" style="color: blue;"><img
+									src="/<?=$config ['appName']?>/images/up.gif" width="11"
+									height="7" state="open" id="sectionDate"
+									onmouseover="this.style.cursor = 'hand';"
+									onclick="hideSection(this, 'sectionDate_', 3, 'rangedate');"></td>
+							</tr>
+							<tr id="sectionDate_1">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr id="sectionDate_2" align="center">
+								<td colspan="2" valign="middle">จาก<input type="text"
+									name="begindate" id="begindate" /><input name="btnBegindate" id="btnBegindate" type="button"
+									class="btn" value="..."
+									onclick="return showCalendar('begindate', '%d/%m/%Y');" /></td>
+							</tr>
+							<tr id="sectionDate_3" align="center">
+								<td colspan="2" valign="middle">ถึง <input type="text"
+									id="enddate" name="enddate"> <input name="btnEnddate" id="btnEnddate" type="button"
+									class="btn" value="..."
+									onclick="return showCalendar('enddate', '%d/%m/%Y');"></td>
+							</tr>
+							<!-- ######################################################### -->
+							<tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr>
+							<!-- ######################################################### -->
+							<!--tr>
+								<td valign="middle" style="color: blue;">วันที่เอกสาร</td>
+								<td align="right" valign="middle" style="color: blue;"><img
+									src="/<?=$config ['appName']?>/images/up.gif" width="11"
+									height="7" state="open" id="sectionDocDate"
+									onmouseover="this.style.cursor = 'hand';"
+									onclick="hideSection(this, 'sectionDocDate_', 2, 'rangedocdate');">
+								</td>
+							</tr>
+							<tr id="sectionDocDate_1">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr id="sectionDocDate_2" align="center">
+								<td colspan="2" valign="middle"><input type="text"
+									name="docdate"> <input name="btnDocdate" type="button"
+									class="btn" value="..."
+									onclick="return showCalendar('docdate', '%d/%m/%Y');"></td>
+							</tr-->
+							<!-- ######################################################### -->
+							<!--tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr-->
+							<!-- ######################################################### -->
+							<!--tr>
+								<td valign="middle" style="color: blue;">จัดเรียงข้อมูล</td>
+								<td align="right" valign="middle" style="color: blue;"><img
+									src="/<?=$config ['appName']?>/images/up.gif" width="11"
+									height="7" state="open" id="sectionOrderBy"
+									onmouseover="this.style.cursor = 'hand';"
+									onclick="hideSection(this, 'sectionOrderBy_', 3, 'orderbyed');">
+								</td>
+							</tr>
+							<tr id="sectionOrderBy_1" align="center">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr id="sectionOrderBy_2" align="center">
+								<td colspan="2" valign="middle">โดย &nbsp; <input type="radio"
+									name="orderby" value="0" class="noborder" checked>ดัชนี &nbsp;
+								<input type="radio" name="orderby" value="1" class="noborder">วันที่</td>
+							</tr>
+							<tr id="sectionOrderBy_3" align="center">
+								<td colspan="2" valign="middle">จาก &nbsp; <input type="radio"
+									name="ordertype" value="asc" class="noborder" checked>น้อยไปมาก<input
+									type="radio" name="ordertype" value="desc" class="noborder">มากไปน้อย</td>
+							</tr-->
+							<!-- ######################################################### -->
+							<!--tr>
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer1.gif"
+									bgcolor="blue"></td>
+							</tr-->
+							<!-- ######################################################### -->
+							<tr align="center">
+								<td colspan=2><input type="button" name="send"
+									value="เริ่มการค้นหา" onclick="loadResult()"
+									style="width: 7em; height: 3em;"> <input type="button"
+									name="clear" value="เคลียร์ข้อมูล"
+									style="width: 7em; height: 3em;"></td>
+							</tr>
+						</table>
+
+						</td>
+						<td valign="top">
+						<table width="100%" height="100%" border="0" cellspacing="0"
+							cellpadding="2">
+							<tr height="17">
+								<td style="color: blue;">ผลลัพธ์การค้นหา</td>
+							</tr>
+							<tr height="1">
+								<td height="1" colspan="2"
+									background="/<?=$config ['appName']?>/images/spacer2.gif"></td>
+							</tr>
+							<tr>
+								<td valign="top"><div id="frmSearching2"></div><iframe src="" name="frmSearching"
+							
+									id="frmSearching" width="0" height="0" frameborder="0"
+									scrolling="yes" state="searching.php"></iframe></td>
+								<td><input name="doc_value" type="hidden" value="'.$doc_value.'"></td>
+							</tr>
+							<tr height="17">
+								<td align="right"></td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+				</form>
+				</td>
+				<td width="1"
+					background="/<?=$config ['appName']?>/images/spacer1.gif"
+					bgcolor="#919B9C"></td>
+			</tr>
+			<tr>
+				<td width="1" height="1"
+					background="/<?=$config ['appName']?>/images/spacer1.gif"
+					bgcolor="#919B9C"></td>
+				<td height="1"
+					background="/<?=$config ['appName']?>/images/spacer1.gif"
+					bgcolor="#919B9C"></td>
+				<td width="1" height="1"
+					background="/<?=$config ['appName']?>/images/spacer1.gif"
+					bgcolor="#919B9C"></td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<script language="Javascript">
+    //sethideSection('sectionLimit', 3, 'limited');
+    //sethideSection('sectionSearchTemplate', 3, 'templated');
+    sethideSection('sectionType', 2, 'typed');
+    sethideSection('sectionSource', 2, 'sourced');
+    sethideSection('sectionDate', 3, 'rangedate');
+    //sethideSection('sectionDocDate', 2, 'rangedocdate');
+    //sethideSection('sectionOrderBy', 3, 'orderbyed');
+</script>

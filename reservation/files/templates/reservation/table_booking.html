@@ -1,0 +1,144 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+	$("#from_date").datepick(datepickDefaults);
+        $("#to_date").datepick(datepickDefault);
+	});
+
+	function showReport (url)
+    {
+        //openForm('{MainUrl}?fid=validate-document&entity_id='+entity_id+'&entity_data_id='+entity_data_id, 'Validate Doc Type', 'block-document-tree');
+        openFormModal(url, 'รายงาน', function(response, data) {
+            if (response)
+            {
+				window.open('{MainUrl}?fid=down-load-report&fname=' + data, 'aaaa');
+
+                this.closeModal();
+            }else{
+                this.closeModal();
+            }
+        });
+    }
+</script>
+<br>
+<div class="grey-bg columns no-bottom-margin">
+    <div class="colx2-left">
+		<div class="columns">
+			<div class="colx2-left">
+		{Booking/DateFrom}
+				<!-- <span class="input-type-text"> -->
+					<input type="text" name="from_date" id="from_date" value="{from_date}" />
+					<input type="hidden" id="altGoDateFormat" name="altGoDateFormat" />
+					<!-- <a href="javascript:void(0);" id="doc_date_from_img"><img height="16" width="16" src="resources/images/icons/fugue/calendar-month.png" alt="" /></a>
+				</span> -->
+
+			</div>
+			<div class="colx2-right">
+		{Booking/DateTo}
+				<!-- <span class="input-type-text"> -->
+					<input type="text" name="to_date" id="to_date" value="{to_date}" />
+					<input type="hidden" id="altBackDateFormat" name="altBackDateFormat" />
+					<!-- <a href="javascript:void(0);" id="doc_date_to_img"><img height="16" width="16" src="resources/images/icons/fugue/calendar-month.png" alt="" /></a>
+				</span> -->
+			</div>
+        </div>
+    </div>
+    <div class="colx2-right">
+
+        <? BEGIN(FOREACH,booking_status_list) ?>
+        <input type="checkbox" name="status[]" value="{Value}" id="status.{Value}"
+               <? BEGIN(CASE,checked) ?>
+               <? CASE(checked) ?>checked="{checked}"
+               <? END(CASE) ?> />
+               <label for="status.{Value}">{Text}</label>
+        <? END(FOREACH) ?>
+		<button class="grey" type="button" onclick="onSubmit()">{Form/Search}</button>
+		<? BEGIN(CASE,policy/f_rc_admin) ?>
+		<? CASE(1) ?>
+		<button class="grey" type="button" onclick="showReport('{MainUrl}?fid=show-report');">{Form/Report}</button>
+		<? END(CASE) ?>
+    </div>
+</div>
+<br>
+<table cellspacing="0" width="100%"  class="table no-bottom-margin">
+    <thead>
+        <tr>
+            <th>{Booking/BookingNo}</th>
+			<th>{Booking/DateFormTo}</th>
+			<th>{Booking/RevDate}</th>
+            <th>{Booking/ReserverName}</th>
+            <th>{Booking/Goto}</th>
+			<th>{Booking/Objective}</th>
+            <th>{Booking/BookingCar}</th>
+            <th>{Booking/BookingDriver}</th>
+            <th>{Booking/BookingStatus}</th>
+			<th>{Booking/StatusDesc}</th>
+            <th>{Booking/ApproveName}</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+		<? BEGIN(CASE,booking_rows) ?>
+		<? CASE(%BLANK) ?>
+		<tr><td colspan="11" style="text-align: center;">ไม่พบรายการ</td></tr>
+		<? CASE(%DEFAULT) ?>
+        <? BEGIN(FOREACH,booking_rows) ?>
+        <tr>
+            <td>{order_no}</td>
+			<td style="text-align: center;">{go_date_in_formate}<br>{Common/To}<br>{back_date_in_formate}</td>
+			<td>{res_date}</td>
+			<td><p>{account_id/f_name} {account_id/f_last_name}</p><p>{Common/Phone}  {phone}</p></td>
+			<td>{goto}</td>
+			<td>{objective}</td>
+            <td>{car_id/car_license}<br>{car_id/car_detail}</td>
+            <td><? BEGIN(CASE,driver_id/first_name) ?><? CASE(%BLANK) ?><? CASE(%DEFAULT) ?><p>{driver_id/first_name}&nbsp;{driver_id/last_name}</p><p>{Common/Phone}  {driver_id/phone}</p><? END(CASE) ?></td>
+            <td>{status_desc}</td>
+			<td>{status_description}</td>
+			<td>{approve_id/f_name} {approve_id/f_last_name}</td>
+            <td>
+				
+				<? BEGIN(CASE,policy/f_rc_admin) ?>
+				<? CASE(1) ?>
+				<a href="javascript:void(0);" title="{Common/Edit}" onclick="openForm('{MainUrl}?fid=booking-edit&booking_id={booking_id}', '{Booking/Edit}', 'bookingList')">
+                    <img src="images/icons/btn_edit.gif" />
+                </a>
+                <a href="javascript:void(0);" title="{Common/Delete}" onclick="deleteData('{MainUrl}?fid=booking-delete&booking_id={booking_id}', 'bookingList')">
+                    <img src="images/icons/btn_delete.gif" />
+                </a>
+                <a href="javascript:void(0);" title="{Common/Approve}" onclick="openForm('{MainUrl}?fid=booking-edit&booking_id={booking_id}&appv=1', '{Booking/Approve}', 'bookingList')">
+                    <img src="images/icons/btn_back.gif" />
+                </a>
+                <a href="javascript:void(0);" title="{Common/Close}" onclick="openForm('{MainUrl}?fid=booking-edit&booking_id={booking_id}&appv=2', '{Booking/Close}', 'bookingList')">
+                    <img src="images/icons/btn_document.gif" />
+                </a>
+				<? CASE(%DEFAULT) ?>
+					<? BEGIN(CASE,status) ?>
+					<? CASE(WAIT) ?>
+					<a href="javascript:void(0);" title="{Common/Edit}" onclick="openForm('{MainUrl}?fid=booking-edit&booking_id={booking_id}', '{Booking/Edit}', 'bookingList')">
+						<img src="images/icons/btn_edit.gif" />
+					</a>
+					<a href="javascript:void(0);" title="{Common/Delete}" onclick="deleteData('{MainUrl}?fid=booking-delete&booking_id={booking_id}', 'bookingList')">
+						<img src="images/icons/btn_delete.gif" />
+					</a>
+					<? END(CASE) ?>
+				<? END(CASE) ?>
+				<? BEGIN(CASE,status) ?>
+				<? CASE(APV) ?>
+                <a href="javascript:void(0);" title="{Booking/Print}" onclick="window.open('{MainUrl}?fid=booking-create-form&booking_id={booking_id}', 'PrintBooking');">
+                    <img src="images/icons/stock_printers.png" width="20px" height="20px" />
+                </a>
+				<? CASE(WAIT) ?>
+				<a href="javascript:void(0);" title="{Booking/Print}" >
+                    <img src="images/icons/printer-error.png" width="20px" height="20px" />
+                </a>
+				<? CASE(%DEFAULT) ?>
+				<a href="javascript:void(0);" title="{Booking/Print}" onclick="window.open('{MainUrl}?fid=booking-create-form&booking_id={booking_id}', 'PrintBooking');">
+                    <img src="images/icons/stock_printers.png" width="20px" height="20px" />
+                </a>
+				<? END(CASE) ?>
+            </td>
+        </tr>
+        <? END(FOREACH) ?>
+		<? END(CASE) ?>
+    </tbody>
+</table>
+<input type="hidden" id="fn" name="fn" value="{fn}" />

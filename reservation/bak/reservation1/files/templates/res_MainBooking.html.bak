@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=tis-620" />
+		<!-- import the calendar script -->
+
+		<!--<link rel="stylesheet" type="text/css" media="all" href="js/calendar/skins/aqua/theme.css" title="Aqua" />
+		<script type="text/javascript" src="js/calendar/calendar.js"></script>
+		<script type="text/javascript" src="js/calendar/lang/calendar-en.js"></script>
+		<script type="text/javascript" src="js/calendar/showCalendar.js"></script>
+		<script type="text/javascript" src="js/jquery/jquery.js"></script>-->
+
+		<!-- Global stylesheets -->
+		<link href="resources/css/reset.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/common.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/form.css" rel="stylesheet" type="text/css">
+
+		<link href="resources/css/standard.css" rel="stylesheet" type="text/css">
+
+		<!-- Comment/uncomment one of these files to toggle between fixed and fluid layout -->
+		<!--<link href="resources/css/960.gs.css" rel="stylesheet" type="text/css">-->
+		<link href="resources/css/960.gs.fluid.css" rel="stylesheet" type="text/css">
+
+		<!-- Custom styles -->
+		<link href="resources/css/simple-lists.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/block-lists.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/planning24.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/table.css" rel="stylesheet" type="text/css">
+
+		<link href="resources/css/calendars.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/wizard.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/gallery.css" rel="stylesheet" type="text/css">
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		<link rel="icon" type="image/png" href="favicon-large.png">
+
+		<!-- Generic libs -->
+		<script type="text/javascript" src="resources/js/html5.js"></script>				<!-- this has to be loaded before anything else -->
+
+		<script type="text/javascript" src="resources/js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="resources/js/old-browsers.js"></script>		<!-- remove if you do not need older browsers detection -->
+
+		<!-- Template libs -->
+		<script type="text/javascript" src="resources/js/jquery.accessibleList.js"></script>
+		<script type="text/javascript" src="resources/js/searchField.js"></script>
+		<script type="text/javascript" src="resources/js/common.js"></script>
+
+		<script type="text/javascript" src="resources/js/standard.js"></script>
+		<!--[if lte IE 8]><script type="text/javascript" src="resources/js/standard.ie.js"></script><![endif]-->
+		<script type="text/javascript" src="resources/js/jquery.tip.js"></script>
+		<script type="text/javascript" src="resources/js/jquery.hashchange.js"></script>
+		<script type="text/javascript" src="resources/js/jquery.contextMenu.js"></script>
+		<script type="text/javascript" src="resources/js/jquery.modal.js"></script>
+
+
+		<!-- Custom styles lib -->
+		<script type="text/javascript" src="resources/js/list.js"></script>
+
+		<!-- Plugins -->
+		<script  type="text/javascript" src="resources/js/jquery.dataTables.min.js"></script>
+
+		<script  type="text/javascript" src="resources/js/jquery.datepick/jquery.datepick.min.js"></script>
+		<script  type="text/javascript" src="resources/js/jquery.datepick/jquery.datepick-th.js"></script>
+		<!-- Godfather Library -->
+		<script type="text/javascript" src="resources/js/gf.gfgrid.js"></script>
+		<script type="text/javascript" src="resources/js/gf.util.js"></script>
+		<!-- <script type="text/javascript" src="resources/js/validator/utils_date.js"></script>
+		<script type="text/javascript" src="resources/js/validator/utils_form.js"></script>
+		<script type="text/javascript" src="resources/js/validator/validator.js"></script> -->
+		<!-- <script type="text/javascript" src="resources/js/validator/validator.js?lang=th"></script> -->
+		<!-- Charts library -->
+		<!--Load the AJAX API-->
+
+
+	</head>
+	<body>
+	<header id="main-nav">
+		<div class="container_12">
+
+			<div class="align-left float-left">
+				<img src="resources/images/oic_header.png" width="415" height="84">
+			</div>
+			<div class="server-info">System: <strong>ระบบจองรถ</strong></div>
+			<div class="server-info">Verion: <strong>1.0</strong></div>-->
+
+		</div>
+	</header>
+	<!-- End server status -->
+
+	<nav id="main-nav">
+
+
+	</nav>
+
+	<div id="status-bar">
+		<div class="container_12">
+			<div class="align-left float-left">
+				<a href="{MainUrl}">
+					<div class="button menu-opener">
+
+						<img height="16" width="16" src="resources/images/icons/fugue/home.png">
+						Home
+
+					</div>
+				</a>
+				<? BEGIN(CASE,policy/f_rc_admin) ?>
+				<? CASE(1) ?>
+				<a href="{MainUrl}?fid=car-ui">
+					<div class="button menu-opener">
+
+						<img height="16" width="16" src="resources/images/icons/fugue/home.png">
+						{Car/List}
+
+					</div>
+				</a>
+				<a href="{MainUrl}?fid=driver-ui">
+					<div class="button menu-opener">
+
+						<img height="16" width="16" src="resources/images/icons/fugue/users.png">
+						{Driver/List}
+
+					</div>
+				</a>
+				<? END(CASE) ?>
+			</div>
+
+		</div>
+		<a href="javascript:void(0);" onclick="window.close();">
+			<div class="button menu-opener">
+				<img height="16" width="16" src="images/icons/btn_delete.gif">
+				{Common/Logout}
+			</div>
+		</a>
+	</div>
+
+	<!-- End status bar -->
+
+	<div id="header-shadow"></div>
+	<!-- End header -->
+
+	<article class="container_12">
+		{PageContent,SRC}
+	</article>
+	<!--[if lt IE 8]></div><![endif]-->
+	<!--[if lt IE 9]></div><![endif]-->
+</body>
+</html>

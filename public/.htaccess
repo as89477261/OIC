@@ -1,0 +1,19 @@
+
+
+#php_value session.save_path "tcp://localhost:11211?persistent=1&weight=1&timeout=1&retry_interval=15#"
+
+RewriteEngine on   
+RewriteBase /ECM/
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+#ErrorDocument 500 /ECM/Error/error
+#ErrorDocument 404 /missing.html
+#ErrorDocument 404 "/cgi-bin/missing_handler.pl"
+#ErrorDocument 402 http://hades/subscription_info.html
+
+#php_value session.save_handler memcache

@@ -1,0 +1,301 @@
+<?php
+global $config;
+global $policy;
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>ระบบจองห้องประชุม</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=tis-620" />
+
+        <!-- Global stylesheets -->
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/reset.css" rel="stylesheet" type="text/css">
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/common.css" rel="stylesheet" type="text/css">
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/form.css" rel="stylesheet" type="text/css">
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/standard.css" rel="stylesheet" type="text/css">
+
+        <!-- Comment/uncomment one of these files to toggle between fixed and fluid layout -->
+        <!--<link href="/<?php echo $config ['appName']?>/constellation15/css/960.gs.css" rel="stylesheet" type="text/css">-->
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/960.gs.fluid.css" rel="stylesheet" type="text/css">
+
+        <!-- Custom styles -->
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/simple-lists.css" rel="stylesheet" type="text/css">
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/block-lists.css" rel="stylesheet" type="text/css">
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/planning.css" rel="stylesheet" type="text/css">
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/table.css" rel="stylesheet" type="text/css">
+        <link href="/<?php echo $config ['appName']?>/reservation/resources/css/calendars.css" rel="stylesheet" type="text/css">
+
+        <!-- Generic libs -->
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/html5.js"></script>
+        <!-- this has to be loaded before anything else -->
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/old-browsers.js"></script>
+        <!-- remove if you do not need older browsers detection -->
+
+        <!-- Template libs -->
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/jquery.accessibleList.js"></script>
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/searchField.js"></script>
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/common.js"></script>
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/standard.js"></script>
+        <!--[if lte IE 8]><script type="text/javascript" src="/<?php echo $config ['appName']?>/constellation15/js/standard.ie.js"></script><![endif]-->
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/jquery.tip.js"></script>
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/jquery.hashchange.js"></script>
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/jquery.contextMenu.js"></script>
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/jquery.modal2.js"></script>
+
+        <!-- Custom styles lib -->
+        <script type="text/javascript" src="/<?php echo $config ['appName']?>/reservation/resources/js/list.js"></script>
+
+        <!-- Plugins -->
+        <script  type="text/javascript" src="/<?php echo $config ['appName']?>/js/jquery.datepick.min.js"></script>
+        <script  type="text/javascript" src="/<?php echo $config ['appName']?>/js/room.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function()
+            {
+                //$('.date-pick').datePicker({startDate: '01/01/1996'});
+
+                $('#btn_search').click(function() {
+                    window.location = '/<?php echo $config ['appName']?>/room/index/?date=' + $('#date').val();
+                });
+
+
+                $('.datepicker').datepick({
+                    alignment: 'bottom',
+                    showOtherMonths: true,
+                    selectOtherMonths: true,
+					dateFormat: 'dd/mm/yyyy',
+                    renderer: {
+                        picker: '<div class="datepick block-border clearfix form"><div class="mini-calendar clearfix">' +
+                                '{months}</div></div>',
+                        monthRow: '{months}',
+                        month: '<div class="calendar-controls">' +
+                                '{monthHeader:M yyyy}' +
+                                '</div>' +
+                                '<table cellspacing="0">' +
+                                '<thead>{weekHeader}</thead>' +
+                                '<tbody>{weeks}</tbody></table>',
+                        weekHeader: '<tr>{days}</tr>',
+                        dayHeader: '<th>{day}</th>',
+                        week: '<tr>{days}</tr>',
+                        day: '<td>{day}</td>',
+                        monthSelector: '.month',
+                        daySelector: 'td',
+                        rtlClass: 'rtl',
+                        multiClass: 'multi',
+                        defaultClass: 'default',
+                        selectedClass: 'selected',
+                        highlightedClass: 'highlight',
+                        todayClass: 'today',
+                        otherMonthClass: 'other-month',
+                        weekendClass: 'week-end',
+                        commandClass: 'calendar',
+                        commandLinkClass: 'button',
+                        disabledClass: 'unavailable'
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <!-- The template uses conditional comments to add wrappers div for ie8 and ie7 - just add .ie or .ie7 prefix to your css selectors when needed -->
+        <!--[if lt IE 9]><div class="ie"><![endif]-->
+        <!--[if lt IE 8]><div class="ie7"><![endif]-->
+
+        <!-- Header -->
+
+        <!-- Server status -->
+        <header>
+            <div class="container_12">
+                <div class="align-left float-left">
+                    <img width="415" height="84" src="/<?php echo $config ['appName']?>/reservation/resources/images/oic_header.png" />
+                </div>
+            </div>
+        </header>
+        <!-- End server status -->
+        <nav id="main-nav"> </nav>
+
+
+        <!-- Status bar -->
+        <div id="status-bar">
+            <div class="container_12">
+                <div class="align-left float-left">
+                    <a href="/<?php echo $config ['appName']?>/room/index">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/calendar-month.png">
+                            หน้าหลัก
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/booking-list/" title="My Booking">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/application-blog.png">
+                            รายการจองห้อง
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/booking-all/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/application-blog.png">
+                            รายการจองห้องทั้งหมด
+                        </div>
+                    </a>
+<?php
+if($policy->isRoomAdmin()){
+?>
+                    <a href="/<?php echo $config ['appName']?>/room/category-manage/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/pencil.png">
+							ประเภทห้อง/อุปกรณ์
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/room-manage/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/pencil.png">
+							ห้องประชุม/อุปกรณ์
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/food-manage/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/pencil.png">
+							รายการอาหาร
+                        </div>
+                    </a>
+<?php
+}
+?>
+                </div>
+            </div>
+        </div>
+        <!-- End status bar -->
+
+        <div id="header-shadow"></div>
+        <!-- End header -->
+
+
+        <!-- Content -->
+        <article class="container_12">
+
+
+
+            <section class="grid_12">
+                <div class="block-border">
+                    <form class="form">
+
+                        <div class="block-content">
+                            <h1>ตารางเวลาการจองห้อง</h1>
+
+                            <div class="block-controls">
+                                <div class="controls-buttons">
+
+                                    <ul class="controls-buttons">
+                                        <?php
+                                        $l = explode('/', $this->date);
+                                        $sel_date = ($l[2]) . '-' . $l[1] . '-' . $l[0];
+                                        ?>
+                                        <li><a onclick="openRoomBooking('<?php echo $sel_date; ?>')" href="javascript:void(0)" title="Add Booking"><b><img src="/<?php echo $config ['appName']?>/images/icons/add.gif"> จองห้องประชุม</b></a></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                            <div class="grey-bg no-margin">
+                                <div>&nbsp;</div>
+                                <div class="no-margin">
+                                    <label class="inline" for="doc_date_from">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;วันที่</label>
+
+                                    <span class="input-type-text margin-right relative" style="width:120px;">
+                                        <input type="text" style="position: relative;" class="datepicker" 
+											name="date" id="date" value="<?php echo $this->date; ?>">
+                                        <!--<img src="/<?php echo $config ['appName']?>/images/calendarIcon.gif" width="16" height="16">-->
+										<!--<a style="margin-left:2px;" href="javascript:void(0);" class="datepick-trigger">
+										<img width="16" height="16" style="cursor:pointer;vertical-align:text-top;" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/calendar-month.png">
+										</a>-->
+                                    </span>
+                                    <button id="btn_search" type="button" class="grey">ค้นหา</button>
+                                </div>
+                                <div>&nbsp;</div>
+                            </div>
+
+                            <ul class="planning no-margin">
+                                <li class="planning-header">
+                                    <span><b>ชื่อห้อง (จำนวนที่นั่ง)</b></span>
+                                    <ul>
+                                        <li class="at-8">7</li>
+                                        <li class="at-9">8</li>
+                                        <li class="at-10">9</li>
+                                        <li class="at-11">10</li>
+                                        <li class="at-12">11</li>
+                                        <li class="at-13">12</li>
+                                        <li class="at-14">13</li>
+                                        <li class="at-15">14</li>
+                                        <li class="at-16">15</li>
+                                        <li class="at-17">16</li>
+                                        <li class="at-18">17</li>
+                                        <li class="at-19">18</li>
+                                        <li class="at-20">19</li>
+                                    </ul>
+                                </li>
+                                <?php
+                                foreach ($this->rooms as $room) {
+                                    ?>
+                                    <li>
+                                        <a href="#" onclick="openRoomDetail('<?php echo $room['F_ROWID_ROOM']; ?>', '<?php echo $room['F_ROOMNAME']; ?>');"><?php echo $room['F_ROOMNAME']. ' ('.$room['F_ROOMCAPACITY'].')'; ?></a>
+
+                                        <?php
+                                        if ($room['F_ROOMSTATUS'] == 1) {
+                                            echo '<ul>';
+                                            ?>
+                                        <li class="lunch from-13 to-14"></li>
+                                        <?php
+                                        foreach ((array) $this->transactions[$room['F_ROWID_ROOM']] as $trans) {
+                                            $trans['F_ROOMNAME'] = $room['F_ROOMNAME'];
+                                            echo '<li class="event-blue from-' . ((int) substr($trans['F_TIMESTART'], 0, 2) + 1) . '-' . substr($trans['F_TIMESTART'], 2, 2)
+                                            . ' to-' . ((int) substr($trans['F_TIMEEND'], 0, 2) + 1) . '-' . substr($trans['F_TIMEEND'], 2, 2) . '">'
+                                            . '<a href="#" onclick="openRoomBookingDetail(\''.$trans['F_ROWID'].'\')" title="' . RoomTransaction::getBookingTitle($trans) . '" class="with-tip">'
+                                            . substr($trans['F_TIMESTART'], 0, 2) . ':' . substr($trans['F_TIMESTART'], 2, 2)
+                                            . ' - '
+                                            . substr($trans['F_TIMEEND'], 0, 2) . ':' . substr($trans['F_TIMEEND'], 2, 2)
+                                            . '</a></li>';
+                                        }
+                                        echo '</ul>';
+                                    } else {
+                                        ?>
+                                        <ul class="zebras"></ul>
+                                        <?php
+                                    }
+                                    ?>
+
+
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+
+                            <ul class="message no-margin">
+                                <li>&nbsp;</li>
+                            </ul>
+
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <div class="clear"></div>
+
+        </article>
+
+        <!-- End content -->
+
+        <footer>
+            <div class="float-right">
+                <a href="#top" class="button"><img src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/navigation-090.png" width="16" height="16"> Page top</a>
+            </div>
+        </footer>
+
+        <!--[if lt IE 8]></div><![endif]-->
+        <!--[if lt IE 9]></div><![endif]-->
+    </body>
+</html>

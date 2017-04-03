@@ -1,0 +1,76 @@
+<?php
+global $config;
+
+?>
+<html>
+	<head><?php
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/viewImage.css' );    
+		echo $this->headLink ();
+		?>
+		<script type="text/javascript">
+		function gotoPage(page) {
+			window.location.href = "/<?php echo $config['appName'];?>/viewer/view/?docID=<?php echo $this->docID;?>&pageID="+page;
+		}
+
+		function movepage(pageno,docid)
+		{
+			var ttpage = <?php echo $this->totalPage;?>;
+			var page=prompt("ย้ายหน้าเอกสาร "+pageno+" ไปเป็นหน้าที่ (ทั้งหมด : "+ttpage+" pages)",1);
+			if (page != null) {
+			  if (parseInt(page) > 0 && parseInt(page) <= parseInt(ttpage)) {
+			  	if (parseInt(page) != parseInt(pageno))  {
+				    top.window.location.href = "/<?php echo $config['appName'];?>/viewer/move-page?docID="+docid+"&pageID="+pageno+"&pageno="+pageno+"&changeto="+page;
+			  	}
+			  } else {
+			    alert("ระบุ หน้าที่ เป็นตัวเลข");
+			  }
+			}
+		}	
+
+		function swappage(pageno,docid)
+		{
+			var ttpage = 5;
+			var page=prompt("ย้ายหน้าเอกสาร "+pageno+" to page (All page : <?php echo $this->totalPage;?> pages)",1);
+			if (page != null) {
+			  if (parseInt(page) > 0 && parseInt(page) <= parseInt(ttpage)) {
+			  	if (parseInt(page) != parseInt(pageno))  {
+				    window.location.href = "postpage.php?PHPSESSID=889c94b2eb991da00b63159cc5af3b33&postmode=MOVEPAGE&topicid="+docid+
+				                           	       "&pageno="+pageno+"&changeto="+page;
+			  	}
+			  } else {
+			    alert("ระบุ หน้าที่ เป็นตัวเลข");
+			  }
+			}
+		}	
+		function deletepage(tid,pageno) {
+			var agree=confirm("Do you want to delete page no. "+pageno+" ?");
+			if (agree) {
+				 window.location.href = "postpage.php?PHPSESSID=889c94b2eb991da00b63159cc5af3b33&postmode=DELPAGE&tid=90&pageno="+pageno;
+			}
+		}
+		
+		</script>
+	</head>
+	<body style="margin: 0px;">
+		<div id="controlDiv" style="width: 100%;">
+			<div style="float: right;">
+				<!-- <input class="button" type="button" value="รายละเอียด"/>
+				<input class="button" type="button" value="เนื้อข้อความ"/> -->
+				<input class="button" type="button" value="สลับหน้า"/ onclick="movepage('<?php echo $this->pageNo ?>','<?php echo $this->docID ?>')">
+				<!-- <input class="button" type="button" value="ย้ายหน้า"/>
+				<input class="button" type="button" value="ลบหน้า"/>
+				<input class="button" type="button" value="ดาวน์โหลด"/> -->
+			</div>
+			<div style="float: left;">
+				&nbsp;<img src="/<?php echo $config['appName'];?>/images/firstpage.gif" style="cursor: pointer" onclick="gotoPage(<?php echo $this->firstPage;?>);"  />&nbsp;
+				<img src="/<?php echo $config['appName'];?>/images/previouspage.gif" style="cursor: pointer" onclick="gotoPage(<?php echo $this->prevPage;?>);"  />
+				หน้าที่ <?php echo $this->pageNo;?>/<?php echo $this->totalPage;?>
+				<img src="/<?php echo $config['appName'];?>/images/nextpage.gif" style="cursor: pointer" onclick="gotoPage(<?php echo $this->nextPage;?>);"  />&nbsp;
+				<img src="/<?php echo $config['appName'];?>/images/lastpage.gif" style="cursor: pointer" onclick="gotoPage(<?php echo $this->lastPage;?>);"  />
+			</div>
+		</div>
+		<div id="displayDiv">
+			<?php echo $this->template;?>
+		</div>
+	</body>
+</html>

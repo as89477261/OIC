@@ -1,0 +1,147 @@
+<?php 
+global $config;
+global $lang;
+global $debugMode;
+global $ieBrowser;
+global $util;
+
+echo $this->docType();
+?>
+<HTML>
+<HEAD>
+<TITLE><?php echo $lang ['ECMAppName'];?></TITLE>
+<link id="page_favicon" href="favicon.ico" rel="icon" type="image/x-icon" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"> 
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<?php
+		$this->headLink ()->appendStylesheet ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/resources/css/ext-all.css' );
+		//$this->headLink ()->appendStylesheet ( '/'.$config['appName'].'/css/ecmCoreCSS.css' );
+		
+		echo $this->headLink ();
+		
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/md5.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/adapter/ext/ext-base.js' );
+		$this->headScript ()->appendFile ( '/'.$config['runtimeJS'].'/ext'.$config['libVersion']['ext'] .'/ext-all.js' );
+		
+		/*if ($debugMode && $ieBrowser) {
+			$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/firebug/firebug.js' );
+		}*/
+
+		echo $this->headScript ();
+?>
+<script type="text/javascript">
+		function loginPerform() {
+			//alert('login');
+			//var elSalt = Ext.get('fldSalt');
+			//var elPassword = Ext.get('fldPwd');
+			//elPassword.setValue(hex_md5(elSalt.getValue() + hex_md5(elPassword.getValue())));
+			//document.forms.loginForm.fldPwd.value = hex_md5(document.forms.loginForm.fldSalt.value + hex_md5(document.forms.loginForm.fldPwd.value));
+			//document.forms.loginForm.pwd.value = '';
+			document.forms.loginForm.btnLogon.disabled = true;
+			document.forms.loginForm.submit();
+		}
+		
+		function clearLoginForm() {
+			document.forms.loginForm.reset();
+		}
+		
+		Ext.onReady(function(){
+			Ext.QuickTips.init();
+			Ext.form.Field.prototype.msgTarget = 'side';
+			/*************** Login Failed Dialog Script : BEGIN ***********************/
+			<?php
+			if(trim($this->loginMessage) != '') {
+			?>
+			Ext.MessageBox.show({
+	    		title: 'Login Error',
+	    		msg: '<?php echo $this->loginMessage;?>',
+	    		buttons: Ext.MessageBox.OK,
+	    		icon: Ext.MessageBox.INFO
+	    	});
+			<?php
+			} 
+			?>
+			/*************** Login Failed Dialog Script : END ***********************/				
+			var logonKeyNav = new Ext.KeyNav(Ext.get('loginForm'), {
+			    "enter" : function(e){
+					loginPerform();
+			    },
+			    scope : this
+			});			
+		});
+</script>
+<style type="text/css">
+<!--
+body {
+	background-image: url(/<?php echo $config['appName'];?>/images/login/client2/bgg.gif);
+	margin: 0;
+}
+.Content {
+	FONT-SIZE: 10px; COLOR: #333333; FONT-FAMILY: "Verdana", "Tahoma", "Helvetica", "sans-serif"; TEXT-DECORATION: none
+}
+.style14 {FONT-SIZE: 10px; COLOR: #333333; FONT-FAMILY: "Verdana", "Tahoma", "Helvetica", "sans-serif"; TEXT-DECORATION: none; font-weight: bold; }
+-->
+</style></HEAD>
+<BODY>
+<!-- ImageReady Slices (login1.psd) -->
+<form action="/<?php echo $config['appName'];?>/login/process" name="loginForm" id="loginForm" method="POST" >
+<input type="hidden" name="fldSalt" id="fldSalt"  value="<?php echo md5 ( time () );?>" />
+<TABLE WIDTH=799 BORDER=0 align="center" CELLPADDING=0 CELLSPACING=0>
+<TR>
+		<TD>
+			<IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_01.gif" WIDTH=799 HEIGHT=23 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_02.gif" WIDTH=799 HEIGHT=134 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_03.gif" WIDTH=799 HEIGHT=8 ALT=""></TD>
+	</TR>
+	<TR>
+		<TD><TABLE WIDTH=799 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+          <TR>
+            <TD><IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_05.gif" WIDTH=471 HEIGHT=450 ALT=""></TD>
+          <TD><TABLE WIDTH=271 BORDER=0 CELLPADDING=0 CELLSPACING=0>
+                <TR>
+                  <TD><IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_06.gif" WIDTH=271 HEIGHT=234 ALT=""></TD>
+              </TR>
+                <TR>
+                  <TD width="271" height="96" valign="top" background="/<?php echo $config['appName'];?>/images/login/client2/login_2_07.gif"><table width="90%" border="0" align="center" cellpadding="1" cellspacing="5">
+                    <tr>
+                      <td width="80"><div align="right" class="style14">
+                        <div align="left">USERNAME</div>
+                      </div></td>
+                      <td width="1"><input name="fldUid" autocomplete="Off"  type="text" id="fldUid" size="15" maxlength="50"></td>
+                    </tr>
+                    <tr>
+                      <td><div align="right" class="style14">
+                        <div align="left">PASSWORD</div>
+                      </div></td>
+                      <td width="1"><input name="fldPwd" autocomplete="Off"  type="password" id="fldPwd" size="15" maxlength="50"></td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td><input name="btnLogon" type="button" class="style14" id="btnLogon" value="LOGIN">
+                          <input name="btnReset" type="reset" class="style14" id="btnReset" value="RESET"></td>
+                    </tr>
+                  </table></TD>
+              </TR>
+                <TR>
+                  <TD><IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_08.gif" WIDTH=271 HEIGHT=120 ALT=""></TD>
+              </TR>
+            </TABLE></TD>
+            <TD><IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_09.gif" WIDTH=57 HEIGHT=450 ALT=""></TD>
+          </TR>
+        </TABLE></TD>
+	</TR>
+	<TR>
+		<TD>
+			<IMG SRC="/<?php echo $config['appName'];?>/images/login/client2/login_2_10.gif" WIDTH=799 HEIGHT=35 ALT=""></TD>
+  </TR>
+</TABLE>
+</form>
+<!-- End ImageReady Slices -->
+</BODY>
+</HTML>

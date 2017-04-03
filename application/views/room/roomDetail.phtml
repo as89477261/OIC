@@ -1,0 +1,131 @@
+<?php
+global $config;
+global $policy;
+?>
+<!--
+<table>
+    <tr>
+        <td>
+            <img src="https://backoffice.oic.or.th/workflow/images/mrbs/room/<?php echo $this->room['F_ROOMIMAGE']; ?>" width="250" hight="200">
+        </td>
+        <td>
+            <img src="https://backoffice.oic.or.th/workflow/images/mrbs/room/<?php echo $this->room['F_ROOMIMAGEMAP']; ?>" width="250" hight="200">
+        </td>
+    </tr>
+</table>
+-->
+
+<style>
+    .table td{
+        height:20px;
+    }
+</style>
+<script>
+
+    function validate_form()
+    {
+        if ($('#f_roomcode').val() == '') {
+            alert('กรุณาระบุรหัส');
+            return false;
+        }
+        if ($('#f_roomname').val() == '') {
+            alert('กรุณาระบุชื่อห้อง');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+<form action="/<?= $config ['appName'] ?>/room/editroom" method="post">
+    <input type="hidden" name="f_rowid_room" id="f_rowid_room" value="<?php echo $this->room['F_ROWID_ROOM']; ?>">
+    <table class="table" width="550">
+        <tr>
+            <td style="width:140px;"><b>รหัส</b> : </td>
+            <td><input type="text" name="f_roomcode" id="f_roomcode" value="<?php echo $this->room['F_ROOMCODE']; ?>" style="width:300px;" maxlength="250" /></td>
+        </tr>
+        <tr>
+            <td style="width:140px;"><b>ชื่อ</b> : </td>
+            <td><input type="text" name="f_roomname" id="f_roomname" value="<?php echo $this->room['F_ROOMNAME']; ?>" style="width:300px;" maxlength="250" /></td>
+        </tr>
+        <tr>
+            <td><b>จำนวนที่นั่ง</b> : </td>
+            <td><input type="text" name="f_roomcapacity" id="f_roomcapacity" value="<?php echo $this->room['F_ROOMCAPACITY']; ?>" style="width:300px;" maxlength="3" /></td>
+        </tr>
+        <tr>
+            <td><b>อาคาร</b> : </td>
+            <td><input type="text" name="f_roombuilding" id="f_roombuilding" value="<?php echo $this->room['F_ROOMBUILDING']; ?>" style="width:300px;" maxlength="250" /></td>
+        </tr>
+        <tr>
+            <td><b>ชั้น</b> : </td>
+            <td><input type="text" name="f_roomfloor" id="f_roomfloor" value="<?php echo $this->room['F_ROOMFLOOR']; ?>" style="width:300px;" maxlength="2" /></td>
+        </tr>
+        <tr>
+            <td><b>รายละเอียด</b> : </td>
+            <td><input type="text" name="f_roomdescription" id="f_roomdescription" value="<?php echo $this->room['F_ROOMDESCRIPTION']; ?>" style="width:300px;" maxlength="250" /></td>
+        </tr>
+        <tr>
+            <td><b>ประเภท</b> :</td>
+            <td>
+                <select name="f_rowid_subcatagories" id="f_rowid_subcatagories">
+                    <?php
+                    foreach ($this->catagory as $catagory) {
+                        if ($catagory['F_ROWID_SUBCATAGORIES'] == $catagory['F_ROWID_CATAGORIES']) {
+                            $select = ' selected="selected"';
+                        } else {
+                            $select = '';
+                        }
+                        echo '<option value="' . $catagory['F_ROWID_SUBCATAGORIES'] . '"' . $select . '>' . $catagory['F_SUBCATAGORIES_NAME'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><b>สถานะเปิดให้บริการได้</b> : </td>
+            <td>
+                <input type="radio" name="f_roomstatus" id="f_roomstatus1" <?php if ($this->room['F_ROOMSTATUS'] == '1') {
+                        echo 'checked="checked"';
+                        } ?> value="1"> <label for="f_roomstatus1">สถานะเปิดบริการ</label>
+                <input type="radio" name="f_roomstatus" id="f_roomstatus0" <?php if ($this->room['F_ROOMSTATUS'] == '0') {
+                        echo 'checked="checked"';
+                        } ?> value="0"> <label for="f_roomstatus0">สถานะปิดบริการ</label>
+            </td>
+        </tr>
+        <!--
+        <tr>
+            <td><b>ยืนยันการจอง</b> : </td>
+            <td><?php
+        if ($this->room['F_ROOMCONFIRM'] == '1') {
+            echo 'ยืนยันอัตโนมัติ';
+            ;
+        } else {
+            echo 'ยืนยันโดยผู้ดูแล';
+        }
+        ?></td>
+        </tr>
+        <tr>
+            <td><b>จองล่วงหน้าได้ไม่เกิน(วัน)</b> : </td>
+            <td><?php echo $this->room['F_BEFOREDAY'] . ' (0 = ไม่จำกัดจำนวนวัน)'; ?></td>
+        </tr>
+        -->
+    </table>
+    <?php
+    if ($policy->isRoomAdmin()) {
+        echo '<button onclick="return validate_form();">บันทึก</button>';
+    } else {
+        ?>
+        <script>
+            $('#f_roomname').attr('readonly', 'readonly');
+            $('#f_roomcapacity').attr('readonly', 'readonly');
+            $('#f_roombuilding').attr('readonly', 'readonly');
+            $('#f_roomfloor').attr('readonly', 'readonly');
+            $('#f_roomdescription').attr('readonly', 'readonly');
+            $('#f_roomstatus1').attr('readonly', 'readonly');
+            $('#f_roomstatus0').attr('readonly', 'readonly');
+            $('#f_roomstatus1').attr('disabled', 'disabled');
+            $('#f_roomstatus0').attr('disabled', 'disabled');
+        </script>
+    <?php
+}
+?>
+</form>

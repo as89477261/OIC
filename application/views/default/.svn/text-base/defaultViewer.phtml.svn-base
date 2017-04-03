@@ -1,0 +1,70 @@
+<?php
+global $config;
+global $lang;
+global $debugMode;
+global $ieBrowser;
+global $util;
+
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title><?php
+echo $this->title;
+?></title>
+		<?php
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/viewImage.css' );    
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/ecmCoreCSS.css' );    
+		$this->headLink ()->appendStylesheet ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/resources/css/ext-all.css' );
+		
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/ColumnTree.css' );
+		$this->headLink ()->appendStylesheet ( '/' . $config ['runtimeJS'] . '/jscalendar/calendar-system.css' );
+
+		$theme = $util->getTheme($config['theme']);
+		echo $this->headLink ();
+		
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/autoMaximize.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/md5.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/jscalendar/calendar.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/jscalendar/lang/calendar-th.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/adapter/ext/ext-base.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/ext-all-debug.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/ext'.$config['libVersion']['ext'] .'/source/locale/ext-lang-th.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.wam.PropertyGrid.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.wam.ColorField.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/Ext.ux.DateField.js' );		
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/ColumnTree.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/cookie.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/functions.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/Portal.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/PortalColumn.js' );
+		$this->headScript ()->appendFile ('/' . $config ['appName'] . '/js/Portlet.js' );
+		$this->headScript ()->appendFile ( '/' . $config ['appName'] . '/js/sample-grid.js' );
+		
+		if ($debugMode && $ieBrowser) {
+			$this->headScript ()->appendFile ( '/' . $config ['runtimeJS'] . '/firebug/firebug.js' );
+		}
+
+		echo $this->headScript ();
+		?>
+ 		<style type="text/css">
+html,body {
+	font: normal 12px verdana;
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	overflow: hidden;
+	height: 100%;
+}
+</style>
+<script>
+resizeToFullscreen();
+</script>
+</head>
+<frameset cols="200,*">
+  	<frame src="/<?php echo $config['appName'];?>/viewer/thumbnail?docID=<?php echo $this->docID;?>&thumbPage=<?php echo $this->thumbPage;?>" noresize="noresize" name="iframeThumbnail" scrolling="yes"/>
+  	<frame src="/<?php echo $config['appName'];?>/viewer/view?docID=<?php echo $this->docID;?>&pageID=<?php echo $this->pageID;?>" noresize="noresize" name="iframePictureview" scrolling="no"/>
+	<!--<frame src="/<?php echo $config['appName'];?>/p3.htm" noresize="noresize" name="iframePictureview" scrolling="no"/>-->
+</frameset>
+
+</html>

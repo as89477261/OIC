@@ -1,0 +1,17 @@
+.tab {
+	background-attachment: scroll;
+	background-image: url(../images/tab.gif);
+	background-repeat: no-repeat;
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+	background-position: left;
+
+}
+.selected {
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	text-decoration: none;
+	background-image: url(../images/tab_selected.gif);
+}

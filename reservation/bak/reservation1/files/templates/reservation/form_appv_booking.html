@@ -1,0 +1,41 @@
+
+<form name="action_booking" action="{MainUrl}?fid={fid}&booking_id={booking/booking_id}" method="POST" class="form">
+    <input type="hidden" name="fn" value="save" />
+    <div class="columns">
+        <div class="colx2-left">
+			<input type="hidden" name="booking[go_date]" id="booking_go_date"  value="{booking/go_date}" />
+			<input type="hidden" name="booking[back_date]" id="booking_back_date" value="{booking/back_date}" />
+			<? BEGIN(CASENOTBLANK,booking/approve_id) ?>
+			<input type="hidden" name="booking[approve_id]" value="{booking/approve_id}" />
+			<? END(CASENOTBLANK) ?>
+            <p>
+                <label for="booking.mile_start">สถานะ</label>
+                <select name="booking[status]" id="booking.status" >
+									{booking_status_list,OPTIONS}
+                </select>
+            </p>
+			<p>
+				<label for="booking.status_description">รายละเอียดการเปลี่ยนสถานะ</label>
+                <textarea id="booking.status_description" name="booking[status_description]" class="full-width">{booking/status_description}</textarea>
+            </p>
+        </div>
+        <div class="colx2-right">
+            <p>
+                <label for="booking.car_id">รถที่อนุมัติ</label>
+                <select name="booking[car_id]" id="booking.car_id" >
+									{booking/car_list,OPTIONS}
+                </select>
+
+            </p>
+            <p>
+                <label for="booking.driver_id">คนขับที่อนุมัติ</label>
+                <select name="booking[driver_id]" id="booking.driver_id" >
+				<? BEGIN(FOREACH,booking/driver_list) ?>
+				<option value="{Value}" selected="{selected}">{first_name} {last_name}</option>
+				<? END(FOREACH) ?>
+                </select>
+
+            </p>
+        </div>
+    </div>
+</form>

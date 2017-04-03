@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    padding: 0;
+    font: normal 13pt/15pt "Angsana New";
+    color: #000000;
+    text-align: center;
+    background: white;
+}
+
+div, p, th, td, li, dd, dl, dt {
+    font: normal 13pt/15pt "Angsana New";
+}
+
+form { margin: 0px; padding: 0px; }
+
+center { padding: 0px; }
+
+img { border: 0px; }
+
+td, th { padding: 0px; }
+
+.page_pane { width: 100%; }
+.page_header, .page_content, .voucher_detail, .voucher_finale { width: 680px; }
+.page_header { text-align: left; border-bottom: 1px solid black; margin-top: 0mm; }
+.company_logo { margin: 3mm 2mm 3mm 0; width: 75px; height: 75px; float: left; }
+.company_info { float: left; margin: 2mm auto; display: inline; }
+.voucher_info { width: 200px; float: right; text-align: center; margin: 2mm auto; padding-top: 2pt; display: inline; }
+.voucher_info .head_row { text-align: left; }
+.page_content { margin-top: 5mm; }
+.voucher_finale { margin-top: 5mm; }
+.rborder_50, .rborder_75, .rborder_85, .rborder_100 { position: relative; }
+.rborder_50 { width: 50mm; }
+.rborder_75, .border_75 { width: 75mm; }
+.rborder_85, .border_85 { width: 85mm; }
+.rborder_100, .border_100 { width: 100mm; }
+.rborder_top .rborder_bot { height: 4mm; }
+.rborder_border { z-index: 1; }
+.rborder_content { position: absolute; z-index: 2; margin: 0 0mm; }
+.name_voucher { font: bold 15pt/17pt BrowalliaUPC; }
+#info_cus { top: 0mm; left: 0mm; width: 100%; }
+#info_ref { top: 0mm; left: 0mm; width: 100%; }
+.voucher_info_cus { float: left; }
+.voucher_info_ref { float: right; }
+.voucher_info_cond { padding: 4pt; font-size: 12pt; text-align: left; }
+.cond li { font-size: 12pt; list-style: outside;}
+.cond ol, .cond ul { margin: 1mm 5mm; }
+.voucher_info_sign { font-size: 12pt; text-align: center; }
+.h15 { height: 15mm; }
+.h20 { height: 20mm; }
+.h22 { height: 22mm; }
+.h30 { height: 30mm; }
+.hfinale { height: 33mm; }
+.cond ul li { list-style-type: none; }
+
+.border_100, .border_75 { border: 1pt solid black; }
+
+.expense_note { width: 30%; float: right; margin-left: 3%;}
+.expense_note tr { height: 8mm; }
+.job_note { width: 33%; float: left; }
+.job_note .data_note {
+    min-height: 96mm;
+    height: auto;
+}
+/* for Internet Explorer */
+/*\*/
+.job_note .data_note {
+    height: 96mm;
+}
+/**/
+
+#transport_detail, #job_detail {
+    width: 100%;
+    padding: 2pt 5pt 5pt 2pt;
+    border: 0pt solid black;
+}
+
+.bar_section, .bar_separator, .bar_sub_section {
+    padding: 2pt 5pt;
+    height: 15pt;
+    margin: 0px;
+    text-align: left;
+    background: transparent;
+    color: black;
+    border: 0 none;
+    font: normal 13pt/12pt "BrowalliaUPC";
+}
+
+table.detail_table {
+    width: 100%;
+    padding: 0px;
+    border: 1pt solid black;
+}
+
+.head_rborder, .head_col, .head_col_small, .head_table, .head_row, .head_row_top, .data_right, .data_left, .data_center, .data_note {
+    padding: 0 5pt ;
+    border-right: 1pt solid black;
+    border-bottom: 1pt solid black;
+    background: transparent;
+}
+.head_rborder { padding: 0pt 10pt; }
+.data_right, .data_left, .data_center { border-bottom: 0px solid black; }
+.data_last_row { border-bottom: none; }
+.form_table .printed { border-bottom: none; }
+.sum_name, .sum_value, .last_row { padding: 0pt 5pt; }
+.sum_name { text-align: right; border-right: 1pt solid black; font: normal 12pt/14pt "BrowalliaUPC"; }
+.sum_value { text-align: right; border-right: 1pt solid black; border-bottom: 1pt solid black; }
+.sum_last_row { border-bottom: 2pt double black; border-top: 1pt solid black; }
+.bahttext { text-align: center; border: 1pt solid black; }
+tr.row_summary td { border-top: 1pt solid black; }
+
+.head_col, .head_col_small, .head_table, .data_center { text-align: center; }
+.head_row, .head_row_top, .field_name, .data_right { text-align: right; }
+.head_rborder, .data_left, .section_table { text-align: left; }
+.field_name { vertical-align: baseline; margin: auto 5px; }
+.head_rborder, .head_col, .head_col_small, .head_table, .head_row, .head_row_top, .field_name { font: normal 12pt/14pt "BrowalliaUPC"; }
+.small { font-size: 11pt; }
+
+.rightmost_col { border-right: none; }
+
+table.layout, table.layout .data_left, table.layout .data_right, table.layout .data_center, table.layout .head_col, table.layout .head_row, table.layout .head_row_top { border: none 0px; padding: 0px; }
+
+table.voucher_sum { width: 100%; padding: 0px; border-right: 1pt solid black; }
+table.voucher_sum td { height: 20pt; }
+
+table.form_table {
+    width: 100%;
+    padding: 0pt;
+    border: 0pt solid black;
+}
+
+table.form_table .data_left, table.form_table .data_right, table.form_table .data_center { border: none 0px; border-bottom: 1pt dashed black; vertical-align: bottom; padding-top: 4pt; }
+table.form_table .head_row, table.form_table .head_col { border: none 0px; vertical-align: bottom; }
+table.form_table .head_row_top { border: none 0px; vertical-align: top; padding-top: 4pt; }
+.data_note { min-height: 3cm; border: 1pt solid black; font: "Tahoma" 14pt; text-align: left; text-overflow: hidden; }
+.truck .data_note { font-size: 14pt; font-family: "Tahoma"; }
+
+table.name_voucher {
+    padding: 0pt;
+    border: none;
+}
+
+table.name_voucher .data_left, table.name_voucher .data_right, table.name_voucher .data_center { border-right: none; border-bottom: 1pt solid black; vertical-align: bottom; height: 19pt; }
+table.name_voucher .head_row { border-right: 1pt solid black; border-bottom: 1pt solid black; vertical-align: bottom; }
+
+.truck .data_left, .truck .head_row, .truck .head_row_top { font-size: 16pt; text-align: left; }
+.truck .head_col { font-size: 16pt; }
+.layout .head_row, .truck .head_row_top { text-align: left; }

@@ -1,0 +1,43 @@
+
+<form action="{MainUrl}?fid=show-report&fn=gen-report" method="post">
+	<p>
+		<input type="radio" value="0" id="choice1" name="choice" checked="checked"><label for="choice1">ช่วงเดือนตั้งแต่</label>
+
+	เดือน&nbsp;&nbsp;
+		<select name="start_mounth_1" id="start_mounth_1" >
+						{mounth,OPTIONS}
+		</select>
+		&nbsp;&nbsp;ปี&nbsp;&nbsp;
+		<select name="start_year_1" id="start_mounth_1" >
+					{year,OPTIONS}
+		</select>
+		&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+	เดือน&nbsp;&nbsp;
+		<select name="stop_mounth_1" id="stop_mounth_1" >
+						{mounth,OPTIONS}
+		</select>
+		&nbsp;&nbsp;ปี&nbsp;&nbsp;
+		<select name="stop_year_1" id="stop_year_1" >
+					{year,OPTIONS}
+		</select>
+
+
+
+		<br>
+		<br>
+		<br>
+
+
+		<input type="radio" value="1" id="choice2" name="choice"><label for="choice2">ช่วงปีตั้งแต่</label>
+
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ปี&nbsp;&nbsp;
+		<select name="start_year_2" id="start_year_2" >
+					{year,OPTIONS}
+		</select>
+		&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+	ปี&nbsp;&nbsp;
+		<select name="stop_year_2" id="stop_year_2" >
+					{year,OPTIONS}
+		</select>
+	</p>
+</form>

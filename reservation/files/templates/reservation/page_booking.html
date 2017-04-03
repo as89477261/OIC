@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $('#bookingList').GfGrid({
+            url: '{MainUrl}?fid=booking-list-all&fn={fn}'
+        }).get(0).reload();
+    });
+	function onSubmit()
+	{
+		var toDate = $('#to_date').val();
+		var to_date = toDate.split('-');
+		var stringToDate = to_date[1]+'/'+to_date[0]+'/'+(to_date[2]-543);
+
+		var fromDate = $('#from_date').val();
+		var from_date = fromDate.split('-');
+		var stringFromDate = from_date[1]+'/'+from_date[0]+'/'+(from_date[2]-543);
+
+		if(stringFromDate>stringToDate)
+		{
+		    alert('คุณเลือกวันที่จากมากกว่าวันที่ถึง กรุณาเลือกวันที่จากใหม่อีกครั้ง');
+		}
+		else
+		{
+		    $('#bookingList').GfGrid({
+			url: '{MainUrl}?fid=booking-list-all&'+$("#page_bookig").serialize()
+		    }).get(0).reload();
+		}
+	}
+	function checkStatus()
+	{
+	    if($('#booking\\.status').val()=='UAVL')
+	    {
+		$('#car_booking, #driver_booking').hide();
+	    }
+	    else
+	    {
+		$('#car_booking, #driver_booking').show();
+	    }
+	}
+
+</script>
+<section class="grid_12">
+    <div class="block-border">
+        <form action="{MainUrl}?fid=booking-ui-all" method="post" id="page_bookig" class="block-content form">
+            <h1>{booking_title}</h1>
+
+            <div class="gf-grid no-margin" id="bookingList"></div>
+        </form>
+    </div>
+</section>

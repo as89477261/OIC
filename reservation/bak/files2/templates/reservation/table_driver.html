@@ -1,0 +1,37 @@
+<table width="100%" cellspacing="0" class="table">
+    <thead>
+        <tr>
+            <th scope="col">{Common/OrderNo}</th>
+            <th scope="col">{Driver/DriverName}&nbsp;{Driver/DriverSurname}</th>
+            <th scope="col">{Driver/DriverType}</th>
+            <th scope="col">
+                <a class="button" title="{Booking/AddBooking}" href="javascript:void(0)" onclick="openForm('{MainUrl}?fid=driver-add', '{Driver/Add}', 'driverId')"><img height="16" width="16" src="resources/images/icons/fugue/plus-circle-blue.png"> {Driver/Add}</a></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <? BEGIN(CASE,driver_rows) ?>
+        <? CASE(%BLANK) ?>
+        <tr>
+            <td class="data_center" colspan="4">{Common/NoData}</td>
+        </tr>
+        <? CASE(%DEFAULT) ?>
+        <? BEGIN(FOREACH,driver_rows) ?>
+        <tr>
+            <td>{order_no}</td>
+            <td>{first_name}&nbsp;{last_name}</td>
+            <td>{type}</td>
+            <td>
+                <a class="with-tip" href="javascript:void(0)" title="{Car/Edit}" onclick="openForm('{MainUrl}?fid=driver-edit&driver_id={driver_id}', '{Driver/Edit}', 'driverId')"><img src="images/icons/btn_edit.gif" /></a>
+
+                <? BEGIN(CASE,delete) ?>
+                <? CASE(1) ?>
+                <a class="with-tip" title="{Car/Delete}" onclick="deleteData('{MainUrl}?fid=driver-delete&driver_id={driver_id}', 'driverId')" href="javascript:void(0);"><img src="images/icons/btn_delete.gif" /></a>
+                <? END(CASE) ?>
+            </td>
+        </tr>
+        <? END(FOREACH) ?>
+        <? END(CASE) ?>
+    </tbody>
+</table>

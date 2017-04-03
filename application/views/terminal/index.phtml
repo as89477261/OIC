@@ -1,0 +1,33 @@
+<?php
+global $config;
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+<title>Web-based terminal : Example</title>
+<style type="text/css">
+body {
+	margin: 0;
+	font-size: 12px;
+}
+</style>
+</head>
+<body>
+
+<div id="terminal_container"></div>
+
+<script type="text/javascript"
+	src="/<?=$config ['appName']?>/js/jquery-1.3.2.js"></script>
+<script type="text/javascript"
+	src="/<?=$config ['appName']?>/js/jquery.terminal.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+var $j = jQuery;
+$j('#terminal_container').height($j(document).height());
+$j('#terminal_container').terminal('/<?php echo $config ['appName'];?>/Terminal/server', {custom_prompt : "-\&gt; ", hello_message : 'Welcome to Benefit&copy;ECM administrator console.<br/>Please Login to gain access.Session ID : [<?php echo session_id();?>]'});
+</script>
+</body>
+</html>

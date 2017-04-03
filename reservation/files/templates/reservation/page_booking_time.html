@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$('#bookingId').GfGrid({
+			url: '{MainUrl}?fid=booking-list'
+		}).get(0).reload();
+	});
+    
+    function onSubmit()
+    {
+		$('#bookingId').GfGrid({
+            url: '{MainUrl}?fid=booking-list&'+$("#table_form").serialize()
+        }).get(0).reload();
+    }
+</script>
+<section class="grid_12">
+			<div class="block-border"><form action="" method="post" id="table_form" class="block-content form">
+			<form action="" method="post" id="table_form" class="block-content form">
+				<span class="gf-grid" id="bookingId"></span>
+			</form>
+			</div>
+</section>

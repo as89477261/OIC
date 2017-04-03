@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="DMSCreateStats"
+
+		 language="groovy"		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<queryString><![CDATA[select c.*,b.f_name as f_creater_name,b.f_last_name as f_creater_lastname  from tbl_account b,tbl_dms_object c
+where c.f_created_uid = b.f_acc_id
+
+]]></queryString>
+
+	<field name="f_obj_id" class="java.lang.Integer"/>
+	<field name="f_obj_pid" class="java.lang.Integer"/>
+	<field name="f_obj_lid" class="java.lang.Integer"/>
+	<field name="f_obj_type" class="java.lang.Integer"/>
+	<field name="f_obj_level" class="java.lang.Integer"/>
+	<field name="f_name" class="java.lang.String"/>
+	<field name="f_description" class="java.sql.Clob"/>
+	<field name="f_keyword" class="java.lang.String"/>
+	<field name="f_location" class="java.lang.String"/>
+	<field name="f_doc_id" class="java.lang.Integer"/>
+	<field name="f_created_uid" class="java.lang.Integer"/>
+	<field name="f_created_role_id" class="java.lang.Integer"/>
+	<field name="f_created_org_id" class="java.lang.Integer"/>
+	<field name="f_created_stamp" class="java.lang.Integer"/>
+	<field name="f_mark_delete" class="java.lang.Integer"/>
+	<field name="f_mark_delete_uid" class="java.lang.Integer"/>
+	<field name="f_mark_delete_role_id" class="java.lang.Integer"/>
+	<field name="f_mark_delete_org_id" class="java.lang.Integer"/>
+	<field name="f_delete" class="java.lang.Integer"/>
+	<field name="f_delete_uid" class="java.lang.Integer"/>
+	<field name="f_delete_role_id" class="java.lang.Integer"/>
+	<field name="f_delete_org_id" class="java.lang.Integer"/>
+	<field name="f_last_update_stamp" class="java.lang.Integer"/>
+	<field name="f_last_update_uid" class="java.lang.Integer"/>
+	<field name="f_last_update_role_id" class="java.lang.Integer"/>
+	<field name="f_last_update_org_id" class="java.lang.Integer"/>
+	<field name="f_locked" class="java.lang.Integer"/>
+	<field name="f_password" class="java.lang.String"/>
+	<field name="f_checkout" class="java.lang.Integer"/>
+	<field name="f_checkout_uid" class="java.lang.Integer"/>
+	<field name="f_checkout_role_id" class="java.lang.Integer"/>
+	<field name="f_checkout_org_id" class="java.lang.Integer"/>
+	<field name="f_published" class="java.lang.Integer"/>
+	<field name="f_publish_uid" class="java.lang.Integer"/>
+	<field name="f_published_role_id" class="java.lang.Integer"/>
+	<field name="f_published_org_id" class="java.lang.Integer"/>
+	<field name="f_owner_type" class="java.lang.Integer"/>
+	<field name="f_owner_id" class="java.lang.Integer"/>
+	<field name="f_owner_role_id" class="java.lang.Integer"/>
+	<field name="f_owner_org_id" class="java.lang.Integer"/>
+	<field name="f_override" class="java.lang.Integer"/>
+	<field name="f_borrowed" class="java.lang.Integer"/>
+	<field name="f_orphaned" class="java.lang.Integer"/>
+	<field name="f_status" class="java.lang.Integer"/>
+	<field name="f_is_inherited_security" class="java.lang.Integer"/>
+	<field name="f_inherit_obj_id" class="java.lang.Integer"/>
+	<field name="f_is_expired" class="java.lang.Integer"/>
+	<field name="f_expire_stamp" class="java.lang.Integer"/>
+	<field name="f_in_mydoc" class="java.lang.Integer"/>
+	<field name="f_creater_name" class="java.lang.String"/>
+	<field name="f_creater_lastname" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="25"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="107"
+						y="0"
+						width="308"
+						height="25"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" size="16" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายงานการสร้างดัชนีระบบจัดเก็บเอกสาร]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="24"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="14"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="44"
+						height="13"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ชื่อดัชนี]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="147"
+						y="0"
+						width="79"
+						height="13"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ประเภทดัชนี]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="250"
+						y="0"
+						width="79"
+						height="12"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ผู้สร้าง]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="415"
+						y="0"
+						width="79"
+						height="13"
+						key="staticText-5"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[วัน/เวลา]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="21"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="1"
+						width="140"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{f_name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="147"
+						y="-1"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{f_obj_type}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="250"
+						y="-1"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{f_creater_name}+' '+$F{f_creater_lastname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="415"
+						y="-1"
+						width="100"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{f_created_stamp}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

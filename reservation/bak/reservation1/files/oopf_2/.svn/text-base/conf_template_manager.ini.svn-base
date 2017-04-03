@@ -1,0 +1,50 @@
+[Main]
+CleanMode = yes                 ;yes, no
+IncludedFiles = CTemplateMacro.php,CTemplateFunction.php,CTemplateFunctionThai.php
+
+[TemplateMacro]
+FOREACH = CTemplateMacroForeach
+LOOP = CTemplateMacroLoop
+CASE = CTemplateMacroCase
+CASEONEOF = CTemplateMacroCaseMatchOne
+INCLUDE = CTemplateMacroInclude
+SELECT = CTemplateMacroSelect
+WITH = CTemplateMacroWith
+PICK = CTemplateMacroPick
+CASEBLANK = CTemplateMacroCaseBlank
+CASENOTBLANK = CTemplateMacroCaseNotBlank
+FIRSTOF = CTemplateMacroWithFirstOf
+ENUMROW = CTemplateMacroEnumRow
+
+[TemplateFunction]
+COUNT = CTemplateFunctionCount
+COUNTDIV = CTemplateFunctionCountDividing
+BASEHREF = CTemplateFunctionBaseHref
+IF = CTemplateFunctionIf
+IFIN = CTemplateFunctionIfInArray
+DATE = CTemplateFunctionDate
+TIME = CTemplateFunctionTime
+NUMBER = CTemplateFunctionNumber
+SP2NB = CTemplateFunctionSpace2Nbsp
+SRC = CTemplateFunctionSource
+NL2BR = CTemplateFunctionNl2Br
+NOOP = CTemplateFunctionNoop
+INDEXBY = CTemplateFunctionIndexBy
+INDEX = CTemplateFunctionIndex
+HTMLENCODE = CTemplateFunctionHtmlEncode
+OPTIONS = CTemplateFunctionOptions
+JSQUOTE = CTemplateFunctionJsQuote
+PID = CTemplateFunctionGetPid
+THAIDATE = CTemplateFunctionThaiDate
+THNUMTEXT = CTemplateFunctionThaiNumberText
+LANGNUM = CTemplateFunctionLangNumber
+BAHTTEXT = CTemplateFunctionThaiBaht
+NUM2LOOP = CTemplateFunctionNumber2LoopText
+IMPLODE = CTemplateFunctionImplode
+ARR2TXT= CTemplateFunctionArrayToText
+DUMP = CTemplateFunctionDump
+EMAIL = CTemplateFunctionEmailFormatting
+CUTTEXT = CTemplateFunctionCutText
+MOD = CTemplateFunctionMod
+SYSVAR = CTemplateFunctionSysVar
+CSVQUOTE = CTemplateFunctionCsvQuote

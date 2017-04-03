@@ -1,0 +1,40 @@
+<div class="block-controls">
+	<div class="controls-buttons">
+		<div class="sub-hover"><? BEGIN(CASEBLANK,PageAll) ?>
+			<span class="control-first disabled" title="First"></span>
+			<span class="control-prev disabled" title="Prev"></span>
+			<span class="disabled current"><b>1</b></span>
+			<span class="disabled"> of <b>{PageAll,IF(,1)}</b></span>
+			<span class="control-next disabled" title="Next"></span>
+			<span class="control-last disabled" title="Last"></span>
+			<? ELSE() ?><? BEGIN(CASE,EnablePrevious) ?><? CASE(Y) ?><a class="control-first" title="First"></a>
+			<a class="control-prev" title="Prev"></a><? END(CASE) ?>
+			<div><select class="small" style="margin: -3px 5px; background: transparent; border: 0;"><option value="1">1</option></select> of {PageAll,IF(,1)}</div>
+			<? BEGIN(CASE,EnableNext) ?><? CASE(Y) ?><a class="control-next" title="Next"></a>
+			<a class="control-last" title="Last"></a><? END(CASE) ?>
+		<? END(CASEBLANK) ?></div>
+		<span class="sep"></span>
+		<a href="#"><img height="16" alt="Reload" width="16" src="resources/images/icons/fugue/arrow-circle.png"></a>
+	</div>
+</div>
+<div class="no-margin">
+	{PageContent,SRC}
+</div>
+
+<ul class="message no-margin">
+	<li>Results 1 - 5 out of {result_count,NUMBER|IF(0|,0)}</li>
+</ul>
+
+<div class="block-footer">
+	<? BEGIN(CASE,EnableSelectedAction) ?><? CASE(Y) ?>
+	<img height="16" width="16" src="resources/images/icons/fugue/arrow-curve-000-left.png" class="picto">
+	<a href="#" class="button">Select All</a>
+	<a href="#" class="button">Unselect All</a>
+	<span class="sep"></span>
+	<select name="table-action" id="table-action" class="small">
+		<option value="">Action for selected...</option>
+		<option value="validate">Validate</option>
+		<option value="delete">Delete</option>
+	</select>
+	<button type="submit" class="small">Ok</button><? END(CASE) ?>
+</div>

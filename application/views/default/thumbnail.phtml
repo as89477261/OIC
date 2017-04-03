@@ -1,0 +1,70 @@
+<?php
+global $config;
+global $util;
+
+?>
+<html>
+	<head><?php
+		$this->headLink ()->appendStylesheet ( '/' . $config ['appName'] . '/css/viewImage.css' );    
+		echo $this->headLink ();
+		?>
+		<script type="text/javascript">
+		function gotoThumbPage(page) {
+			window.location.href = "/<?php echo $config['appName'];?>/viewer/thumbnail/?docID=<?php echo $this->docID;?>&thumbPage="+page;
+		}
+		</script>
+	</head>
+	<body style="margin: 0px;">
+		<center>
+		<div id="controlDiv">
+			&nbsp;<img src="/<?php echo $config['appName'];?>/images/firstpage.gif" style="cursor: pointer" onclick="gotoThumbPage(<?php echo $this->firstPage;?>);"  />&nbsp;
+			<img src="/<?php echo $config['appName'];?>/images/previouspage.gif" style="cursor: pointer" onclick="gotoThumbPage(<?php echo $this->prevPage;?>);"  />
+			หน้าที่ <?php echo $this->currentPage;?>/<?php echo $this->maxPage;?>
+			<img src="/<?php echo $config['appName'];?>/images/nextpage.gif" style="cursor: pointer" onclick="gotoThumbPage(<?php echo $this->nextPage;?>);"  />&nbsp;
+			<img src="/<?php echo $config['appName'];?>/images/lastpage.gif" style="cursor: pointer" onclick="gotoThumbPage(<?php echo $this->lastPage;?>);"  />
+		</div>
+		</center>
+		<div>
+			<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr height="1"><td background="images/spacer2.gif"></td></tr>
+				<tr>
+					<td>
+						<table border="0" cellspacing="1" cellpadding="2" align="center" width="100%" height="100%">
+							<?php foreach($this->pages as $page) { ?>
+							<tr>
+								<td>
+									<table border="0" cellspacing="1" cellpadding="2" align="center" class="thumbitem" width="100%" height="100%" onmouseover="this.style.cursor='hand'; this.className='thumbmouseover';" onmouseout="this.className='thumbitem';">
+										<tr valign="top">
+											<td><img src='<?php echo $util->getSmalIconURLByMimeType($page['type']);?>'></td>
+											<td align="center" valign="middle">
+												<table cellspacing="0" cellpadding="0" border="0" width="130" height="175" class="default" style="border:1px solid #000000;">
+													<tr>
+														<td valign="middle" align="center" onclick="top.window.frames.iframePictureview.location.href='/<?php echo $config['appName'];?>/viewer/view/?docID=<?php echo $this->docID;?>&pageID=<?php echo $page['pageid'];?>';">
+															<!-- <img src="/cgi-bin/t2g.exe?param=d:/wwwroot/doc2000cvs/storage/storage_doc2000/47b/fileid_47be9e7f7765f.tif" width="130" height="180.94246031746" border="0">-->
+															<img src="/<?php echo $config['appName'];?>/images/filetype/tif.jpg" width="130" height="180.94246031746" border="0">
+														</td>
+													</tr>
+												</table>
+											</td>
+											<td align="right" valign="top"><?php echo $page['pageno'];?></td>
+										</tr>
+										<tr>
+											<td colspan="3" align="center"><?php echo $page['filename'];?>,<br/><?php echo $page['type'];?> <br/> ขนาด  <?php echo $page['size']; ?> KB</td>
+										</tr>
+										<tr>
+											<td colspan="3" align="center">Version : 1.0.0</td>
+										</tr>
+										<tr>
+											<td bgcolor="#E6E6E6" colspan="3" align="center">by: admin admin, date: 22/02/2551</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<?php } ?>
+						</table>
+					</td>
+				</tr>	
+			</table>
+		</div>
+	</body>
+</html>

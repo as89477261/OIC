@@ -1,0 +1,141 @@
+<?php
+global $config;
+$start_h = substr($this->trans['F_TIMESTART'], 0, 2);
+$start_m = substr($this->trans['F_TIMESTART'], 2, 2);
+
+$end_h = substr($this->trans['F_TIMEEND'], 0, 2);
+$end_m = substr($this->trans['F_TIMEEND'], 2, 2);
+
+
+$month_name = array(
+    '01' => 'มกราคม',
+    '02' => 'กุมภาพันธ์',
+    '03' => 'มีนาคม',
+    '04' => 'เมษายน',
+    '05' => 'พฤษภาคม',
+    '06' => 'มิถุนายน',
+    '07' => 'กรกฎาคม',
+    '08' => 'สิงหาคม',
+    '09' => 'กันยายน',
+    '10' => 'ตุลาคม',
+    '11' => 'พฤศจิกายน',
+    '12' => 'ธันวาคม'
+);
+list($year, $month, $day) = explode('-', $this->trans['F_DATE_BOOK']);
+$book_day = $day;
+$book_month = $month_name[$month];
+$book_year = $year + 543;
+?>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+        <link href="/workflow/images/mrbs/css/bookform.css" rel="stylesheet" type="text/css">
+        <title>แบบฟอร์มขอใช้ห้องประชุมสำนักงาน คปภ.</title>
+    </head>
+    <body>
+    <center>
+        <div class="header clearfix"><img align="left" src="/workflow/images/report_logo.gif">
+            <div class="title" style="width:45%">
+                <h1><div style="display:inline"><?php echo $this->account['SECTION_PARENT']; ?></div></h1>
+                <h1><div style="display:inline"><?php echo $this->account['DE_SECTION_NAME']; ?></div></h1>
+                <h1><div style="display:inline">โทร <?php echo $this->trans['F_TEL_NO']; ?></div></h1>
+            </div>
+        </div>
+        <div class="bookno">
+
+        </div>
+        <div class="bookdate">
+            <div class="col1">
+                &nbsp;
+            </div>
+            <div class="col1">
+                วันที่ <?php echo date('d') . ' ' . $month_name[date('m')] . ' ' . (date('Y') + 543); ?>
+            </div>
+        </div>
+        <div class="booktitle">
+            <div class="col1">เรื่อง</div>
+            <div class="col2">ขอใช้ห้องประชุมสำนักงาน คปภ.</div>
+        </div>
+        <div class="booktitle">
+            <div class="col1">เรียน</div>
+            <div class="col2">ผู้อำนวยการฝ่ายอาวุโส ฝ่ายปฏิบัติการ/ผู้อำนวยการสำนักสนุบสนุนงานบริหาร</div>
+        </div>
+        <div class="bookdata">
+
+            <div class="single"><p Style="text-align :justify;  ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    ด้วย <?php echo $this->account['SECTION_PARENT']; ?> <?php echo $this->account['DE_SECTION_NAME']; ?> จะจัดประชุม/สัมมนา
+                    ในวันที่ <?php echo $book_day; ?> เดือน <?php echo $book_month; ?> พ.ศ. <?php echo $book_year; ?>
+                    เวลา <?php echo $start_h . ':' . $start_m; ?> น. ถึง <?php echo $end_h . ':' . $end_m; ?> น.
+                    มีผู้เข้าร่วมประชุมจำนวน <?php echo $this->trans['F_QUANTITY_IN'] + $this->trans['F_QUANTITY_OUT']; ?> คน
+                    (บุคคลภายใน <?php echo $this->trans['F_QUANTITY_IN']; ?> คน
+                    และบุคคลภายนอก <?php echo $this->trans['F_QUANTITY_OUT']; ?> คน)
+                    เรื่อง <?php echo $this->trans['F_SUBJECT']; ?>
+                    โดย <?php echo $this->trans['F_CHAIRMAN']; ?> เป็นประธาน
+                    จึงขอใช้ <?php echo $this->trans['F_ROOMNAME']; ?>
+                </p></div></div>
+        <div class="bookcommit">
+            <div class="col1">&nbsp;</div>
+            <div class="col2">จึงเรียนมาเพื่อโปรดพิจารณา</div>
+        </div>
+        <div class="bookdate">
+            <div class="col1">
+                &nbsp;<br>&nbsp;<br>
+            </div>
+            <div class="col2">
+                <span style="border-bottom: black 1px dotted"><?php echo $this->account['AHI_EMP_NAME']; ?></span><br>ผู้ขอใช้ห้องประชุม<br>
+                <span style="border-bottom: black 1px dotted"><?php echo $this->account['F_TTL_TNAME']; ?></span><br>ตำแหน่ง<br>
+            </div>
+        </div>
+        <br style="clear:both;">
+        <?php
+        if (count($this->food_trans) > 0) {
+            ?>
+            <div class="bookcomment">
+                &nbsp;ให้จัดเครื่องดื่ม/อุปกรณ์ ดังนี้
+                <table border="0" >
+                    <?php
+                    //var_dump($this->food_trans);
+                    foreach ($this->food_trans as $food) {
+                        ?>
+                        <tr>
+                            <td align="right"  >-</td>
+                            <td><?php echo $food['F_FOODNAME']; ?></td>
+                            <td>&nbsp;จำนวน</td>
+                            <td>&nbsp;&nbsp;<?php
+                if ($food['F_TRANFOODQUANTITY'] > 0) {
+					if ((int)$food['F_TRANFOODPRICE'] !== 0) {
+						echo 'เช้า ';
+					}
+					echo $food['F_TRANFOODQUANTITY'].' ที่';
+                }
+                if ($food['F_TRANFOODPRICE'] > 0) {
+                    echo '&nbsp;&nbsp;';
+					if ((int)$food['F_TRANFOODQUANTITY'] !== 0) {
+						echo 'บ่าย ';
+					}
+					echo $food['F_TRANFOODPRICE'] . ' ที่';
+                }
+                        ?></td>
+                            <td></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+            </div>
+            <?php
+        }
+        ?>
+        <div class="bookcommit">
+            <div class="col1"><br><br><br><br></div>
+            <div class="col2">(  ) อนุมัติดำเนินการ</div>
+            <div class="single">.......................................................................<br>
+                ผู้อำนวยการฝ่ายอาวุโส ฝ่ายปฏิบัติการ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                หรือ ผู้อำนวยการสำนักสนุบสนุนงานบริหาร<br>
+            </div>
+        </div>
+        <div class="bookcomment"><b><u>หมายเหตุ</u></b> กรณีที่ขอของว่าง/อาหาร โปรดจัดส่งเอกสารพร้อมทั้งลงชื่อรับรองฯ 2 รายการ ได้แก่ สำเนา<br>
+            หนังสือเชิญประชุมและรายชื่อผู้เข้าร่วมประชุม</div>
+    </center>
+</body>
+</html>

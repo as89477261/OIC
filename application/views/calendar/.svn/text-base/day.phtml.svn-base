@@ -1,0 +1,93 @@
+<?php
+global $config;
+ ?>
+<div id ="calendarDayContainerDIV"></div>
+<div id="calendarDayDiv">
+Calendar DAY
+</div>
+<script type="text/javascript">
+var calendarDay = new Ext.Panel({
+	//xtype:'portal',
+	width: Ext.getCmp('tpAdmin').getInnerWidth()-5,
+	height: Ext.getCmp('tpAdmin').getInnerHeight()-5,
+	tbar: new Ext.Toolbar({
+		id: 'calendarDay_Toolbar',
+		height: 25				
+	}),
+	border: false,
+	frame: false,
+	//height: '100%',
+	id: 'panelCalendarDay',
+	autoScroll: true,
+	contentEl: 'calendarDayDiv',
+	renderTo: 'calendarDayContainerDIV',
+	autoScroll:true,
+	layout: 'column',
+	iconCls: 'homeIcon',
+	//items:[{$this->getPortletColumnLayout ( $config ['portlet'] ['style'] )}]
+});
+var tbCalendarMonth = Ext.getCmp('calendarDay_Toolbar').add({
+	text: '<<',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarDayContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/day', 
+			params: 'month=<?php echo $this->prevMonth; ?>&year=<?php echo $this->prevYear; ?>' ,
+			scripts: true					
+		});
+		
+	}
+},new Ext.form.Label({
+	text: '<?php
+	echo $this->calendarMonth . " " . $this->calendarYear;
+	?>',
+	cls: 'calendarTextTBar'
+}),{
+	text: '>>',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarDayContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/day', 
+			params: 'month=<?php echo $this->nextMonth; ?>&year=<?php echo $this->nextYear; ?>' ,
+			scripts: true					
+		});
+	}
+},{
+	text: '|',
+	disabled: true
+},{
+	id: 'btnChangeWeekToDay',
+	text:'Week',
+	iconCls: 'calendarIcon',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarDayContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/week', 
+			scripts: true					
+		});
+	}
+},{
+	id: 'btnChangeWeekToMonth',
+	text:'Month',
+	iconCls: 'calendarIcon',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarDayContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/month', 
+			scripts: true					
+		});
+	}
+},{
+	id: 'btnChangeWeekToYear',
+	text:'Year',
+	iconCls: 'calendarIcon',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarDayContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/year', 
+			scripts: true					
+		});
+	}
+});
+calendarDay.render();
+</script>

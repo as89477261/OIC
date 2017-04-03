@@ -1,0 +1,24 @@
+<table cellspacing="0" cellpadding="0" width="300" border="0" class="default">
+    <tbody>
+        <tr>
+            <td>Struct_1</td>
+            <td><input id="Struct_1" name="Struct_1" /></td>
+        </tr>
+        <tr>
+            <td>Struct_2</td>
+            <td><input id="Struct_2" name="Struct_2" /></td>
+        </tr>
+        <tr>
+            <td>Struct_3</td>
+            <td><input id="Struct_3" name="Struct_3" /></td>
+        </tr>
+        <tr>
+            <td>Struct_4x</td>
+            <td><input id="Struct_4x" name="Struct_4x" /></td>
+        </tr>
+        <tr>
+            <td>Struct_5</td>
+            <td><input id="Struct_5" name="Struct_5" /></td>
+        </tr>
+    </tbody>
+</table>

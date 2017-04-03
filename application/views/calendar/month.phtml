@@ -1,0 +1,137 @@
+<?php
+global $config;
+ ?>
+<div id="calendarMonthContainerDIV"></div>
+<div id="calendarMonthDiv">
+<table width="100%" border="0" cellspacing="1" cellpadding="1">
+		<tr align="center">
+			<td>Sun</td>
+			<td>Mon</td>
+			<td>Tue</td>
+			<td>Wed</td>
+			<td>Thu</td>
+			<td>Fri</td>
+			<td>Sat</td>
+		</tr>
+		<?php
+		for($i = 0; $i <= 5; $i ++) {
+			?>
+		<tr style="width: 100%" style="height: 7em;">
+			<?php
+			for($j = 0; $j <= 6; $j ++) {
+				?>
+				<td
+			<?php
+				echo "class=\"{$this->data [$i] [$j] ['class']}\"";
+				?>
+			valign="top">
+		<table width="100%">
+			<tr>
+				<td align="right"><?php
+				if ($this->data [$i] [$j] ['date'] != 0) {
+					echo $this->data [$i] [$j] ['date'];
+				}
+				?></td>
+			</tr>
+			<tr>
+				<td><?php
+				//echo "col [$i][$j]";
+				?></td>
+			</tr>
+		</table>
+		</td>
+			<?php
+			}
+			?>
+		</tr>
+		<?php
+		}
+		?>
+	</table>
+</div>
+<script type="text/javascript">
+var calendarMonth = new Ext.Panel({
+	//xtype:'portal',
+	width: Ext.getCmp('tpAdmin').getInnerWidth()-5,
+	height: Ext.getCmp('tpAdmin').getInnerHeight()-5,
+	tbar: new Ext.Toolbar({
+		id: 'calendarMonth_Toolbar',
+		height: 25				
+	}),
+	border: false,
+	frame: false,
+	//height: '100%',
+	id: 'panelCalendarMonth',
+	autoScroll: true,
+	contentEl: 'calendarMonthDiv',
+	renderTo: 'calendarMonthContainerDIV',
+	autoScroll:true,
+	layout: 'column',
+	iconCls: 'homeIcon',
+	//items:[{$this->getPortletColumnLayout ( $config ['portlet'] ['style'] )}]
+});
+var tbCalendarMonth = Ext.getCmp('calendarMonth_Toolbar').add({
+	text: '<<',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarMonthContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/month', 
+			params: 'month=<?php echo $this->prevMonth; ?>&year=<?php echo $this->prevYear; ?>' ,
+			scripts: true					
+		});
+		
+	}
+},new Ext.form.Label({
+	text: '<?php
+	echo $this->calendarMonth . " " . $this->calendarYear;
+	?>',
+	cls: 'calendarTextTBar'
+}),{
+	text: '>>',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarMonthContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/month', 
+			params: 'month=<?php echo $this->nextMonth; ?>&year=<?php echo $this->nextYear; ?>' ,
+			scripts: true					
+		});
+	}
+},{
+	text: '|',
+	disabled: true
+},{
+	id: 'btnChangeMonthToDay',
+	text:'Day',
+	iconCls: 'calendarIcon',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarMonthContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/day', 
+			scripts: true					
+		});
+	}
+},{
+	id: 'btnChangeMonthToWeek',
+	text:'Week',
+	iconCls: 'calendarIcon',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarMonthContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/week', 
+			scripts: true					
+		});
+	}
+},{
+	id: 'btnChangeMonthToYear',
+	text:'Year',
+	iconCls: 'calendarIcon',
+	disabled: false,
+	handler: function() {
+		Ext.get('calendarMonthContainerDIV').getUpdater().update({
+			url: '/<?php echo $config ['appName'];  ?>/personal-calendar/year', 
+			scripts: true					
+		});
+	}
+});
+calendarMonth.render();
+</script>

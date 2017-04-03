@@ -1,0 +1,60 @@
+<?php
+global $config;
+global $policy;
+?>
+<style>
+	.table td{
+		height:20px;
+	}
+</style>
+<script>
+
+    function validate_form()
+    {
+        if ($('#f_subcatagories_code').val() == '') {
+            alert('กรุณาระบุรหัส');
+            return false;
+        }
+        if ($('#f_subcatagories_name').val() == '') {
+            alert('กรุณาระบุชื่อ');
+            return false;
+        }
+
+        return true;
+    }
+</script>
+<form action="/<?= $config ['appName'] ?>/room/edit-category" method="post">
+<input type="hidden" name="f_rowid_subcatagories" id="f_rowid_subcatagories" value="<?php echo $this->category['F_ROWID_SUBCATAGORIES']; ?>">
+<table class="table" width="500">
+    <tr>
+        <td style="width:130px;"><b>รหัส</b> : </td>
+        <td><input type="text" name="f_subcatagories_code" id="f_subcatagories_code" value="<?php echo $this->category['F_SUBCATAGORIES_CODE']; ?>" style="width:300px;" maxlength="250" /></td>
+    </tr>
+    <tr>
+        <td style="width:130px;"><b>ชื่อ</b> : </td>
+        <td><input type="text" name="f_subcatagories_name" id="f_subcatagories_name" value="<?php echo $this->category['F_SUBCATAGORIES_NAME']; ?>" style="width:300px;" maxlength="250" /></td>
+    </tr>
+    <tr>
+        <td style="width:130px;"><b>ประเภท</b> : </td>
+        <td>
+			<input type="radio" name="f_rowid_catagories" id="f_rowid_catagories1" <?php if ($this->category['F_ROWID_CATAGORIES'] == 'cat44069175e1ea7') {
+					echo 'checked="checked"';
+					} ?> value="cat44069175e1ea7"> <label for="f_roomstatus1">ห้อง</label>
+			<input type="radio" name="f_rowid_catagories" id="f_rowid_catagories2" <?php if ($this->category['F_ROWID_CATAGORIES'] == 'cat4406918792464') {
+					echo 'checked="checked"';
+					} ?> value="cat4406918792464"> <label for="f_roomstatus0">อุปกรณ์</label>
+		</td>
+    </tr>
+</table>
+<?php
+if($policy->isRoomAdmin()){
+	echo '<button onclick="return validate_form();">บันทึก</button>';
+}else{
+?>
+<script>
+$('#f_roomname').attr('readonly','readonly');
+</script>
+<?php
+}
+?>
+</form>

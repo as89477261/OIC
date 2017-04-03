@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="DMSStats"
+
+		 language="groovy"		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="2" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="26"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="99"
+						y="0"
+						width="308"
+						height="25"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" size="16" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายงานสถานะดัชนีระบบจัดเก็บเอกสาร]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="1"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="200"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="169"
+						height="14"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[จำนวนแฟ้มทั้งหมด]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="19"
+						width="169"
+						height="14"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[จำนวนเอกสารทั้งหมด]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="38"
+						width="169"
+						height="14"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ปริมาณการเข้าใช้เอกสาร]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="57"
+						width="230"
+						height="14"
+						key="staticText-5"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ปริมาณการใช้พื้นที่บน Storage Server]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="30"
+						y="77"
+						width="135"
+						height="14"
+						key="staticText-6"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[Storage #1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="30"
+						y="96"
+						width="169"
+						height="14"
+						key="staticText-7"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[Storage #2]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="115"
+						width="169"
+						height="14"
+						key="staticText-8"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[Index ที่ยังไม่ได้ทำการ Fulltext]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="132"
+						width="169"
+						height="14"
+						key="staticText-9"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[Index ที่หมดอายุ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="151"
+						width="169"
+						height="14"
+						key="staticText-10"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[Index ที่รอ Puge]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="305"
+						y="133"
+						width="0"
+						height="0"
+						key="staticText-11"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="151"
+						width="41"
+						height="14"
+						key="staticText-12"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="132"
+						width="41"
+						height="14"
+						key="staticText-13"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="115"
+						width="41"
+						height="14"
+						key="staticText-14"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="96"
+						width="41"
+						height="14"
+						key="staticText-15"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[MB]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="77"
+						width="41"
+						height="14"
+						key="staticText-16"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[MB]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="38"
+						width="41"
+						height="14"
+						key="staticText-17"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="19"
+						width="41"
+						height="14"
+						key="staticText-18"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="258"
+						y="-2"
+						width="41"
+						height="14"
+						key="staticText-19"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายการ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="151"
+						width="41"
+						height="14"
+						key="staticText-20"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[0]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="132"
+						width="41"
+						height="14"
+						key="staticText-21"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[0]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="115"
+						width="41"
+						height="14"
+						key="staticText-22"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[0]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="96"
+						width="41"
+						height="14"
+						key="staticText-23"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[0]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="77"
+						width="41"
+						height="14"
+						key="staticText-24"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[1259]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="38"
+						width="41"
+						height="14"
+						key="staticText-25"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[12911]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="19"
+						width="41"
+						height="14"
+						key="staticText-26"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[1129]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="210"
+						y="-2"
+						width="41"
+						height="14"
+						key="staticText-27"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="TAHOMA.TTF" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[235]]></text>
+				</staticText>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

@@ -1,0 +1,39 @@
+<form name="AddEditDriver" action="{MainUrl}?fid={fid}" method="post"  class="form">
+  <input type="hidden" name="fn" value="save">
+  <input type="hidden" name="driver[driver_id]" id="driver.driver_id" value="{driver/driver_id}">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="result_table">
+	<tr>
+		<td>
+			<p class="required">
+				<label for="simple-action">{Driver/DriverName}</label>
+				<input class="full-width" type="text" name="driver[first_name]" id="driver.first_name" value="{driver/first_name}">
+			</p>
+			<p class="required">
+				<label for="simple-action">{Driver/DriverSurname}</label>
+				<input class="full-width" type="text" name="driver[last_name]" id="driver.last_name" value="{driver/last_name}">
+			</p>
+			<p>
+				<label for="simple-action">{Driver/DriverType}</label>
+				<select class="full-width" name="driver[type]" id="driver.type">
+					{driver/type,OPTIONS}
+				</select>
+			</p>
+			<p>
+				<label for="simple-action">{Driver/DriverType}</label>
+				<select id="driver.car_id" name="driver[car_id]"  class="full-width" >
+					{car_list,OPTIONS}
+				</select>
+			</p>
+		</td>
+	</tr>
+  </table>
+  </form>
+</div>
+<script type="text/javascript">
+vrules = [
+			['driver[first_name]', '{Driver/DriverName}', STRING, YES, null],
+			['driver[last_name]', '{Driver/DriverSurname}', STRING, YES, null]
+		];
+		document.forms['AddEditDriver'].onsubmit = function() {return validateForm(this, vrules);};
+		gotoFirstControl(document.forms['AddEditDriver']);
+</script>

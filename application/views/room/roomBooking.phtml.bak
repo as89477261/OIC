@@ -1,0 +1,425 @@
+<?php
+global $config;
+global $policy;
+?>
+<style>
+    .columns{
+        margin-bottom: 10px;
+    }
+    .datepick-popup{
+        z-index: 999999 !important;
+    }
+</style>
+<script>
+    function checktime()
+    {
+        //alert($('#start_h').val() + '' + $('#start_m').val()+''+$('#end_h').val() + '' + $('#end_m').val());
+        if ($('#start_h').val() + '' + $('#start_m').val() > $('#end_h').val() + '' + $('#end_m').val()) {
+            $('#end_h').val($('#start_h').val());
+            $('#end_m').val($('#start_m').val());
+        }
+
+        if ($('#start_h').val() < 12) {
+            $('.morning').each(function(index) {
+                $(this).attr('readonly', '');
+            });
+        } else {
+            $('.morning').each(function(index) {
+                $(this).attr('readonly', 'readonly');
+                $(this).val('');
+            });
+        }
+        if ($('#end_h').val() >= 13) {
+            $('.afternoon').each(function(index) {
+                $(this).attr('readonly', '');
+            });
+        } else {
+            $('.afternoon').each(function(index) {
+                $(this).attr('readonly', 'readonly');
+                $(this).val('');
+            });
+        }
+    }
+    function cal_food(obj)
+    {
+        if (checkdigit(obj.value) === false) {
+            obj.value = '';
+        } else {
+            obj.value = parseInt(obj.value);
+        }
+        numIn = parseInt($('#quantity_in').val());
+        numOut = parseInt($('#quantity_out').val());
+        numTotal = (isNaN(numIn) ? 0 : numIn) + (isNaN(numOut) ? 0 : numOut);
+        if (obj.value > numTotal) {
+            obj.value = numTotal;
+        }
+    }
+    function checkdigit(val)
+    {
+        return /^\d+$/.test(val);
+    }
+    function todigit(obj) {
+        if (checkdigit(obj.value) === false) {
+            obj.value = '';
+        } else {
+            obj.value = parseInt(obj.value);
+        }
+    }
+    function recalculateFood()
+    {
+        aform = document.booking_form;
+        numIn = parseInt($('#quantity_in').val());
+        numOut = parseInt($('#quantity_out').val());
+        numTotal = (isNaN(numIn) ? 0 : numIn) + (isNaN(numOut) ? 0 : numOut);
+        for (var key = 0; key < aform.elements.length; key++)
+        {
+            if ((typeof aform.elements[key].type != 'undefined') && (aform.elements[key].type == 'checkbox') && (aform.elements[key].name.substring(0, 11) == 'f_checkfood'))
+            {
+                elem = aform.elements[key];
+                if (elem.checked) {
+
+
+                    if ($('#start_h').val() < 12) {
+                        var num = parseInt(aform.elements['f_tranfoodquantity_m_' + elem.value].value);
+                        if (num == aform.elements['f_tranfoodquantity_m_' + elem.value].value == 0
+                                || aform.elements['f_tranfoodquantity_m_' + elem.value].value > numTotal
+                                ) {
+                            aform.elements['f_tranfoodquantity_m_' + elem.value].value = numTotal;
+                        }
+                    } else {
+                        aform.elements['f_tranfoodquantity_m_' + elem.value].value = '0';
+                    }
+
+                    if ($('#end_h').val() >= 13) {
+                        var num = parseInt(aform.elements['f_tranfoodquantity_a_' + elem.value].value);
+                        if (num == aform.elements['f_tranfoodquantity_a_' + elem.value].value == 0
+                                || aform.elements['f_tranfoodquantity_a_' + elem.value].value > numTotal
+                                ) {
+                            aform.elements['f_tranfoodquantity_a_' + elem.value].value = numTotal;
+                        }
+                    } else {
+                        aform.elements['f_tranfoodquantity_a_' + elem.value].value = '0';
+                    }
+                } else {
+                    aform.elements['f_tranfoodquantity_m_' + elem.value].value = '';
+                    aform.elements['f_tranfoodquantity_a_' + elem.value].value = '';
+                }
+            }
+        }
+    }
+    function validate_form()
+    {
+        if ($('#subject').val() == '') {
+            alert('กรุณาระบุเรื่องประชุม');
+            return false;
+        }
+		var subject = $('#subject').val();
+        if (subject.length > 250) {
+            alert('กรุณาระบุเรื่องประชุมน้อยกว่า 250 อักษร');
+            return false;
+        }
+        if ($('#chairman').val() == '') {
+            alert('กรุณาระบุประธาน');
+            return false;
+        }
+		var chairman = $('#chairman').val();
+        if (chairman.length > 150) {
+            alert('กรุณาระบุประธาน น้อยกว่า 150 อักษร');
+            return false;
+        }
+        if ($('#quantity_in').val() == '') {
+            alert('กรุณาระบุผู้เข้าร่วมประชุมภายใน');
+            return false;
+        }
+        if ($('#book_date').val() == '') {
+            alert('กรุณาระบุวันที่จอง');
+            return false;
+        }
+        if ($('#start_h').val() + '' + $('#start_m').val() == $('#end_h').val() + '' + $('#end_m').val()) {
+            alert('กรุณาระบุเวลาจอง');
+            return false;
+        }
+        if ($('#f_tel_no').val() == '') {
+            alert('กรุณาระบุเบอร์โทรศัพท์');
+            return false;
+        }
+		var f_tel_no = $('#f_tel_no').val();
+        if (f_tel_no.length > 50) {
+            alert('กรุณาระบุเบอร์โทร น้อยกว่า 50 อักษร');
+            return false;
+        }
+
+        $.get("/<?= $config ['appName'] ?>/room/validate/"
+                + "?date=" + $('#book_date').val()
+                + '&room=' + $('#room').val()
+                + '&trans_id=<?php echo $this->trans['F_TRANSACTION_ROWID']; ?>'
+                + '&start=' + $('#start_h').val() + $('#start_m').val()
+                + '&end=' + $('#end_h').val() + $('#end_m').val(), function(data) {
+            //alert(data);
+            if (data != '1') {
+                alert('กรุณาระบุเวลาจองใหม่ เนื่องจากเวลาที่่ท่านระบุมีการจองแล้ว');
+                return false;
+            }else{
+                $('#booking_form').submit();
+            }
+        });
+        return false;
+    }
+</script>
+<form class="form" id="booking_form" name="booking_form" method="post" action="/<?= $config ['appName'] ?>/room/savebooking">
+    <input type="hidden" name="F_TRANSACTION_ROWID" id="F_TRANSACTION_ROWID" value="<?php echo $this->trans['F_TRANSACTION_ROWID']; ?>" />
+    <fieldset>
+        <div class="columns">
+            <label for="room">รายการ *</label>
+            <select name="room" id="room" class="full-width">
+                <?php
+                foreach ($this->rooms as $room) {
+                    if ($room['F_ROOMSTATUS'] == '1') {
+                        if ($this->trans['F_ROWID_ROOM'] == $room['F_ROWID_ROOM']) {
+                            $selected = 'selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . $room['F_ROWID_ROOM'] . '"' . $selected . '>' . $room['F_ROOMNAME'] . '</option>';
+                    }
+                }
+                ?>
+            </select>
+        </div>
+        <div class="columns">
+            <label for="subject">เรื่องประชุม *</label>
+            <input type="text" name="subject" id="subject" class="full-width" value="<?php echo $this->trans['F_SUBJECT']; ?>">
+        </div>
+        <div class="columns">
+            <label for="chairman">ประธาน *</label>
+            <input type="text" name="chairman" id="chairman" class="full-width" value="<?php echo $this->trans['F_CHAIRMAN']; ?>">
+        </div>
+        <div class="columns">
+            <div class="colx2-left">
+                <label for="chirman">จำนวนผู้เข้าร่วมประชุม(ภายใน) *</label>
+                <input type="text" name="quantity_in" id="quantity_in" value="<?php echo $this->trans['F_QUANTITY_IN']; ?>" onchange="todigit(this);
+                        recalculateFood();">
+            </div>
+            <div class="colx2-right">
+                <label for="chirman">จำนวนผู้เข้าร่วมประชุม(ภายนอก)</label>
+                <input type="text" name="quantity_out" id="quantity_out" value="<?php echo $this->trans['F_QUANTITY_OUT']; ?>" onchange="todigit(this);
+                        recalculateFood();">
+            </div>
+        </div>
+        <div class="columns">
+            <div class="colx2-left">
+                <label for="book_date">วันที่จอง *</label>
+
+                <span class="input-type-text margin-right relative" style="width:120px;">
+                    <input type="text" name="book_date" id="book_date" value="<?php
+                    echo Room::dateFormat2($this->trans['F_DATE_BOOK']);
+                    ?>" class="datepicker">
+                    <!--<img src="/<?= $config ['appName'] ?>/images/calendarIcon.gif" width="16" height="16">-->
+                </span>
+            </div>
+
+            <?php
+            $start_h = substr($this->trans['F_TIMESTART'], 0, 2);
+            $start_m = substr($this->trans['F_TIMESTART'], 2, 2);
+
+            $end_h = substr($this->trans['F_TIMEEND'], 0, 2);
+            $end_m = substr($this->trans['F_TIMEEND'], 2, 2);
+            ?>
+            <div class="colx2-right">
+                <label for="simple-calendar">เวลาจอง *</label>
+                <select name="start_h" id="start_h" onchange="checktime();">
+                    <?php
+                    for ($r = '7'; $r <= 19; $r++) {
+                        if ($r == $start_h) {
+                            $selected = ' selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . sprintf('%02d', $r) . '"' . $selected . '>' . sprintf('%02d', $r) . '</option>';
+                    }
+                    ?>
+                </select>
+                <select name="start_m" id="start_m" onchange="checktime();">
+                    <?php
+                    for ($r = 0; $r <= 45; $r+=15) {
+                        if ($r == $start_m) {
+                            $selected = ' selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . sprintf('%02d', $r) . '"' . $selected . '>' . sprintf('%02d', $r) . '</option>';
+                    }
+                    ?>
+                </select>
+                -
+                <select name="end_h" id="end_h" onchange="checktime();">
+                    <?php
+                    for ($r = '7'; $r <= 19; $r++) {
+                        if ($r == $end_h) {
+                            $selected = ' selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . sprintf('%02d', $r) . '"' . $selected . '>' . sprintf('%02d', $r) . '</option>';
+                    }
+                    ?>
+                </select>
+                <select name="end_m" id="end_m" onchange="checktime();">
+                    <?php
+                    for ($r = 0; $r <= 45; $r+=15) {
+                        if ($r == $end_m) {
+                            $selected = ' selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . sprintf('%02d', $r) . '"' . $selected . '>' . sprintf('%02d', $r) . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="columns">
+            <div class="colx2-left">
+                <label for="user_id">ผู้จอง *</label>
+                <select name="user_id" id="user_id" class="full-width">
+                    <?php
+                    foreach ($this->accounts as $account) {
+                        if ($this->trans['F_USERID'] == $account['F_ACC_ID']) {
+                            $selected = 'selected="selected"';
+                        } else {
+                            $selected = '';
+                        }
+                        echo '<option value="' . $account['F_ACC_ID'] . '"' . $selected . '>' . $account['F_NAME'] . ' ' . $account['F_LAST_NAME'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="colx2-right">
+                <label for="">เบอร์โทร *</label>
+                <input type="text" name="f_tel_no" id="f_tel_no" value="<?php echo $this->trans['F_TEL_NO']; ?>">
+            </div>
+        </div>
+        <div class="columns">
+            <label for="remark">หมายเหตุ</label>
+            <input type="text" name="remark" id="remark" class="full-width" value="<?php echo $this->trans['F_REMARK']; ?>">
+        </div>
+        <div class="columns">
+            <label for="remark">อาหาร</label>
+            <ul class="checkable-list">
+                <?php
+//var_dump($this->foodTransaction);
+                foreach ($this->foods as $food) {
+                    if (isset($this->foodTransaction[$food['F_ROWID_FOOD']])) {
+                        $check = 'checked';
+                        $m_amount = (int) $this->foodTransaction[$food['F_ROWID_FOOD']]['F_TRANFOODQUANTITY'];
+                        $l_amount = (int) $this->foodTransaction[$food['F_ROWID_FOOD']]['F_TRANFOODPRICE'];
+                    } else {
+                        $check = '';
+                        $m_amount = 0;
+                        $l_amount = 0;
+                    }
+                    ?>
+                    <li>
+                        <div class="colx3-left">
+                            <input type="checkbox" onclick="recalculateFood();" value="<?php echo $food['F_ROWID_FOOD'] ?>"
+                                   name="f_checkfood_food<?php echo $food['F_ROWID_FOOD'] ?>"
+                                   id="f_checkfood_food<?php echo $food['F_ROWID_FOOD'] ?>" <?= $check ?>>
+                            <label for="f_checkfood_food<?php echo $food['F_ROWID_FOOD'] ?>">
+                                <?php
+                                echo $food['F_FOODNAME'];
+                                ?>
+                            </label>
+                        </div>
+                        <div class="colx3-center">
+                            เช้า
+                            <input type="text"
+                                   name="f_tranfoodquantity_m_<?php echo $food['F_ROWID_FOOD'] ?>"
+                                   id="f_tranfoodquantity_m_<?php echo $food['F_ROWID_FOOD'] ?>"
+                                   value="<?= $m_amount ?>"
+                                   style="width:50px;" class="morning" onchange="cal_food(this);">
+                        </div>
+                        <div class="colx3-right">
+                            บ่าย
+                            <input type="text"
+                                   name="f_tranfoodquantity_a_<?php echo $food['F_ROWID_FOOD'] ?>"
+                                   id="f_tranfoodquantity_a_<?php echo $food['F_ROWID_FOOD'] ?>"
+                                   value="<?= $l_amount ?>"
+                                   style="width:50px;" class="afternoon" onchange="cal_food(this);">
+                        </div>
+                    </li>
+                    <?php
+                }
+                ?>
+            </ul>
+        </div>
+
+    </fieldset>
+    <div class="block-footer align-right">
+		<?php
+		if($this->trans['F_CREATEUSERID'] == $_SESSION['accID'] 
+			|| $this->trans['F_USERID'] == $_SESSION['accID'] 
+			|| $policy->isRoomAdmin()
+			|| $this->trans['F_ROWID'] == ''){
+		?>
+        <button onclick="return validate_form();">บันทึก</button>
+        <?php
+		}
+		
+        if ($this->trans['F_ROWID'] != '') {
+            ?>
+            <button onclick="window.open('/<?= $config ['appName'] ?>/room/print/?id=<?= $this->trans['F_ROWID'] ?>', '', '');
+                        return false;"><img src="/<?= $config ['appName'] ?>/reservation/images/icons/btn_print.gif" width="16" height="16"> พิมพ์</button>
+			<?php
+            if($this->trans['F_CREATEUSERID'] == $_SESSION['accID'] || $this->trans['F_USERID'] == $_SESSION['accID'] || $policy->isRoomAdmin()){
+            ?>
+            <button onclick="if (confirm('ยืนยันการยกเลิกจองหัองประชุม?')) {
+                            window.location = '/<?= $config['appName'] ?>/room/cancel/?id=<?= $this->trans['F_ROWID'] ?>';
+                            return false;
+                        } else {
+                            return false;
+                        }" class="red">ยกเลิกการจอง</button>
+            <?php
+            }
+		}
+		?>
+    </div>
+</form>
+
+<script>
+
+    $('.datepicker').datepick({
+        alignment: 'bottom',
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: 'dd/mm/yyyy',
+        renderer: {
+            picker: '<div class="datepick block-border clearfix form"><div class="mini-calendar clearfix">' +
+                    '{months}</div></div>',
+            monthRow: '{months}',
+            month: '<div class="calendar-controls">' +
+                    '{monthHeader:M yyyy}' +
+                    '</div>' +
+                    '<table cellspacing="0">' +
+                    '<thead>{weekHeader}</thead>' +
+                    '<tbody>{weeks}</tbody></table>',
+            weekHeader: '<tr>{days}</tr>',
+            dayHeader: '<th>{day}</th>',
+            week: '<tr>{days}</tr>',
+            day: '<td>{day}</td>',
+            monthSelector: '.month',
+            daySelector: 'td',
+            rtlClass: 'rtl',
+            multiClass: 'multi',
+            defaultClass: 'default',
+            selectedClass: 'selected',
+            highlightedClass: 'highlight',
+            todayClass: 'today',
+            otherMonthClass: 'other-month',
+            weekendClass: 'week-end',
+            commandClass: 'calendar',
+            commandLinkClass: 'button',
+            disabledClass: 'unavailable'
+        }
+    });
+</script>

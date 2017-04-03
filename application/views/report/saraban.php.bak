@@ -1,0 +1,100 @@
+<?php 
+
+$data = $this->data;
+$countData = $this->countData;
+$ann_label = $this->ann_label;
+$ann = $this->ann;
+$org = $this->org;
+$dateFromTxt = $this->dateFromTxt;
+$dateToTxt = $this->dateToTxt;
+$dateTime = date("G.i.s");
+$printDate = $this->printDate;
+$commandCondition = $this->commandCondition;
+		
+		$html = "
+		<html>
+		<head>
+			<style>
+				body, td, th, div {font-family: Angsana New; font-size: 14pt;}
+				td.center {text-align:center}
+				h1{font-size: 18pt;}
+</style>
+		</head>
+		<body>
+		<form name=\"reportForm\" method=\"post\" action=\"/{$config['appName']}/export-report/docflow-stats\" >
+		<center>
+		<table style=\"width:600px;\" border =\"0\" >
+			<tr>
+				<td class = \"center\" style=\"width:60%\" colspan = \"3\"><h1>สำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย</h1></td>
+			</tr>
+			<tr>
+				<td style=\"width:20%\"></td>
+				<td class = \"center\"  style=\"width:60%\">รายงานสรุปปริมาณการรับ - ส่งหนังสือ</td>
+				<td style=\"width:20%\">วันที่ : {$printDate}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class = \"center\">{$org}</td>
+				<td>เวลา : {$dateTime}</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class = \"center\">ตั้งแต่วันที่ {$dateFromTxt} &nbsp;&nbsp;&nbsp;ถึงวันที่ {$dateToTxt}</td>
+				<td></td>
+			</tr>
+		</table>
+		<br />
+		<table style=\"width:600px;border-collapse:collapse;\" border=\"1\" >
+		<thead >
+			<tr>
+				<td class = \"center\" style=\"width:10%\">ลำดับที่</td>
+				<td class = \"center\" style=\"width:75%\">ประเภทการรับ - ส่ง</td>
+				<td class = \"center\" style=\"width:15%\">จำนวน</td>
+			</tr>
+		</thead>
+		<tbody>";
+		$itemNo = 1;
+		for($i = 0;$i<count($countData);$i++){
+			if($countData[$i] != 0){
+				$html .= "
+					<tr>
+						<td class = \"center\">&nbsp;$itemNo</td>
+						<td>&nbsp;$data[$i]</td>
+						<td class = \"center\">$countData[$i]</td>
+					</tr>
+				";
+					$itemNo++;
+			}
+		}
+		if($commandCondition == TRUE){
+			$html .= "
+						<tr>
+							<td class = \"center\">&nbsp;$itemNo</td>
+							<td>&nbsp;$data[11]</td>
+							<td>&nbsp;</td>
+						</tr>
+						";
+		$dot = 1;
+			for($j=0;$j<count($ann_label);$j++){
+				if($ann[$j] != 0){
+					
+					$html .= "
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$itemNo.$dot&nbsp;&nbsp;$ann_label[$j]</td>
+							<td class = \"center\">$ann[$j]</td>
+						</tr>
+					";
+						$dot ++;
+				}
+			}
+		}
+		$html .= "
+		</tbody>
+		</table>
+		</center>
+		</form></body></html>";
+		echo $html;
+
+
+?>

@@ -1,0 +1,25 @@
+<form name="AddEditCar" action="{MainUrl}?fid={fid}" method="post" class="form">
+  <input type="hidden" name="fn" value="save">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+		<input type="hidden" name="car[car_id]" id="car.car_id" value="{car/car_id}">
+			<p class="input-with-button required">
+				<label for="simple-action">{Car/CarLicense}</label>
+				<input class="full-width" type="text" name="car[car_license]" id="car.car_license" value="{car/car_license}">
+			</p>
+			<p class="input-with-button">
+				<label for="simple-action">{Car/CarDetail}</label>
+				<textarea  class="full-width" name="car[car_detail]" id="car.car_detail" rows="3" cols="40">{car/car_detail}</textarea>
+			</p>
+		</td>
+	</tr>
+  </table>
+  </form>
+  <script type="text/javascript">
+vrules = [
+		['car[car_license]', '{Car/CarLicense}', STRING, YES, null]
+	];
+document.forms['AddEditCar'].onsubmit = function() {return validateForm(this, vrules);};
+gotoFirstControl(document.forms['AddEditCar']);
+</script>

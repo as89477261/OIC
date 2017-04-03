@@ -1,0 +1,86 @@
+console.log("DATE");
+SUFFIX_DAY = 'Day';
+SUFFIX_MONTH = 'Month';
+SUFFIX_YEAR = 'Year';
+DATE_DELIMITER = '-';
+END_OF_MONTH = 'end';
+
+SHORT_MONTH = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function endOfMonth(m, y)
+{
+    eom = [0,31,28,31,30,31,30,31,31,30,31,30,31];
+//    if ((m < 1) && (m > 12)) { alertError(ERROR_TYPE_DESIGN, 'invalid month value. (Should be validated before calling.)'); return -1; }
+    leapyear = (((y % 4) == 0) && (((y % 100) != 0) || ((y % 400) == 0)));
+    if ((m == 2) && leapyear)
+        return 29;
+    else
+        return eom[m];
+}
+
+function daysAfter(day1, day2)
+{
+    day2_arr = day2.split(DATE_DELIMITER, 3);
+    day1_arr = day1.split(DATE_DELIMITER, 3);
+    return (Date.UTC(day2_arr[0], day2_arr[1] - 1, day2_arr[2]) - Date.UTC(day1_arr[0], day1_arr[1] - 1, day1_arr[2])) / 86400000;
+}
+
+// date returned from today() is not UTC date
+function today()
+{
+    day_date = new Date();
+    m = day_date.getMonth() + 1;
+    if (m < 10) m = '0' + m;
+    d = day_date.getDate();
+    if (d < 10) d = '0' + d;
+    return day_date.getFullYear() + '-' + m + '-' + d;
+}
+
+function relativeDate(day_str, offset)
+{
+    day_arr = day_str.split(DATE_DELIMITER, 3);
+    day_date = new Date(day_arr[0], day_arr[1] - 1, day_arr[2]);
+    day_date.setDate(day_date.getDate() + offset);
+    m = day_date.getMonth() + 1;
+    if (m < 10) m = '0' + m;
+    d = day_date.getDate();
+    if (d < 10) d = '0' + d;
+    return day_date.getFullYear() + DATE_DELIMITER + m + DATE_DELIMITER + d;
+}
+
+function getDateStringFromSelect(aform, vname)
+{
+    if (vname.indexOf('_') != -1) {
+        name_suffix = vname.substring(vname.indexOf('_'));
+        vname = vname.substring(0, vname.indexOf('_'));
+    } else
+        name_suffix = '';
+    day = getValue(aform, vname + SUFFIX_DAY + name_suffix, STRING);
+    month = getValue(aform, vname + SUFFIX_MONTH + name_suffix, STRING);
+    year = getValue(aform, vname + SUFFIX_YEAR + name_suffix, STRING);
+    if ((month == false) || (year == false))
+        return false;
+    else {
+        if ((day == false) || (day == END_OF_MONTH))
+            day = endOfMonth(month, year);
+        return year + DATE_DELIMITER + month + DATE_DELIMITER + day;
+    }
+}
+
+function getFormattedDate(adate)
+{
+    arr_date = adate.split(DATE_DELIMITER, 3);
+    return arr_date[2] + DATE_DELIMITER + SHORT_MONTH[arr_date[1]] + DATE_DELIMITER + arr_date[0];
+}
+
+function toThaiDate(adate)
+{
+    arr_date = adate.split(DATE_DELIMITER, 3);
+    return (parseInt(arr_date[0], 10) + 543) + DATE_DELIMITER + arr_date[1] + DATE_DELIMITER + arr_date[2];
+}
+
+function toJulianDate(tdate)
+{
+    arr_date = tdate.split(DATE_DELIMITER, 3);
+    return (parseInt(arr_date[0], 10) - 543) + DATE_DELIMITER + arr_date[1] + DATE_DELIMITER + arr_date[2];
+}

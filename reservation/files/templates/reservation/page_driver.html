@@ -1,0 +1,16 @@
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$('#driverId').GfGrid({
+			url: '{MainUrl}?fid=driver-list'
+		}).get(0).reload();
+	});
+</script>
+<section class="grid_12">
+			<div class="block-border"><form action="" method="post" id="table_form" class="block-content form">
+			<form action="" method="post" id="table_form" class="block-content form">
+				<h1>{Driver/List}</h1>
+				<div class="gf-grid no-margin" id="driverId"></div>
+			</form>
+			</div>
+</section>

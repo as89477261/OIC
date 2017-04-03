@@ -1,0 +1,196 @@
+8
+
+dir
+407
+http://192.168.1.18/ECM/Branch/Revolution/public
+http://192.168.1.18/ECM
+
+
+
+2009-08-25T07:20:19.640625Z
+406
+zelda
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+54fe2830-83b3-844e-bcbc-4e7e24f87afd
+
+newfile.php
+file
+
+
+
+
+2009-09-16T08:27:37.045703Z
+0f89df5cba05c00004f54a96ed714dd1
+2009-07-28T02:25:56.562500Z
+388
+zelda
+
+export
+dir
+
+maintenance
+dir
+
+sqlnet.log
+file
+
+
+
+
+2009-09-16T08:27:37.073704Z
+6ac579058263cbdb7473b7058be2e4df
+2009-07-14T07:27:47.093750Z
+387
+zelda
+
+static
+dir
+
+css
+dir
+
+index.php
+file
+
+
+
+
+2009-09-16T08:27:37.337719Z
+1ee500298a505628434a6aa2ff333342
+2009-08-19T12:18:42.171875Z
+400
+zelda
+
+PictureView.ocx
+file
+
+
+
+
+2009-09-16T08:27:37.561732Z
+71b43564f11cf4d1a74b3c9aa5871847
+2008-07-04T12:29:34.078125Z
+47
+zelda
+has-props
+
+favicon.ico
+file
+
+
+
+
+2009-09-16T08:27:37.378722Z
+c5e2a81b473f12c1851132369e35ed16
+2009-04-02T11:15:27.953125Z
+335
+zelda
+has-props
+
+swf
+dir
+
+viewtemp
+dir
+
+tools
+dir
+
+ActiveViewText.ocx
+file
+
+
+
+
+2009-09-16T08:27:37.782745Z
+ef492ad7fcb6ed46f64f4903b2213a5b
+2008-07-04T12:29:34.078125Z
+47
+zelda
+has-props
+
+images
+dir
+
+CDMSPlugins.exe
+file
+
+
+
+
+2009-09-16T08:27:38.615792Z
+8937fd2f8b4a81d4517a0ea6e1cb789c
+2009-04-22T01:25:50.281250Z
+359
+zelda
+has-props
+
+session.php
+file
+
+
+
+
+2009-09-16T08:27:38.630793Z
+c63c79c4bbebbe33a9f301c3a6577149
+2009-08-19T12:18:42.171875Z
+400
+zelda
+
+terminal
+dir
+
+.htaccess
+file
+
+
+
+
+2009-09-16T08:27:38.638794Z
+ab38ba7127d0c5786fcf120e60a6e392
+2009-08-19T12:18:42.171875Z
+400
+zelda
+
+js
+dir
+
+TwnProj1.ocx
+file
+
+
+
+
+2009-09-16T08:27:38.651794Z
+c04d8ee8e820bd1bb63c54d13d656fe0
+2008-07-04T12:29:34.078125Z
+47
+zelda
+has-props
+
+TwainFTP.exe
+file
+
+
+
+
+2009-09-16T08:27:38.659795Z
+8f073e1d5edb5bded40157c2f4d7d518
+2008-07-04T12:29:34.078125Z
+47
+zelda
+has-props
+

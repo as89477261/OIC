@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="SarabanSummaryReport"
+
+		 language="groovy"		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="782"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="announce_type" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="announce_cat" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="date_start" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="date_stop" isForPrompting="true" class="java.lang.String"/>
+	<parameter name="date_txt_begin" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="date_txt_end" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="print_date" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="print_time" isForPrompting="false" class="java.lang.String"/>
+	<queryString><![CDATA[SELECT
+     TBL_ACCOUNT."F_NAME" AS TBL_ACCOUNT_F_NAME,
+     TBL_ACCOUNT."F_LAST_NAME" AS TBL_ACCOUNT_F_LAST_NAME,
+     TBL_ANNOUNCE."F_TITLE" AS TBL_ANNOUNCE_F_TITLE,
+     TBL_ANNOUNCE."F_ANNOUNCE_DATE" AS TBL_ANNOUNCE_F_ANNOUNCE_DATE,
+     TBL_ANNOUNCE."F_ANNOUNCE_ORG_NAME" AS TBL_ANNOUNCE_F_ANNOUNCE_ORG_NA,
+     TBL_ANNOUNCE."F_REMARK" AS TBL_ANNOUNCE_F_REMARK,
+     TBL_ANNOUNCE_CATEGORY."F_NAME" AS TBL_ANNOUNCE_CATEGORY_F_NAME,
+     TBL_ANNOUNCE."F_ANNOUNCE_NO" AS TBL_ANNOUNCE_F_ANNOUNCE_NO,
+     TBL_ANNOUNCE."F_ANNOUNCE_SYS_STAMP" AS TBL_ANNOUNCE_F_ANNOUNCE_SYS_ST,
+     TBL_ROLE."F_ROLE_NAME" AS TBL_ROLE_F_ROLE_NAME
+FROM
+     "TBL_ACCOUNT" TBL_ACCOUNT INNER JOIN "TBL_ANNOUNCE" TBL_ANNOUNCE ON TBL_ACCOUNT."F_ACC_ID" = TBL_ANNOUNCE."F_SIGN_UID"
+     INNER JOIN "TBL_ANNOUNCE_CATEGORY" TBL_ANNOUNCE_CATEGORY ON TBL_ANNOUNCE."F_ANNOUNCE_TYPE" = TBL_ANNOUNCE_CATEGORY."F_ANNOUNCE_TYPE"
+     AND TBL_ANNOUNCE."F_ANNOUNCE_CATEGORY" = TBL_ANNOUNCE_CATEGORY."F_ANNOUNCE_CAT_ID"
+     INNER JOIN "TBL_ROLE" TBL_ROLE ON TBL_ANNOUNCE."F_SIGN_ROLE" = TBL_ROLE."F_ROLE_ID"
+WHERE
+     f_announce_type = $P{announce_type}
+     and f_announce_cat_id = $P{announce_cat}
+      and F_ANNOUNCE_SYS_STAMP >= $P{date_start}
+     and F_ANNOUNCE_SYS_STAMP <= $P{date_stop}]]></queryString>
+
+	<field name="TBL_ACCOUNT_F_NAME" class="java.lang.String"/>
+	<field name="TBL_ACCOUNT_F_LAST_NAME" class="java.lang.String"/>
+	<field name="TBL_ANNOUNCE_F_TITLE" class="java.lang.String"/>
+	<field name="TBL_ANNOUNCE_F_ANNOUNCE_DATE" class="java.lang.String"/>
+	<field name="TBL_ANNOUNCE_F_ANNOUNCE_ORG_NA" class="java.lang.String"/>
+	<field name="TBL_ANNOUNCE_F_REMARK" class="java.lang.String"/>
+	<field name="TBL_ANNOUNCE_CATEGORY_F_NAME" class="java.lang.String"/>
+	<field name="TBL_ANNOUNCE_F_ANNOUNCE_NO" class="java.math.BigDecimal"/>
+	<field name="TBL_ANNOUNCE_F_ANNOUNCE_SYS_ST" class="java.math.BigDecimal"/>
+	<field name="TBL_ROLE_F_ROLE_NAME" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="43"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="266"
+						y="11"
+						width="240"
+						height="26"
+						key="staticText-69"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="18" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[รายงาน คำสั่ง,ประกาศ,ระเบียบ,อื่นๆ]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="57"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="682"
+						y="0"
+						width="23"
+						height="15"
+						key="staticText-57"/>
+					<box></box>
+					<textElement>
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="12" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[วันที่ :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="682"
+						y="15"
+						width="23"
+						height="14"
+						key="staticText-58"/>
+					<box></box>
+					<textElement>
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="12" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[เวลา :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="683"
+						y="29"
+						width="23"
+						height="15"
+						key="staticText-59"/>
+					<box></box>
+					<textElement>
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="12" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[หน้า :]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="98"
+						y="0"
+						width="585"
+						height="26"
+						key="textField-2"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="14" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ANNOUNCE_CATEGORY_F_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="709"
+						y="30"
+						width="39"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="tahoma.ttf" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="335"
+						y="31"
+						width="72"
+						height="14"
+						key="textField-10"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="tahoma.ttf" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{date_txt_begin}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="439"
+						y="31"
+						width="79"
+						height="14"
+						key="textField-11"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="tahoma.ttf" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{date_txt_end}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="705"
+						y="1"
+						width="75"
+						height="13"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="tahoma.ttf" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{print_date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="706"
+						y="17"
+						width="68"
+						height="12"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font pdfFontName="tahoma.ttf" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{print_time}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="295"
+						y="29"
+						width="40"
+						height="20"
+						key="staticText-67"/>
+					<box></box>
+					<textElement>
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="14" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[จากวันที่]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="407"
+						y="29"
+						width="32"
+						height="20"
+						key="staticText-68"/>
+					<box></box>
+					<textElement>
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="14" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ถึงวันที่]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="25"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="252"
+						y="6"
+						width="31"
+						height="17"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="true" isItalic="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[เรื่อง]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="700"
+						y="6"
+						width="61"
+						height="17"
+						key="staticText-3"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[หมายเหตุ]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="2"
+						width="0"
+						height="19"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="1"
+						width="781"
+						height="0"
+						key="line-5"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="1"
+						y="6"
+						width="46"
+						height="17"
+						key="staticText-44"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[คำสั่งเลขที่]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="53"
+						y="6"
+						width="48"
+						height="17"
+						key="staticText-63"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[วัน/เดือน/ปี]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="24"
+						width="781"
+						height="0"
+						key="line-6"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="429"
+						y="6"
+						width="80"
+						height="16"
+						key="staticText-64"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[หน่วยงานที่ออก]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="536"
+						y="5"
+						width="61"
+						height="17"
+						key="staticText-65"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ลงนาม]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="625"
+						y="4"
+						width="50"
+						height="17"
+						key="staticText-66"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<text><![CDATA[ตำแหน่ง]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="45"  isSplitAllowed="true" >
+				<elementGroup><!--  Start: 1 !-->
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="42"
+						width="781"
+						height="0"
+						key="line-7"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				</elementGroup><!-- End 1 !-->
+				<line direction="TopDown">
+					<reportElement
+						x="0"
+						y="-23"
+						width="0"
+						height="65"
+						key="line-8"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="781"
+						y="-24"
+						width="1"
+						height="66"
+						key="line-9"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="684"
+						y="-23"
+						width="0"
+						height="65"
+						key="line-10"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="47"
+						y="-24"
+						width="1"
+						height="66"
+						key="line-12"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="113"
+						y="-24"
+						width="1"
+						height="66"
+						key="line-13"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="616"
+						y="-23"
+						width="0"
+						height="65"
+						key="line-14"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="519"
+						y="-23"
+						width="0"
+						height="65"
+						key="line-15"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="415"
+						y="-23"
+						width="0"
+						height="65"
+						key="line-16"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="6"
+						width="47"
+						height="19"
+						key="textField-3"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ANNOUNCE_F_ANNOUNCE_NO}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="51"
+						y="7"
+						width="64"
+						height="19"
+						key="textField-4"
+						isPrintWhenDetailOverflows="true"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ANNOUNCE_F_ANNOUNCE_DATE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="118"
+						y="5"
+						width="295"
+						height="26"
+						key="textField-5"
+						isPrintWhenDetailOverflows="true"/>
+					<box></box>
+					<textElement>
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ANNOUNCE_F_TITLE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="418"
+						y="7"
+						width="101"
+						height="18"
+						key="textField-6"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ANNOUNCE_F_ANNOUNCE_ORG_NA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="522"
+						y="8"
+						width="97"
+						height="18"
+						key="textField-7"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ACCOUNT_F_NAME} +" "+ $F{TBL_ACCOUNT_F_LAST_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="620"
+						y="6"
+						width="62"
+						height="19"
+						key="textField-8"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ROLE_F_ROLE_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="688"
+						y="6"
+						width="92"
+						height="19"
+						key="textField-9"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="AngsanaUPC" pdfFontName="tahoma.ttf" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="Identity-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{TBL_ANNOUNCE_F_REMARK}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

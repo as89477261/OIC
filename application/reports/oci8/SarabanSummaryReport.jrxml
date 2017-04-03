@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SarabanSummaryReport" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="recv_t1" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="recv_t2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="recv_t3" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="recv_t4" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="recv_t5" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="send_t1" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="send_t2" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="send_t3" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="send_t4" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="send_t5" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="send_t6" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="org_name" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="date_txt_from" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="date_txt_to" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="print_date" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="print_time" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="send_t7" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ann_label_1" class="java.lang.String"/>
+	<parameter name="ann_label_2" class="java.lang.String"/>
+	<parameter name="ann_label_3" class="java.lang.String"/>
+	<parameter name="ann_label_4" class="java.lang.String"/>
+	<parameter name="ann_label_5" class="java.lang.String"/>
+	<parameter name="ann_label_6" class="java.lang.String"/>
+	<parameter name="ann_label_7" class="java.lang.String"/>
+	<parameter name="ann_label_8" class="java.lang.String"/>
+	<parameter name="ann_label_9" class="java.lang.String"/>
+	<parameter name="ann_label_10" class="java.lang.String"/>
+	<parameter name="ann_label_11" class="java.lang.String"/>
+	<parameter name="ann_label_12" class="java.lang.String"/>
+	<parameter name="ann_label_13" class="java.lang.String"/>
+	<parameter name="ann_label_14" class="java.lang.String"/>
+	<parameter name="ann_label_15" class="java.lang.String"/>
+	<parameter name="ann_label_16" class="java.lang.String"/>
+	<parameter name="ann_label_18" class="java.lang.String"/>
+	<parameter name="ann_label_19" class="java.lang.String"/>
+	<parameter name="ann_1" class="java.lang.String"/>
+	<parameter name="ann_2" class="java.lang.String"/>
+	<parameter name="ann_3" class="java.lang.String"/>
+	<parameter name="ann_4" class="java.lang.String"/>
+	<parameter name="ann_5" class="java.lang.String"/>
+	<parameter name="ann_6" class="java.lang.String"/>
+	<parameter name="ann_7" class="java.lang.String"/>
+	<parameter name="ann_8" class="java.lang.String"/>
+	<parameter name="ann_9" class="java.lang.String"/>
+	<parameter name="ann_10" class="java.lang.String"/>
+	<parameter name="ann_11" class="java.lang.String"/>
+	<parameter name="ann_12" class="java.lang.String"/>
+	<parameter name="ann_13" class="java.lang.String"/>
+	<parameter name="ann_14" class="java.lang.String"/>
+	<parameter name="ann_15" class="java.lang.String"/>
+	<parameter name="ann_16" class="java.lang.String"/>
+	<parameter name="ann_17" class="java.lang.String"/>
+	<parameter name="ann_18" class="java.lang.String"/>
+	<parameter name="ann_19" class="java.lang.String"/>
+	<parameter name="ann_label_17" class="java.lang.String"/>
+	<parameter name="ann_lebel_20" class="java.lang.String"/>
+	<parameter name="ann_20" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-1" x="74" y="0" width="388" height="28"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="14" isBold="true" pdfFontName="TAHOMA.TTF" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[สำนักงานคณะกรรมการกำกับและส่งเสริมการประกอบธุรกิจประกันภัย]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-58" x="455" y="16" width="23" height="14"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[เวลา :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-59" x="456" y="33" width="23" height="15"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[หน้า :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField-1" x="144" y="20" width="206" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{org_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-61" x="145" y="37" width="43" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ตั้งแต่วันที่]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-62" x="255" y="37" width="31" height="20"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ถึงวันที่]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="480" y="32" width="32" height="15"/>
+				<textElement>
+					<font size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[1]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="478" y="15" width="48" height="18"/>
+				<textElement>
+					<font size="10" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{print_time}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="286" y="35" width="100" height="18"/>
+				<textElement>
+					<font size="10" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{date_txt_to}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="189" y="35" width="72" height="18"/>
+				<textElement>
+					<font size="10" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{date_txt_from}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="478" y="0" width="54" height="18"/>
+				<textElement>
+					<font size="10" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{print_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-60" x="134" y="0" width="216" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[รายงานสรุปปริมาณการรับและส่งหนังสือ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-57" x="454" y="1" width="23" height="15"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[วันที่ :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-2" x="68" y="4" width="118" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="false" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ประเภทการรับ-ส่ง]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-3" x="471" y="4" width="61" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[จำนวน]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-1" x="0" y="2" width="1" height="23"/>
+			</line>
+			<line>
+				<reportElement key="line-2" x="468" y="1" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement key="line-5" x="0" y="1" width="535" height="1"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-44" x="7" y="6" width="37" height="17"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลำดับที่]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-2" x="534" y="1" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement key="line-1" x="50" y="2" width="1" height="23"/>
+			</line>
+			<line>
+				<reportElement key="line-6" x="0" y="24" width="535" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="620" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText-5" x="66" y="22" width="327" height="20"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ส่งออกหนังสือภายนอกทะเบียนกลาง (ส่งออก)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-6" x="66" y="42" width="327" height="21"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ส่งออกหนังสือภายในทะเบียนกลาง (ส่งภายใน)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-7" x="66" y="63" width="327" height="20"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลงรับหนังสือภายในทะเบียนรับภายใน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-8" x="66" y="83" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลงรับหนังสือภายนอกทะเบียนรับภายนอก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-9" x="66" y="103" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลงรับหนังสือเวียน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-10" x="66" y="124" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ส่งออกภายในทะเบียนส่งภายใน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-11" x="66" y="145" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ส่งออกภายนอกทะเบียนส่งภายนอก]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-12" x="66" y="165" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ส่งออกหนังสือเวียน]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-13" x="66" y="207" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลงรับหนังสือทะเบียนหนังสือลงรับ (ลับ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-14" x="66" y="186" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ส่งออกหนังสือทะเบียนหนังสือส่งออก (ลับ)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="21" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{send_t3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="2" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{recv_t3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="42" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{send_t4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="63" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{recv_t1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="84" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{recv_t2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="103" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{recv_t4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="124" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{send_t1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="145" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{send_t2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="186" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{send_t5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="207" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{recv_t5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="472" y="165" width="60" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{send_t6}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-45" x="14" y="2" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-46" x="14" y="22" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-47" x="14" y="42" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-48" x="14" y="63" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-49" x="14" y="83" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-50" x="14" y="103" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-51" x="14" y="124" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-52" x="14" y="145" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[8]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-53" x="14" y="165" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[9]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-54" x="14" y="186" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-55" x="14" y="207" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[11]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-55" x="14" y="227" width="22" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[12]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-13" x="66" y="227" width="327" height="19"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[คำสั่ง/ประกาศ/ระเบียบ/อื่นๆ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="247" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_1}==null?' ':$P{ann_1})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="268" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_2}==null?' ':$P{ann_2})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="289" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_3}==null?' ':$P{ann_3})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="310" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_4}==null?' ':$P{ann_4})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="330" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_5}==null?' ':$P{ann_5})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="350" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_6}==null?' ':$P{ann_6})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="370" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_7}==null?' ':$P{ann_7})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="390" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_8}==null?' ':$P{ann_8})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="410" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_9}==null?' ':$P{ann_9})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="430" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_10}==null?' ':$P{ann_10})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="450" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_11}==null?' ':$P{ann_11})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="247" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_1}==null?' ':$P{ann_label_1} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="289" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_3}==null?' ':$P{ann_label_3} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="268" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_2}==null?' ':$P{ann_label_2} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="390" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_8}==null?' ':$P{ann_label_8} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="350" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_6}==null?' ':$P{ann_label_6} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="370" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_7}==null?' ':$P{ann_label_7} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="330" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_5}==null?' ':$P{ann_label_5} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="430" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_10}==null?' ':$P{ann_label_10} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="310" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_4}==null?' ':$P{ann_label_4} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="80" y="410" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_9}==null?' ':$P{ann_label_9} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="450" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_11}==null?' ':$P{ann_label_11} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="490" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_13}==null?' ':$P{ann_label_13} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="490" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_13}==null?' ':$P{ann_13})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="470" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_12}==null?' ':$P{ann_12})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="510" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_14}==null?' ':$P{ann_label_14} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="530" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_15}==null?' ':$P{ann_15})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="470" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_12}==null?' ':$P{ann_label_12} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="510" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_14}==null?' ':$P{ann_14})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="530" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_15}==null?' ':$P{ann_label_15} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="550" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_label_16}==null?' ':$P{ann_label_16} )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="550" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_16}==null?' ':$P{ann_16})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="570" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_17}==null?' ':$P{ann_17})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="570" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $P{ann_label_17}==null ? ' ' : $P{ann_label_17} )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement key="line-8" x="0" y="0" width="1" height="618"/>
+			</line>
+			<line>
+				<reportElement key="line-12" x="51" y="0" width="3" height="618"/>
+			</line>
+			<line>
+				<reportElement key="line-10" x="468" y="0" width="3" height="618"/>
+			</line>
+			<line>
+				<reportElement key="line-9" x="534" y="0" width="1" height="618"/>
+			</line>
+			<staticText>
+				<reportElement key="staticText-4" x="66" y="2" width="327" height="20"/>
+				<textElement>
+					<font fontName="AngsanaUPC" size="10" isBold="true" isItalic="false" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[ลงรับหนังสือภายนอกทะเบียนกลาง (รับเข้า)]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-7" x="1" y="617" width="533" height="1"/>
+			</line>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="473" y="590" width="59" height="21"/>
+				<textElement textAlignment="Center">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($P{ann_18}==null?' ':$P{ann_18})]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="79" y="590" width="382" height="19"/>
+				<textElement textAlignment="Left">
+					<font fontName="AngsanaUPC" size="10" isBold="true" pdfFontName="tahoma.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $P{ann_label_18}==null ? ' ' : $P{ann_label_18} )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="22" splitType="Stretch"/>
+	</lastPageFooter>
+	<summary>
+		<band height="24" splitType="Stretch"/>
+	</summary>
+</jasperReport>

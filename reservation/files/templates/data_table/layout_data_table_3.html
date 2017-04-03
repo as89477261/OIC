@@ -1,0 +1,14 @@
+<div class="block-controls">
+    <div class="controls-buttons">
+
+        <ul class="controls-buttons">
+            <li><a title="My Booking" href="{MainUrl}?fid=booking-ui-all&fn=my_booking"><b>{Booking/MyBooking}</b></a></li>
+            <? BEGIN(CASE,policy/f_rc_admin) ?><? CASE(1) ?><li><a title="Booking List" href="{MainUrl}?fid=booking-ui-all&fn=booking_list_all"><b>{Booking/BookingList}</b></a></li><? END(CASE) ?>
+            <li><a title="Add Booking" href="javascript:void(0)" onclick="openForm('{MainUrl}?fid=booking-add', 'Add Booking', 'bookingId')"><b><img src="images/icons/car--plus.png" /> {Booking/AddBooking}</b></a></li>
+        </ul>
+
+    </div>
+</div>
+<div class="no-margin">
+	{PageContent,SRC}
+</div>

@@ -1,0 +1,70 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#doc_date_from").datepick(datepickDefaults);
+		$("#altGoDateFormat").val('{date}');
+		//var today  = '{date}';
+		//var dates = today.split("-");
+		//dates[2] = parseInt(dates[2])+543;
+		//$("#doc_date_from").val(dates[0]+"-"+dates[1]+"-"+dates[2]);
+		//var today = convertThaiDateDMY('{date}');
+		//$("#doc_date_from").val(today);
+	});
+</script>
+
+<h1>{Booking/TableTime}</h1>
+<div class="grey-bg no-margin" >
+	<div>&nbsp;</div>
+	<div class="no-margin" >
+		<label for="doc_date_from" class="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Form/Date}</label>
+			<input type="text" value="{date}" id="doc_date_from" name="date" class="datepicker" style="position: relative;" />
+		<button class="grey" type="button" onclick="onSubmit()">{Form/Search}</button>
+		<input type="hidden" id="altGoDateFormat" name="altGoDateFormat" />
+	</div>
+	<div>&nbsp;</div>
+</div>
+<ul class="planning no-margin">
+    <li class="planning-header">
+        <span><b>{Car/CarLicense}</b></span>
+        <ul>
+            <li class="at-0"></li>
+            <li class="at-1">1</li>
+            <li class="at-2">2</li>
+            <li class="at-3">3</li>
+            <li class="at-4">4</li>
+            <li class="at-5">5</li>
+            <li class="at-6">6</li>
+            <li class="at-7">7</li>
+            <li class="at-8">8</li>
+            <li class="at-9">9</li>
+            <li class="at-10">10</li>
+            <li class="at-11">11</li>
+            <li class="at-12">12</li>
+            <li class="at-13">13</li>
+            <li class="at-14">14</li>
+            <li class="at-15">15</li>
+            <li class="at-16">16</li>
+            <li class="at-17">17</li>
+            <li class="at-18">	18</li>
+            <li class="at-19">19</li>
+            <li class="at-20">20</li>
+            <li class="at-21">21</li>
+            <li class="at-22">22</li>
+            <li class="at-23">23</li>
+            <li class="at-24"></li>
+        </ul>
+    </li>
+    <? BEGIN(FOREACH,car_rows) ?>
+    <li>
+        <a href="#">{car_license}</a>
+        <ul>
+            <? BEGIN(FOREACH,time_rows) ?>
+            <li class="event-blue from-{start} to-{stop}">
+                <a class="with-tip" title="{start}.{min_start} {Common/To} {stop}.{min_stop}" href="#">{start}.{min_start} - {stop}.{min_stop}</a>
+            </li>
+            <? END(FOREACH) ?>
+        </ul>
+    </li>
+    <? END(FOREACH) ?>
+</ul>
+
+

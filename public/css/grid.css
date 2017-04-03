@@ -1,0 +1,90 @@
+table {
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+}
+td.colheader1 {
+	color: #0000CC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+
+}
+td.colimgheader1 {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #CCCCCC;
+
+}
+.fieldset {
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+}
+input {
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+	border: 1px solid #7F9DB9;
+}
+input.noborder {
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+	border: 0px solid #7F9DB9;
+}
+select {
+	font-family: Tahoma, Arial, "Microsoft Sans Serif";
+	font-size: 11px;
+	font-style: normal;
+	text-decoration: none;
+	border: 1px solid #666666;
+
+}
+input.button {
+	background-color: #EEEEEE;
+	clear: none;
+	float: none;
+	width: 10em;
+
+
+}
+iframe {
+	border: 1px solid #7F9DB9;
+	margin: 0px;
+	padding: 0px;
+
+}
+td.gridheader {
+	background-image: url(img/header.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+	height: 20px;
+}
+td.gridfooter {
+	background-image: url(img/bottom.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+	height: 20px;
+}
+td.overgridheader {
+	background-image: url(img/overheader.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+	height: 20px;
+}
+td.griddata {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #CCCCCC;
+	border-bottom-color: #CCCCCC;
+}
+.btn {
+	border: 1px solid;
+}

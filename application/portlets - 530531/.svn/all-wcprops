@@ -1,0 +1,329 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/ECM/!svn/ver/405/Branch/Revolution/application/portlets
+END
+AwaitingDocument.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/AwaitingDocument.Portlet.php
+END
+Application.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/Application.Portlet.php
+END
+ReceivedItemOld.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ReceivedItemOld.Portlet.php
+END
+UnreceiveItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/ECM/!svn/ver/405/Branch/Revolution/application/portlets/UnreceiveItem.Portlet.php
+END
+WorkflowUserList.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/WorkflowUserList.Portlet.php
+END
+WorkflowAbortbox.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/WorkflowAbortbox.Portlet.php
+END
+ExecutiveReport.Portet.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ExecutiveReport.Portet.php
+END
+ExtraCommand.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ExtraCommand.Portlet.php
+END
+DMS.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/DMS.Portlet.php
+END
+ReceivedInternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ReceivedInternal.Portlet.php
+END
+AdminReport.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/AdminReport.Portlet.php
+END
+ClassifiedInbound.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ClassifiedInbound.Portlet.php
+END
+DmsControlCenter.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/DmsControlCenter.Portlet.php
+END
+ClassifiedOutbound.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ClassifiedOutbound.Portlet.php
+END
+CircBookInternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/CircBookInternal.Portlet.php
+END
+OrderAssigned.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/ECM/!svn/ver/403/Branch/Revolution/application/portlets/OrderAssigned.Portlet.php
+END
+ReceivedExternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ReceivedExternal.Portlet.php
+END
+SendCirc.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SendCirc.Portlet.php
+END
+ISO.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/ISO.Portlet.php
+END
+CompletedItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/CompletedItem.Portlet.php
+END
+WorkflowCommitbox.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/WorkflowCommitbox.Portlet.php
+END
+CircBookExternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/CircBookExternal.Portlet.php
+END
+OICApplication.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/OICApplication.Portlet.php
+END
+SarabanReport.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SarabanReport.Portlet.php
+END
+WorkflowDraftbox.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/WorkflowDraftbox.Portlet.php
+END
+CommittedItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/CommittedItem.Portlet.php
+END
+ReceivedItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ReceivedItem.Portlet.php
+END
+GlobalReceiveExternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/GlobalReceiveExternal.Portlet.php
+END
+GlobalSendInternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/GlobalSendInternal.Portlet.php
+END
+WorkflowOld.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/WorkflowOld.Portlet.php
+END
+OutgoingItemOld.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/OutgoingItemOld.Portlet.php
+END
+OutgoingItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/OutgoingItem.Portlet.php
+END
+Borrow.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/Borrow.Portlet.php
+END
+WorkflowInbox.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/WorkflowInbox.Portlet.php
+END
+Order.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/Order.Portlet.php
+END
+CallbackItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/CallbackItem.Portlet.php
+END
+ClassifiedRegister.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ClassifiedRegister.Portlet.php
+END
+WorkflowOutbox.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/ECM/!svn/ver/395/Branch/Revolution/application/portlets/WorkflowOutbox.Portlet.php
+END
+GlobalSendExternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/ECM/!svn/ver/404/Branch/Revolution/application/portlets/GlobalSendExternal.Portlet.php
+END
+Working.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/Working.Portlet.php
+END
+OrderReceived.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/OrderReceived.Portlet.php
+END
+CirculumDocument.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/CirculumDocument.Portlet.php
+END
+ForwardItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ForwardItem.Portlet.php
+END
+TrackItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/TrackItem.Portlet.php
+END
+SendInternalOld.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SendInternalOld.Portlet.php
+END
+SendInternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SendInternal.Portlet.php
+END
+ReceivedCirc.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ReceivedCirc.Portlet.php
+END
+ReceivedExternalOld.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/ReceivedExternalOld.Portlet.php
+END
+SearchLoanRequest.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SearchLoanRequest.Portlet.php
+END
+SendbackItem.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SendbackItem.Portlet.php
+END
+SendExternalOld.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SendExternalOld.Portlet.php
+END
+SendExternal.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SendExternal.Portlet.php
+END
+DocumentOperation.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/ECM/!svn/ver/404/Branch/Revolution/application/portlets/DocumentOperation.Portlet.php
+END
+SearchGlobalRegBook.Portlet.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/ECM/!svn/ver/396/Branch/Revolution/application/portlets/SearchGlobalRegBook.Portlet.php
+END

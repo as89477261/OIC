@@ -1,0 +1,611 @@
+
+// Validation Rule is a structure of [name, message_name, type, required, range] represented by an array.
+// name: a string represents the control name
+// message_name: a string represents the field name (user friendly name) to be shown in alert()
+// type: enum(STRING, VAL_STRING, INTEGER, FLOAT, NUM_STRING, EMAIL, DATE)
+//       for type DATE, the control name maybe the prefix of 3 controls '-Day', '-Month', '-Year' which each contains an integer value
+//       (if '-Day' is not exist, 'end of the month' is assumed.
+//       or the full name of control which contains STRING value in format 'yyyy-mm-dd'
+//       (all number except 'dd' may be 'end' to get assumed 'end of the month')
+// required: YES, NO or array of [IF, string to eval() to true or false to determine whether this field is required]
+// range: array of [enum(IN, COMPARE), array of set of values for IN or of array of comparison rules for COMPARE]
+// (range can be null if no need to check.)
+// comparison rule: array of [comparison operator, comparison value]
+// comparison operator: enum(LT, LTE, EQ, GTE, GT)
+// comparison value can be any valid javascript type and match the value type
+// for STRING, NUM_STRING, and EMAIL, the value to compare is its length
+// therefore all value to compare must be a number (integer or float)
+// except for DATE, the value can be a date string in format 'yyyy-mm-dd' (formatted as above)
+// or a prefix of 3 controls which each contains an integer value
+// (also if '-Day' is not exist, 'end of the month' is assumed.
+// and only for DATE, the comparison rule may contain 'date offset' as the third element
+// if the comparison value is a prefix of 3 date-controls.
+// not implemented - if comparison value is string, it will be eval()'d before comparing
+
+NAME = 0;
+MSG_NAME=1;
+TYPE = 2;
+REQUIRED = 3;
+RANGE = 4;
+
+STRING = 'string';
+VAL_STRING = 'value_string';
+INTEGER = 'integer';
+FLOAT = 'number';
+NUM_STRING = 'numeric_string';
+EMAIL = 'email';
+DATE = 'date';
+ID = 'id';
+
+SUFFIX_DAY = 'Day';
+SUFFIX_MONTH = 'Month';
+SUFFIX_YEAR = 'Year';
+DATE_DELIMITER = '-';
+END_OF_MONTH = 'end';
+
+YES = '101';
+NO = '102';
+IF = '103';
+SOME = '104';
+
+IN = '201';
+NOT_IN = '202';
+COMPARE = '203';
+
+LT = '301';
+LTE = '302';
+EQ = '303';
+NEQ = '304';
+GTE = '305';
+GT = '306';
+
+ERROR_TYPE_DESIGN = 0;
+ERROR_TYPE_VALIDATE = 1;
+//ERR_TYPE_INTERNAL = 2;
+
+// include error message translation // *** edit to not depend on prototype.js
+/*
+$A(document.getElementsByTagName("script")).findAll( function(s) {
+	return (s.src && s.src.match(/validator\.js(\?.*)?$/))
+	}).each( function(s) {
+		var path = s.src.replace(/validator\.js(\?.*)?$/,'');
+		var lang = s.src.match(/\?.*lang=([a-z,]*)/);
+	    if (lang && (lang[1] != 'en'))
+			document.write('<script type="text/javascript" src="'+path+'validator-'+lang[1]+'.js'+'"><\/script>');
+    });
+*/
+// use jQuery
+v = $('script[src*=validator.js]').attr('src');
+vpath = v.replace(/validator\.js(\?.*)?$/,'');
+vlang = v.match(/\?.*lang=([a-z,]*)/);
+if (vlang && (vlang[1] != 'en'))
+	document.write('<script type="text/javascript" src="'+vpath+'validator-'+vlang[1]+'.js'+'"><\/script>');
+
+// after this line, errorPrefix array would be defined
+if ((typeof(errorPrefix) != 'object') || (typeof(errorPrefix.length) == 'undefined') || (errorPrefix.length < 2))		// if no error message is defined, define them in English.
+{
+	errorLang = 'default';
+	errorPrefix = ['Design Error: ', 'Error: '];
+	errorSuffix = [' (Please inform system admin)', ''];
+	ERRMSG_ISREQUIRED_PREFIX = '';
+	ERRMSG_ISREQUIRED_SUFFIX = ' is required.';
+	ERRMSG_PLEASESPECIFY_PREFIX = 'Please specifies ';
+	ERRMSG_PLEASESPECIFY_SUFFIX = '.';
+	ERRMSG_ISINVALID_PREFIX = '';
+	ERRMSG_ISINVALID_MIDDLE = 'is not a ';
+	ERRMSG_ISINVALID_SUFFIX = '.';
+	ERRMSG_ISINVALID_TYPE = new Array();
+	ERRMSG_ISINVALID_TYPE[STRING] = 'string';				// never been used
+	ERRMSG_ISINVALID_TYPE[VAL_STRING] = 'string';				// never been used
+	ERRMSG_ISINVALID_TYPE[NUM_STRING] = 'string';				// never been used
+	ERRMSG_ISINVALID_TYPE[INTEGER] = 'integer';
+	ERRMSG_ISINVALID_TYPE[FLOAT] = 'number';
+	ERRMSG_ISINVALID_TYPE[EMAIL] = 'e-mail';
+	ERRMSG_ISINVALID_TYPE[DATE] = 'date';
+	ERRMSG_ISINVALID_TYPE[ID] = 'identification code';
+	ERRMSG_ISINCORRECT_PREFIX = '';
+	ERRMSG_ISINCORRECT_MIDDLE = ' is incorrect. Please enter ';
+	ERRMSG_ISINCORRECT_SUFFIX = ' again.';
+}
+
+//ERR_TOO_LONG = 'is too long.';
+//ERR_TOO_SHORT = 'is too short.';
+
+idRegExp = /(^[a-zA-Z0-9_\-\.]+$)/;
+intRegExp = /(^[+-]?\d+$)/;
+floatRegExp = /(^[+-]?\d+\.\d+$)/;
+// emailRegExp1 = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+emailRegExp = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+dateRegExp = /(^\d{4}\-\d{1,2}\-\d{1,2}$)/;                                     // format 'yyyy-mm-dd'
+fullmonthRegExp = new RegExp('(^\\d{4}\\-\\d{1,2}\\-' + END_OF_MONTH + '$)');   // format 'yyyy-mm-end'
+
+debug_php = false;
+quiet = false;
+
+function alertError(type, message)
+{
+    if (!quiet)
+        alert(errorPrefix[type] + message);
+}
+
+function isValidDate(day, month, year)
+{
+    if ((month < 1) || (month > 12)) {
+//        alertError(ERROR_TYPE_VALIDATE, "invalid month value '" + month + "'.");
+        return false;
+    }
+    return (day <= endOfMonth(month, year)) || ((year > 543) && (day <= endOfMonth(month, year - 543)));	// roughly support buddhist year too
+}
+
+function isDateUnder(d, m, y, dToCheck, mToCheck, yToCheck)
+{
+    if ((y < yToCheck) || ((y == yToCheck) && (m < mToCheck)) ||
+        ((y == yToCheck) && (m == mToCheck) && (d < dToCheck))) {
+        return true;
+    }
+    return false;
+}
+
+function isDateOver(d, m, y, dToCheck, mToCheck, yToCheck)
+{
+    if ((y > yToCheck) || ((y == yToCheck) && (m > mToCheck)) ||
+        ((y == yToCheck) && (m == mToCheck) && (d > dToCheck))) {
+        return true;
+    }
+    return false;
+}
+
+function isSameDate(d, m, y, dToCheck, mToCheck, yToCheck)
+{
+    if ((y == yToCheck) && (m == mToCheck) && (d == dToCheck)) {
+        return true;
+    }
+    return false;
+}
+
+function isValidEmail(email)
+{
+    return emailRegExp.test(email);
+}
+
+function isValidType(val, vtype)
+{
+    if ((vtype == STRING) || (vtype == VAL_STRING))
+        return true;    // always true;
+    else if (vtype == INTEGER)
+        return intRegExp.test(val);
+    else if (vtype == FLOAT)
+        return (intRegExp.test(val) || floatRegExp.test(val));
+    else if (vtype == NUM_STRING)
+        return intRegExp.test(val);
+    else if (vtype == EMAIL)
+        return emailRegExp.test(val);
+    else if (vtype == ID)
+        return idRegExp.test(val);
+    else if (vtype == DATE)
+        return isValidDate(val[2], val[1], val[0]);
+    else
+        alertError(ERROR_TYPE_DESIGN, "unknow type '" + vtype + "' to validate.");
+    return false;
+}
+
+function getValueToCompare(val, vtype)
+{
+    if (vtype == STRING)
+        return val.length;
+    else if (vtype == VAL_STRING)
+        return val;
+    else if (vtype == INTEGER)
+        return parseInt(val, 10);
+    else if (vtype == FLOAT)
+        return parseFloat(val);
+    else if (vtype == NUM_STRING)
+        return val.length;
+    else if (vtype == EMAIL)
+        return val.length;
+    else if (vtype == ID)
+        return val.length;
+    else if (vtype == DATE)
+        return val;
+    else
+        alertError(ERROR_TYPE_DESIGN, "unknow type '" + vtype + "' to get value for comparison.");
+    return false;
+}
+
+function getDateStringValue(str_date)
+{
+    arr_date = false;
+    if (dateRegExp.test(str_date)) {
+        arr_date = str_date.split(DATE_DELIMITER, 3);
+        arr_date[2] = parseInt(arr_date[2], 10); arr_date[1] = parseInt(arr_date[1], 10); arr_date[0] = parseInt(arr_date[0], 10);
+    } else if (fullmonthRegExp.test(str_date)) {
+        arr_date = str_date.split(DATE_DELIMITER, 3);
+        arr_date[1] = parseInt(arr_date[1], 10); arr_date[0] = parseInt(arr_date[0], 10);
+        arr_date[2] = endOfMonth(arr_date[1], arr_date[0]);
+    }
+    return arr_date;
+}
+
+function getDateSelectValue(aform, vname)
+{
+    if (typeof(aform.elements[vname]) == 'object')
+        return false;
+    if (vname.indexOf('_') != -1) {
+        name_suffix = vname.substring(vname.indexOf('_'));
+        vname = vname.substring(0, vname.indexOf('_'));
+    } else if (vname.charAt(vname.length - 1) == ']') {
+        vname = vname.substring(0, vname.length - 1);
+        name_suffix = ']';
+    } else
+        name_suffix = '';
+
+    dayObj = aform.elements[vname + SUFFIX_DAY + name_suffix]
+    if ((typeof(dayObj) != 'object') || (dayObj == null))
+        day = END_OF_MONTH;
+    else
+    	day = getValue(aform, vname + SUFFIX_DAY + name_suffix, STRING);
+
+    month = getValue(aform, vname + SUFFIX_MONTH + name_suffix, STRING);
+    year = getValue(aform, vname + SUFFIX_YEAR + name_suffix, STRING);
+    if ((month === false) || (year === false))
+        return false;
+    else if ((month === '') && (year === ''))
+        return '';
+    else {
+        month = parseInt(month, 10); year = parseInt(year, 10);
+        if ((day == false) || (day == END_OF_MONTH))
+            day = endOfMonth(month, year);
+        else
+            day = parseInt(day, 10);
+        return [year, month, day];
+    }
+}
+
+function isMatchDateRange(rval, comp_rules, aform)
+{
+    for (var i = 0; i < comp_rules.length; i++) {
+        cmp_op = comp_rules[i][0];
+        cmp_val = comp_rules[i][1];
+        if ((rval.length != 3) || (!isValidDate(rval[2], rval[1], rval[0]))){
+            alertError(ERROR_TYPE_DESIGN, "invalid input date value to compare '" + rval + "'.");
+            return false;
+        }
+
+        test_date = getDateStringValue(cmp_val);
+        if (test_date == false)
+        {
+            test_date = isControlExistent(aform, cmp_val);
+            if (test_date == false)
+                test_date = getDateStringFromSelect(aform, cmp_val);
+            else
+                test_date = getValue(aform, cmp_val, STRING);
+            if ((test_date == false) || (test_date == ''))
+                continue;
+
+            if (comp_rules[i].length > 2)
+//               cmp_val = relativeDate(getDateStringFromSelect(aform, cmp_val), comp_rules[i][2]);
+                cmp_val = relativeDate(test_date, comp_rules[i][2]);
+            else
+                cmp_val = test_date;
+        }
+
+        date_cmp_val = getDateStringValue(cmp_val);
+        if (date_cmp_val == false)
+            date_cmp_val = getDateSelectValue(aform, cmp_val);
+        if (!date_cmp_val || (date_cmp_val.length != 3)) {
+            alertError(ERROR_TYPE_DESIGN, "invalid date value to compare '" + cmp_val + "'.");
+            return false;
+        }
+        if (cmp_op == LT) {
+            if (!isDateUnder(rval[2], rval[1], rval[0], date_cmp_val[2], date_cmp_val[1], date_cmp_val[0]))
+                return false;
+        } else if (cmp_op == LTE) {
+            if (isDateOver(rval[2], rval[1], rval[0], date_cmp_val[2], date_cmp_val[1], date_cmp_val[0]))
+                return false;
+        } else if (cmp_op == EQ) {
+            if (!isSameDate(rval[2], rval[1], rval[0], date_cmp_val[2], date_cmp_val[1], date_cmp_val[0]))
+                return false;
+        } else if (cmp_op == NEQ) {
+            if (isSameDate(rval[2], rval[1], rval[0], date_cmp_val[2], date_cmp_val[1], date_cmp_val[0]))
+                return false;
+        } else if (cmp_op == GTE) {
+            if (isDateUnder(rval[2], rval[1], rval[0], date_cmp_val[2], date_cmp_val[1], date_cmp_val[0]))
+                return false;
+        } else if (cmp_op == GT) {
+            if (!isDateOver(rval[2], rval[1], rval[0], date_cmp_val[2], date_cmp_val[1], date_cmp_val[0]))
+                return false;
+        } else {
+            alertError(ERROR_TYPE_DESIGN, "unknow comparison operator '" + comp_op + "'.");
+            return false;
+        }
+    }
+    return true;
+}
+
+function isMatchRange(rval, comp_rules, aform, vtype)
+{
+    for (var i = 0; i < comp_rules.length; i++) {
+        cmp_op = comp_rules[i][0];
+        cmp_val = comp_rules[i][1];
+        if (typeof(cmp_val) == 'string') {
+            obj = aform.elements[cmp_val];
+            if ((typeof(obj) == 'object') && (obj != null))
+                cmp_val = getValue(aform, cmp_val, vtype);
+        }
+        else if (typeof(cmp_val) == 'function')
+        	cmp_val = cmp_val();
+        if (cmp_op == LT) {
+            if (rval >= cmp_val) return false;
+        } else if (cmp_op == LTE) {
+            if (rval > cmp_val) return false;
+        } else if (cmp_op == EQ) {
+            if (rval != cmp_val) return false;
+        } else if (cmp_op == NEQ) {
+            if (rval == cmp_val) return false;
+        } else if (cmp_op == GTE) {
+            if (rval < cmp_val) return false;
+        } else if (cmp_op == GT) {
+            if (rval <= cmp_val) return false;
+        } else {
+            alertError(ERROR_TYPE_DESIGN, "unknow comparison operator '" + cmp_op + "'.");
+            return false;
+        }
+    }
+    return true;
+}
+
+function isInRange(val, vtype, vrange, aform)
+{
+    rtype = vrange[0];
+    range = vrange[1];
+    if (rtype == NOT_IN) {
+        rval = val;
+        for (var i = 0; i < range.length; i++)
+            // convert range set to comparison rules set
+            range[i] = [cmp_op, range[i]];
+        rtype = COMPARE;
+        if (vtype == STRING)
+            vtype = VAL_STRING;
+    }
+
+    if (rtype == COMPARE) {
+        rval = getValueToCompare(val, vtype);
+        if (vtype == DATE)
+            if (isMatchDateRange(rval, range, aform))
+                return true;
+            else
+                return false;
+        else if (isMatchRange(rval, range, aform, vtype))
+            return true;
+    } else if (rtype == IN) {
+        for (var i = 0; i < range.length; i++) {
+            if (vtype == DATE) {
+                if (isMatchDateRange(val, [ [EQ, range[i]] ], aform))
+                    return true;
+            } else if (val == range[i]) {
+                return true;
+            }
+        }
+    } else
+        alertError(ERROR_TYPE_DESIGN, "unknow range type '" + rtype + "'.");
+    return false;
+}
+
+function getValue(aform, vname, vtype)
+{
+    val = null;
+    if (typeof(vname) != 'object')
+	    obj = aform.elements[vname];
+    else if ((vname.length == 0) || (typeof(vname.length) == 'undefined'))			// for array of input that might be required some or not required, will pass thru this function when require no. (on 18/04/2010)
+    	return false;
+	else
+	{
+		obj = new Array(vname.length);
+        for (var a = 0; a < vname.length; a++)
+		    obj[a] = aform.elements[vname[a]];
+	}
+
+    if ((typeof(obj) != 'object') || (obj == null)) {
+//    if ((typeof(obj) == 'undefined') || (obj == null)) {
+//    if ((obj == undefined) || (obj == null)) {
+        if (vtype == DATE)
+            val = getDateSelectValue(aform, vname);
+        if ((vtype != DATE) || (val === false)) {
+            alertError(ERROR_TYPE_DESIGN, "required input control '" + vname + "' (" + vtype + ").");
+            return false;
+        } else
+            return val;
+    }
+
+    if (typeof(obj.type) == 'undefined')
+        if (obj.length > 0)
+            objtype = obj[0].type;
+        else
+            objtype = 'unknown';
+    else
+        if (obj.type == 'radio')
+            objtype = 'checkbox';
+        else
+            objtype = obj.type;
+
+    if (objtype == 'select-one') {
+        if (obj.selectedIndex > -1)
+            val = obj.options[obj.selectedIndex].value;
+    } else if (objtype == 'radio') {
+        for (var j = 0; j < obj.length; j++) {
+            if (obj[j].checked)
+                val = obj[j].value;
+        }
+    } else if (objtype == 'checkbox') {
+        if (obj.length > 0)
+        {
+            for (var j = 0; j < obj.length; j++)
+                if (obj[j].checked)
+                    val = ((((val == null) || (val == '')) ? '' : val + ',') + obj[j].value);
+        } else
+            if (obj.checked)
+                val = obj.value;
+    } else
+        val = obj.value;
+
+    if (vtype == DATE)
+    {
+	    arr_date = getDateStringValue(val);
+        return (arr_date ? arr_date : val);
+    }
+    else
+        return val;
+}
+
+function verifyRequireSome(aform, vrule)
+{
+    arule = vrule.concat();         // clone vrule to arule, otherwise, arule is refered rather
+    name_list = arule[0];
+    arule[REQUIRED] = YES;
+    result = false;
+    prev_quiet = quiet;
+    quiet = true;
+    for (var j = 0; j < name_list.length; j++) {
+        arule[0] = name_list[j];
+        rules = [arule];
+        result = (result || validate(aform, rules));
+    }
+    quiet = prev_quiet;
+    return result;
+}
+
+function validate(aform, vrules)
+{
+    if (aform.action == null) {
+        alertError(ERROR_TYPE_DESIGN, 'there is a problem about form.');
+        return false;
+    }
+    for (var i = 0; i < vrules.length; i++) {
+        if ((typeof(vrules[i]) != 'object') || (vrules[i] == null))
+            continue;
+        vrequired = vrules[i][REQUIRED];
+        msg_name = vrules[i][MSG_NAME];
+        vname = vrules[i][NAME];
+
+        if (typeof(vrequired) == 'string')
+            vreq_flag = vrequired;
+        else
+            vreq_flag = vrequired[0];
+        // Note that SOME_IF is not implemented yet
+        if (vreq_flag == SOME) {
+            if (verifyRequireSome(aform, vrules[i]))
+                continue;
+            else
+            {
+                alertError(ERROR_TYPE_VALIDATE, ERRMSG_PLEASESPECIFY_PREFIX + msg_name + ERRMSG_PLEASESPECIFY_SUFFIX);
+                focusInput(aform, vname);
+                return false;
+            }
+        }
+        vtype = vrules[i][TYPE];
+        val = getValue(aform, vrules[i][NAME], vtype);
+// alert(vrules[i][NAME] + " = " + val);
+        if ((val == '') || (val == null)) {
+            if (vreq_flag == YES) {
+                alertError(ERROR_TYPE_VALIDATE, ERRMSG_ISREQUIRED_PREFIX + msg_name + ERRMSG_ISREQUIRED_SUFFIX);
+                focusInput(aform, vname);
+                return false;
+            } else if (vreq_flag == NO) {
+                // go on next value.
+                continue;
+            } else if (vreq_flag == IF) {
+                if ((vrequired.length < 2) || (vrequired[1] == null)) {
+                    alertError(ERROR_TYPE_DESIGN, "requisition type '" + vreq_flag + "' of '" + msg_name + "' without conditions.");
+                    return false;
+                }
+                if (eval(vrequired[1])) {
+                    // only eval() is not a complete implementation of this type of requisition, need more improvement
+                    alertError(ERROR_TYPE_VALIDATE, ERRMSG_ISREQUIRED_PREFIX + msg_name +  ERRMSG_ISREQUIRED_SUFFIX);
+                	focusInput(aform, vname);
+                    return false;
+                } else
+                    continue;
+            } else {
+                alertError(ERROR_TYPE_DESIGN, "unknown requisition type '" + vreq_flag + "'.");
+                return false;
+            }
+        }
+        if (!isValidType(val, vtype)) {
+            alertError(ERROR_TYPE_VALIDATE, ERRMSG_ISINVALID_PREFIX + msg_name +  ERRMSG_ISINVALID_MIDDLE + ERRMSG_ISINVALID_TYPE[vtype] + ERRMSG_ISINVALID_SUFFIX);
+            focusInput(aform, vname, vtype);
+            return false;
+        } else {
+            vrange = vrules[i][RANGE];
+            if ((vrange != null) && (vrange.length > 0) && (!isInRange(val, vtype, vrange, aform))) {
+                alertError(ERROR_TYPE_VALIDATE, ERRMSG_ISINCORRECT_PREFIX + msg_name + ERRMSG_ISINCORRECT_MIDDLE + msg_name + ERRMSG_ISINCORRECT_SUFFIX );
+                focusInput(aform, vname);
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function focusInput(aform, vname, vtype)
+{
+	if (typeof(aform.elements[vname]) != 'undefined')
+	{
+		if (typeof(aform.elements[vname].focus) != 'undefined')
+			aform.elements[vname].focus();
+		else if (typeof(aform.elements[vname].length) != 'undefined')			// support for focusing checkbox or radio. (on 19/04/2010)
+			aform.elements[vname][0].focus();
+	}
+	else if (vtype == DATE)
+	{
+	    if (vname.indexOf('_') != -1) {
+	        name_suffix = vname.substring(vname.indexOf('_'));
+	        vname = vname.substring(0, vname.indexOf('_'));
+	    } else if (vname.charAt(vname.length - 1) == ']') {
+	        vname = vname.substring(0, vname.length - 1);
+	        name_suffix = ']';
+        }
+        aform.elements[vname + SUFFIX_DAY + name_suffix].focus();
+	}
+}
+
+function validateForm(aform, vrules)
+{
+    passed = validate(aform, vrules);
+    if (debug_php && !passed)
+        return confirm('There are incorrect data!!! Still want to submit this form?');
+    else
+        return passed;
+}
+
+function isValidCardNumber(cardnum, cardtype)
+{
+    if (cardtype == 'VISA')
+        regexp = /^4\d{15}$|^4\d{12}$/;
+    else if (cardtype == 'MASTERCARD')
+        regexp = /^5[1-5]\d{14}$/;
+    else if (cardtype == 'AMEX')
+        regexp = /^3[47]\d{13}$/;
+    else
+        return false;
+    return regexp.test(cardnum);
+}
+
+function isValidCardNumberMod10(cardnum)
+{
+    checksum = 0;
+    len = cardnum.length;
+    for (var i = 1; i <= cardnum.length; i++)
+    {
+        digit = parseInt(cardnum.charAt(len - i), 10);
+        if ((i % 2) == 0)
+        {
+            asum = digit * 2;
+            if (asum > 9)
+                asum -= 9;
+            checksum += asum;
+        }
+        else
+            checksum += digit;
+    }
+    return ((checksum % 10) == 0);
+}

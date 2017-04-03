@@ -1,0 +1,89 @@
+<?php
+global $config;
+global $policy;
+if($this->mode == 'self'){
+	$this->title = 'รายการจองห้อง';
+	$link = 'booking-list';
+}else{
+	$this->title = 'รายการจองห้องทั้งหมด';
+	$link = 'booking-all';
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title><?=$this->title?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=tis-620" />
+		<style type="text/css">
+			.table td, .table th{
+				border:1px solid gray;
+				cell-padding : 3px;
+			}
+		</style>
+    </head>
+
+    <body>
+	
+	<?php
+	echo 'วันที่ จาก '. $this->date_from;
+	echo ' ถึง '. $this->date_to;
+	?>
+	<div class="no-margin">
+		<table class="table" cellspacing="0" width="100%" style="border:1px solid">
+
+			<thead>
+				<tr>
+					<th scope="col" nowrap>ว.ด.ป.</th>
+					<th scope="col" nowrap>ระหว่างเวลา</th>
+					<th scope="col">ประชุมเรื่อง</th>
+					<th scope="col">จำนวน</th>
+					<th scope="col">ห้อง</th>
+					<th scope="col">ประธาน</th>
+					<th scope="col">สำนัก/ฝ่าย</th>
+					<th scope="col">ขออาหาร/เบรค</th>
+					<th scope="col">เบอร์โทรติดต่อ</th>
+					<th scope="col">ผู้ขอ</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<?php
+				foreach ($this->transactions as $transaction)
+				{
+					?>
+					<tr>
+						<td nowrap><?php echo Room::dateFormat($transaction['F_DATE_BOOK']); ?></td>
+						<td nowrap><?php echo substr($transaction['F_TIMESTART'], 0, 2) . ':' . substr($transaction['F_TIMESTART'], 2, 2) . ' - ' . substr($transaction['F_TIMEEND'], 0, 2) . ':' . substr($transaction['F_TIMEEND'], 2, 2); ?></td>
+						<td><?php echo $transaction['F_SUBJECT']; ?></td>
+						<td><?php echo $transaction['F_QUANTITY_IN']; ?> (<?php echo $transaction['F_QUANTITY_OUT']; ?>)</td>
+						<td><?php echo str_replace('ห้องประชุม', '', str_replace('OIC', '', $transaction['F_ROOMNAME'])); ?></td>
+						<td><?php echo $transaction['F_CHAIRMAN']; ?></td>
+						<td><?php 
+						$roomTransaction = new RoomTransaction();
+						$account = $roomTransaction->getAccountRole($transaction['F_USERID']);
+						//print_r($account);
+						echo $account['DE_SECTION_NAME'].'<br>'. $account['BC_DEPT_NAME']; 
+						
+						?></td>
+						<td nowrap>
+							<?php
+							$foods = Room::getTransFood($transaction['F_TRANSACTION_ROWID']);
+							foreach ($foods as $food)
+							{
+								echo $food['F_FOODNAME'] . '<br>';
+							}
+							?>
+						</td>
+						<td><?php echo $transaction['F_TEL_NO']; ?></td>
+						<td><?php echo $transaction['F_NAME']; ?></td>
+					</tr>
+					<?php
+				}
+				?>
+			</tbody>
+
+		</table>
+	</div>
+    </body>
+</html>

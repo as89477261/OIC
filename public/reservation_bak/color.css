@@ -1,0 +1,54 @@
+body {
+    background: white; /* #48A6E0; */
+    color: #000000;
+}
+
+input, select, option, textarea { color: #666; }
+
+a, a:link, a:active, a:visited, a:hover { color: #1E49D6; }
+
+#page_header { color: white; }
+#top_banner { background: white; border-bottom: 3px solid #869EEE; }
+#work_area { background: white; }
+#left_pane { background: #E3E9FB; border-right: 1px solid white; }
+#left_menu { }
+#bottom_liner { background: #D0DAF8; border-top: 1px solid white; }
+#content_pane { }
+
+.content95, .content90, .content80, .content70, .content60, .content50, .content { border: 1px solid #FDCCC1; }
+
+.doc_title { color: gray; }
+
+.bar_section, .bar_section_close, .bar_sub_section {
+    color: #DE4008; /* #DFC32A; */
+    background: #FDCCC1;
+    border: 2px solid white;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.bar_separator, .bar_link, .bar_remark {
+    background: #FEEEEA;
+    border: 2px white solid;
+    border-top: none;
+}
+
+table.result_table, table.form_table {
+    border: 1px solid white;
+    background: #FEEEEA;
+}
+
+.head_col, .head_col_small, .head_table, .head_row, .head_row_top, .data_right, .data_left, .data_center, .separator_row, .separator_col, .close_row {
+    border: 1px solid white;
+    background: transparent;
+}
+.close_row { background: #FDCCC1; }
+
+.separator_col {
+    background: white;
+}
+
+.head_col, .head_col_small, .head_table, .head_row, .head_row_top, .field_name { color: #DF5D31; }
+
+.data_right, .data_left, .data_center { color: #666; }
+

@@ -1,0 +1,543 @@
+/**
+ * Styles for the planning block
+ */
+ 
+.planning {
+	margin-bottom: 1.667em;
+	border: 1px solid #999999;
+	}
+	.planning:last-child {
+		margin-bottom: 0;
+	}
+	/* IE class */
+	.planning.last-child {
+		margin-bottom: 0;
+	}
+	.planning.no-margin,
+	.content-columns .planning {
+		border: none;
+	}
+	.content-columns .planning {
+		margin-bottom: 0;
+	}
+	.planning > li {
+		height: 2.5em;
+		line-height: 2.5em;
+		padding-left: 15em;
+		background: #f2f2f2;
+		vertical-align: bottom; /* IE7 list gap fix */
+	}
+	.planning > li:nth-child(odd) {
+		background: #e6e6e6;
+	}
+	/* IE class */
+	.planning > li.odd {
+		background: #e6e6e6;
+	}
+	.planning > li.planning-header {
+		background: #a4a4a4 url(../images/old-browsers-bg/planning-header-bg.png) repeat-x top;
+		-webkit-background-size: 100% 100%;
+		-moz-background-size: 100% 100%;
+		-o-background-size: 100% 100%;
+		background-size: 100% 100%;
+		background: -moz-linear-gradient(
+			top,
+			#cccccc,
+			#a4a4a4
+		);
+		background: -webkit-gradient(
+			linear,
+			left top, left bottom,
+			from(#cccccc),
+			to(#a4a4a4)
+		);
+		border-top: 1px solid white;
+		border-bottom: 1px solid #828282;
+		color: white;
+	}
+	.planning > li > span,
+	.planning > li > a {
+		display: block;
+		height: 2.5em;
+		line-height: 2.5em;
+		float: left;
+		margin-left: -15em;
+		width: 14em;
+		padding: 0 0.5em;
+		color: #333333;
+		}
+		.planning > li > span {
+			color: #999999;
+		}
+		.planning > li > a:hover {
+			background: #CCCCCC;
+		}
+		.planning > li > span img,
+		.planning > li > a img {
+			margin-bottom: -3px;
+		}
+		.planning > li.planning-header > span {
+			width: 13.5em;
+			padding: 0 0.75em;
+			-moz-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+			-webkit-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+			text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+			color: white;
+			}
+			.planning > li.planning-header > span b {
+				display: block;
+				height: 2.5em;
+				margin: 0 -0.75em;
+				padding: 0 0.75em;
+				border-left: 1px solid #dddddd;
+				border-right: 1px solid #999999;
+			}
+	.planning > li > ul {
+		position: relative;
+		height: 2.5em;
+		border-left: 1px dotted #808080;
+		background: white;
+		}
+		.planning > li:nth-child(odd) > ul {
+			background: #f2f2f2;
+		}
+		/* IE class */
+		.planning > li.odd > ul {
+			background: #f2f2f2;
+		}
+		.planning > li.planning-header > ul {
+			border-left: 1px solid white;
+			background: none;
+		}
+		.planning > li > ul > li {
+			position: absolute;
+			top: 0.5em;
+			height: 1.5em;
+			-moz-border-radius: 0.167em;
+			-webkit-border-radius: 0.167em;
+			-webkit-background-clip: padding-box;
+			border-radius: 0.167em;
+			background: #e5e5e5 url(../images/old-browsers-bg/planning-bar-bg.png) repeat-x top;
+			-webkit-background-size: 100% 100%;
+			-moz-background-size: 100% 100%;
+			-o-background-size: 100% 100%;
+			background-size: 100% 100%;
+			background: -moz-linear-gradient(
+				top,
+				#ffffff,
+				#eeeeee 15%,
+				#c2c2c2 73%,
+				#e5e5e5
+			);
+			background: -webkit-gradient(
+				linear,
+				left top, left bottom,
+				from(#ffffff),
+				to(#e5e5e5),
+				color-stop(0.15, #eeeeee),
+				color-stop(0.73, #c2c2c2)
+			);
+			}
+			.planning > li.planning-header > ul > li {
+				width: 2em;
+				top: auto;
+				height: auto;
+				text-align: center;
+				margin-left: -1em;
+				-moz-text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
+				-webkit-text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
+				text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.25);
+				background: none;
+			}
+			.planning > li.planning-header > ul > li:nth-child(even) {
+				font-size: 0.75em;
+			}
+			/* IE class */
+			.planning > li.planning-header > ul > li.even {
+				font-size: 0.75em;
+			}
+			.planning > li > ul > li.lunch,
+			.planning > li > ul > li.zebras {
+				-webkit-background-size: auto;
+				-moz-background-size: auto;
+				-o-background-size: auto;
+				background-size: auto;
+				background: #f2f2f2;
+				top: 0;
+				height: 2.5em;
+				-moz-border-radius: 0;
+				-webkit-border-radius: 0;
+				-webkit-background-clip: padding-box;
+				border-radius: 0;
+			}
+			.planning > li:nth-child(odd) > ul > li.lunch {
+				background: #e6e6e6;
+			}
+			/* IE class */
+			.planning > li.odd > ul > li.lunch {
+				background: #e6e6e6;
+			}
+			.planning > li > ul > li.zebras {
+				border-left: 1px solid #ccc;
+				border-right: 1px solid #ccc;
+			}
+			.planning > li > ul.zebras,
+			.planning > li > ul > li.zebras {
+				background: white url(../images/zebras.png);
+			}
+			.planning > li > ul > li.current-time {
+				background: none;
+				top: 0;
+				height: 2.5em;
+				-moz-border-radius: 0;
+				-webkit-border-radius: 0;
+				-webkit-background-clip: padding-box;
+				border-radius: 0;
+				width: 0;
+				border-left: 1px solid red;
+			}
+			.planning > li > ul > li > a,
+			.planning > li > ul > li > span {
+				display: block;
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				color: #666666;
+				text-indent: 0.333em;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 0.92em;
+				line-height: 1.45em;
+				border: 1px solid #666666;
+				-moz-border-radius: 0.25em;
+				-webkit-border-radius: 0.25em;
+				-webkit-background-clip: padding-box;
+				border-radius: 0.25em;
+				-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+				white-space: nowrap;
+				overflow: hidden;
+				}
+				.planning > li > ul > li > a span,
+				.planning > li > ul > li > span span {
+					display: block;
+					position: absolute;
+					left: 0;
+					top: 0;
+					bottom: 0;
+					width: 100%;
+					white-space: nowrap;
+					overflow: hidden;
+				}
+			
+			.planning > li > ul > li.milestone {
+				background: #333;
+				top: 0.75em;
+				height: 0.833em;
+				width: 0.833em;
+				margin-left: -0.5em;
+				border: 0.083em solid;
+				border-color: #999 #000 #000 #999;
+				-webkit-transform: rotate(45deg);
+				-moz-transform: rotate(45deg);
+				-o-transform: rotate(45deg);
+				transform: rotate(45deg);
+				}
+				.planning > li > ul > li.milestone > a,
+				.planning > li > ul > li.milestone > span {
+					border: 0;
+				}
+			
+
+.planning > li > ul .event-blue,
+.planning > li > ul .event-green,
+.planning > li > ul .event-orange,
+.planning > li > ul .event-purple,
+.planning > li > ul > li.event-blue a,
+.planning > li > ul > li.event-green a,
+.planning > li > ul > li.event-orange a,
+.planning > li > ul > li.event-purple a,
+.planning > li > ul > li.event-blue span,
+.planning > li > ul > li.event-green span,
+.planning > li > ul > li.event-orange span,
+.planning > li > ul > li.event-purple span {
+	color: white;
+	-webkit-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-o-background-size: 100% 100%;
+	background-size: 100% 100%;
+	-moz-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+	-webkit-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.planning > li > ul .event-blue {
+	background: #4398c9 url(../images/old-browsers-bg/planning-bar-blue-bg.png) repeat-x top;
+	background: -moz-linear-gradient(
+		top,
+		#b0cde5,
+		#6ec3e3 15%,
+		#0e62a8 73%,
+		#4398c9
+	);
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#b0cde5),
+		to(#4398c9),
+		color-stop(0.15, #6ec3e3),
+		color-stop(0.73, #0e62a8)
+	);
+}
+.planning > li > ul .event-green {
+	background: #56c943 url(../images/old-browsers-bg/planning-bar-green-bg.png) repeat-x top;
+	background: -moz-linear-gradient(
+		top,
+		#b3e6b1,
+		#8ae46f 15%,
+		#15a80e 73%,
+		#56c943
+	);
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#b3e6b1),
+		to(#56c943),
+		color-stop(0.15, #8ae46f),
+		color-stop(0.73, #15a80e)
+	);
+}
+.planning > li > ul .event-orange {
+	background: #c99c43 url(../images/old-browsers-bg/planning-bar-orange-bg.png) repeat-x top;
+	background: -moz-linear-gradient(
+		top,
+		#e6d4b1,
+		#e4bd6f 15%,
+		#a8750e 73%,
+		#c99c43
+	);
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#e6d4b1),
+		to(#c99c43),
+		color-stop(0.15, #e4bd6f),
+		color-stop(0.73, #a8750e)
+	);
+}
+.planning > li > ul .event-purple {
+	background: #b543c9 url(../images/old-browsers-bg/planning-bar-purple-bg.png) repeat-x top;
+	background: -moz-linear-gradient(
+		top,
+		#e3b1e6,
+		#c86fe4 15%,
+		#a10ea8 73%,
+		#b543c9
+	);
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#e3b1e6),
+		to(#b543c9),
+		color-stop(0.15, #c86fe4),
+		color-stop(0.73, #a10ea8)
+	);
+}
+
+
+
+.planning .from-0-00, .planning .at-0-00, .planning .from-0, .planning .at-0{ left: 0.00%; }
+.planning .from-0-15, .planning .at-0-15{ left: 1.04%; }
+.planning .from-0-30, .planning .at-0-30{ left: 2.08%; }
+.planning .from-0-45, .planning .at-0-45{ left: 3.13%; }
+.planning .from-1-00, .planning .at-1-00, .planning .from-1, .planning .at-1{ left: 4.17%; }
+.planning .from-1-15, .planning .at-1-15{ left: 5.21%; }
+.planning .from-1-30, .planning .at-1-30{ left: 6.25%; }
+.planning .from-1-45, .planning .at-1-45{ left: 7.29%; }
+.planning .from-2-00, .planning .at-2-00, .planning .from-2, .planning .at-2{ left: 8.33%; }
+.planning .from-2-15, .planning .at-2-15{ left: 9.38%; }
+.planning .from-2-30, .planning .at-2-30{ left: 10.42%; }
+.planning .from-2-45, .planning .at-2-45{ left: 11.46%; }
+.planning .from-3-00, .planning .at-3-00, .planning .from-3, .planning .at-3{ left: 12.50%; }
+.planning .from-3-15, .planning .at-3-15{ left: 13.54%; }
+.planning .from-3-30, .planning .at-3-30{ left: 14.58%; }
+.planning .from-3-45, .planning .at-3-45{ left: 15.63%; }
+.planning .from-4-00, .planning .at-4-00, .planning .from-4, .planning .at-4{ left: 16.67%; }
+.planning .from-4-15, .planning .at-4-15{ left: 17.71%; }
+.planning .from-4-30, .planning .at-4-30{ left: 18.75%; }
+.planning .from-4-45, .planning .at-4-45{ left: 19.79%; }
+.planning .from-5-00, .planning .at-5-00, .planning .from-5, .planning .at-5{ left: 20.83%; }
+.planning .from-5-15, .planning .at-5-15{ left: 21.88%; }
+.planning .from-5-30, .planning .at-5-30{ left: 22.92%; }
+.planning .from-5-45, .planning .at-5-45{ left: 23.96%; }
+.planning .from-6-00, .planning .at-6-00, .planning .from-6, .planning .at-6{ left: 25.00%; }
+.planning .from-6-15, .planning .at-6-15{ left: 26.04%; }
+.planning .from-6-30, .planning .at-6-30{ left: 27.08%; }
+.planning .from-6-45, .planning .at-6-45{ left: 28.13%; }
+.planning .from-7-00, .planning .at-7-00, .planning .from-7, .planning .at-7{ left: 29.17%; }
+.planning .from-7-15, .planning .at-7-15{ left: 30.21%; }
+.planning .from-7-30, .planning .at-7-30{ left: 31.25%; }
+.planning .from-7-45, .planning .at-7-45{ left: 32.29%; }
+.planning .from-8-00, .planning .at-8-00, .planning .from-8, .planning .at-8{ left: 33.33%; }
+.planning .from-8-15, .planning .at-8-15{ left: 34.38%; }
+.planning .from-8-30, .planning .at-8-30{ left: 35.42%; }
+.planning .from-8-45, .planning .at-8-45{ left: 36.46%; }
+.planning .from-9-00, .planning .at-9-00, .planning .from-9, .planning .at-9{ left: 37.50%; }
+.planning .from-9-15, .planning .at-9-15{ left: 38.54%; }
+.planning .from-9-30, .planning .at-9-30{ left: 39.58%; }
+.planning .from-9-45, .planning .at-9-45{ left: 40.63%; }
+.planning .from-10-00, .planning .at-10-00, .planning .from-10, .planning .at-10{ left: 41.67%; }
+.planning .from-10-15, .planning .at-10-15{ left: 42.71%; }
+.planning .from-10-30, .planning .at-10-30{ left: 43.75%; }
+.planning .from-10-45, .planning .at-10-45{ left: 44.79%; }
+.planning .from-11-00, .planning .at-11-00, .planning .from-11, .planning .at-11{ left: 45.83%; }
+.planning .from-11-15, .planning .at-11-15{ left: 46.88%; }
+.planning .from-11-30, .planning .at-11-30{ left: 47.92%; }
+.planning .from-11-45, .planning .at-11-45{ left: 48.96%; }
+.planning .from-12-00, .planning .at-12-00, .planning .from-12, .planning .at-12{ left: 50.00%; }
+.planning .from-12-15, .planning .at-12-15{ left: 51.04%; }
+.planning .from-12-30, .planning .at-12-30{ left: 52.08%; }
+.planning .from-12-45, .planning .at-12-45{ left: 53.13%; }
+.planning .from-13-00, .planning .at-13-00, .planning .from-13, .planning .at-13{ left: 54.17%; }
+.planning .from-13-15, .planning .at-13-15{ left: 55.21%; }
+.planning .from-13-30, .planning .at-13-30{ left: 56.25%; }
+.planning .from-13-45, .planning .at-13-45{ left: 57.29%; }
+.planning .from-14-00, .planning .at-14-00, .planning .from-14, .planning .at-14{ left: 58.33%; }
+.planning .from-14-15, .planning .at-14-15{ left: 59.38%; }
+.planning .from-14-30, .planning .at-14-30{ left: 60.42%; }
+.planning .from-14-45, .planning .at-14-45{ left: 61.46%; }
+.planning .from-15-00, .planning .at-15-00, .planning .from-15, .planning .at-15{ left: 62.50%; }
+.planning .from-15-15, .planning .at-15-15{ left: 63.54%; }
+.planning .from-15-30, .planning .at-15-30{ left: 64.58%; }
+.planning .from-15-45, .planning .at-15-45{ left: 65.63%; }
+.planning .from-16-00, .planning .at-16-00, .planning .from-16, .planning .at-16{ left: 66.67%; }
+.planning .from-16-15, .planning .at-16-15{ left: 67.71%; }
+.planning .from-16-30, .planning .at-16-30{ left: 68.75%; }
+.planning .from-16-45, .planning .at-16-45{ left: 69.79%; }
+.planning .from-17-00, .planning .at-17-00, .planning .from-17, .planning .at-17{ left: 70.83%; }
+.planning .from-17-15, .planning .at-17-15{ left: 71.88%; }
+.planning .from-17-30, .planning .at-17-30{ left: 72.92%; }
+.planning .from-17-45, .planning .at-17-45{ left: 73.96%; }
+.planning .from-18-00, .planning .at-18-00, .planning .from-18, .planning .at-18{ left: 75.00%; }
+.planning .from-18-15, .planning .at-18-15{ left: 76.04%; }
+.planning .from-18-30, .planning .at-18-30{ left: 77.08%; }
+.planning .from-18-45, .planning .at-18-45{ left: 78.13%; }
+.planning .from-19-00, .planning .at-19-00, .planning .from-19, .planning .at-19{ left: 79.17%; }
+.planning .from-19-15, .planning .at-19-15{ left: 80.21%; }
+.planning .from-19-30, .planning .at-19-30{ left: 81.25%; }
+.planning .from-19-45, .planning .at-19-45{ left: 82.29%; }
+.planning .from-20-00, .planning .at-20-00, .planning .from-20, .planning .at-20{ left: 83.33%; }
+.planning .from-20-15, .planning .at-20-15{ left: 84.38%; }
+.planning .from-20-30, .planning .at-20-30{ left: 85.42%; }
+.planning .from-20-45, .planning .at-20-45{ left: 86.46%; }
+.planning .from-21-00, .planning .at-21-00, .planning .from-21, .planning .at-21{ left: 87.50%; }
+.planning .from-21-15, .planning .at-21-15{ left: 88.54%; }
+.planning .from-21-30, .planning .at-21-30{ left: 89.58%; }
+.planning .from-21-45, .planning .at-21-45{ left: 90.63%; }
+.planning .from-22-00, .planning .at-22-00, .planning .from-22, .planning .at-22{ left: 91.67%; }
+.planning .from-22-15, .planning .at-22-15{ left: 92.71%; }
+.planning .from-22-30, .planning .at-22-30{ left: 93.75%; }
+.planning .from-22-45, .planning .at-22-45{ left: 94.79%; }
+.planning .from-23-00, .planning .at-23-00, .planning .from-23, .planning .at-23{ left: 95.83%; }
+.planning .from-23-15, .planning .at-23-15{ left: 96.88%; }
+.planning .from-23-30, .planning .at-23-30{ left: 97.92%; }
+.planning .from-23-45, .planning .at-23-45{ left: 98.96%; }
+.planning .from-24-00, .planning .at-24-00, .planning .from-24, .planning .at-24{ left: 100.00%; }
+.planning .to-0-0, .planning .to-0 {right: 100.00%;}
+.planning .to-0-15 {right: 98.96%;}
+.planning .to-0-30 {right: 97.92%;}
+.planning .to-0-45 {right: 96.88%;}
+.planning .to-1-0, .planning .to-1 {right: 95.83%;}
+.planning .to-1-15 {right: 94.79%;}
+.planning .to-1-30 {right: 93.75%;}
+.planning .to-1-45 {right: 92.71%;}
+.planning .to-2-0, .planning .to-2 {right: 91.67%;}
+.planning .to-2-15 {right: 90.63%;}
+.planning .to-2-30 {right: 89.58%;}
+.planning .to-2-45 {right: 88.54%;}
+.planning .to-3-0, .planning .to-3 {right: 87.50%;}
+.planning .to-3-15 {right: 86.46%;}
+.planning .to-3-30 {right: 85.42%;}
+.planning .to-3-45 {right: 84.38%;}
+.planning .to-4-0, .planning .to-4 {right: 83.33%;}
+.planning .to-4-15 {right: 82.29%;}
+.planning .to-4-30 {right: 81.25%;}
+.planning .to-4-45 {right: 80.21%;}
+.planning .to-5-0, .planning .to-5 {right: 79.17%;}
+.planning .to-5-15 {right: 78.13%;}
+.planning .to-5-30 {right: 77.08%;}
+.planning .to-5-45 {right: 76.04%;}
+.planning .to-6-0, .planning .to-6 {right: 75.00%;}
+.planning .to-6-15 {right: 73.96%;}
+.planning .to-6-30 {right: 72.92%;}
+.planning .to-6-45 {right: 71.88%;}
+.planning .to-7-0, .planning .to-7 {right: 70.83%;}
+.planning .to-7-15 {right: 69.79%;}
+.planning .to-7-30 {right: 68.75%;}
+.planning .to-7-45 {right: 67.71%;}
+.planning .to-8-0, .planning .to-8 {right: 66.67%;}
+.planning .to-8-15 {right: 65.63%;}
+.planning .to-8-30 {right: 64.58%;}
+.planning .to-8-45 {right: 63.54%;}
+.planning .to-9-0, .planning .to-9 {right: 62.50%;}
+.planning .to-9-15 {right: 61.46%;}
+.planning .to-9-30 {right: 60.42%;}
+.planning .to-9-45 {right: 59.38%;}
+.planning .to-10-0, .planning .to-10 {right: 58.33%;}
+.planning .to-10-15 {right: 57.29%;}
+.planning .to-10-30 {right: 56.25%;}
+.planning .to-10-45 {right: 55.21%;}
+.planning .to-11-0, .planning .to-11 {right: 54.17%;}
+.planning .to-11-15 {right: 53.13%;}
+.planning .to-11-30 {right: 52.08%;}
+.planning .to-11-45 {right: 51.04%;}
+.planning .to-12-0, .planning .to-12 {right: 50.00%;}
+.planning .to-12-15 {right: 48.96%;}
+.planning .to-12-30 {right: 47.92%;}
+.planning .to-12-45 {right: 46.88%;}
+.planning .to-13-0, .planning .to-13 {right: 45.83%;}
+.planning .to-13-15 {right: 44.79%;}
+.planning .to-13-30 {right: 43.75%;}
+.planning .to-13-45 {right: 42.71%;}
+.planning .to-14-0, .planning .to-14 {right: 41.67%;}
+.planning .to-14-15 {right: 40.63%;}
+.planning .to-14-30 {right: 39.58%;}
+.planning .to-14-45 {right: 38.54%;}
+.planning .to-15-0, .planning .to-15 {right: 37.50%;}
+.planning .to-15-15 {right: 36.46%;}
+.planning .to-15-30 {right: 35.42%;}
+.planning .to-15-45 {right: 34.38%;}
+.planning .to-16-0, .planning .to-16 {right: 33.33%;}
+.planning .to-16-15 {right: 32.29%;}
+.planning .to-16-30 {right: 31.25%;}
+.planning .to-16-45 {right: 30.21%;}
+.planning .to-17-0, .planning .to-17 {right: 29.17%;}
+.planning .to-17-15 {right: 28.13%;}
+.planning .to-17-30 {right: 27.08%;}
+.planning .to-17-45 {right: 26.04%;}
+.planning .to-18-0, .planning .to-18 {right: 25.00%;}
+.planning .to-18-15 {right: 23.96%;}
+.planning .to-18-30 {right: 22.92%;}
+.planning .to-18-45 {right: 21.88%;}
+.planning .to-19-0, .planning .to-19 {right: 20.83%;}
+.planning .to-19-15 {right: 19.79%;}
+.planning .to-19-30 {right: 18.75%;}
+.planning .to-19-45 {right: 17.71%;}
+.planning .to-20-0, .planning .to-20 {right: 16.67%;}
+.planning .to-20-15 {right: 15.63%;}
+.planning .to-20-30 {right: 14.58%;}
+.planning .to-20-45 {right: 13.54%;}
+.planning .to-21-0, .planning .to-21 {right: 12.50%;}
+.planning .to-21-15 {right: 11.46%;}
+.planning .to-21-30 {right: 10.42%;}
+.planning .to-21-45 {right: 9.38%;}
+.planning .to-22-0, .planning .to-22 {right: 8.33%;}
+.planning .to-22-15 {right: 7.29%;}
+.planning .to-22-30 {right: 6.25%;}
+.planning .to-22-45 {right: 5.21%;}
+.planning .to-23-0, .planning .to-23 {right: 4.17%;}
+.planning .to-23-15 {right: 3.13%;}
+.planning .to-23-30 {right: 2.08%;}
+.planning .to-23-45 {right: 1.04%;}
+.planning .to-24-0, .planning .to-24 {right: 0.00%;}

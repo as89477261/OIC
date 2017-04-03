@@ -1,0 +1,252 @@
+<?php
+global $config;
+global $policy;
+$this->title = 'รายการอาหาร';
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title><?=$this->title?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=tis-620" />
+
+        <!-- Global stylesheets -->
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/reset.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/common.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/form.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/standard.css" rel="stylesheet" type="text/css">
+
+        <!-- Comment/uncomment one of these files to toggle between fixed and fluid layout -->
+        <!--<link href="/<?=$config ['appName']?>/reservation/resources/css/960.gs.css" rel="stylesheet" type="text/css">-->
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/960.gs.fluid.css" rel="stylesheet" type="text/css">
+
+        <!-- Custom styles -->
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/simple-lists.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/block-lists.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/planning.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/table.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/calendars.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/wizard.css" rel="stylesheet" type="text/css">
+        <link href="/<?=$config ['appName']?>/reservation/resources/css/gallery.css" rel="stylesheet" type="text/css">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="icon" type="image/png" href="/favicon-large.png">
+
+        <!-- Generic libs -->
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/html5.js"></script>
+        <!-- this has to be loaded before anything else -->
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/old-browsers.js"></script>
+        <!-- remove if you do not need older browsers detection -->
+
+        <!-- Template libs -->
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/jquery.accessibleList.js"></script>
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/searchField.js"></script>
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/common.js"></script>
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/standard.js"></script>
+        <!--[if lte IE 8]><script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/standard.ie.js"></script><![endif]-->
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/jquery.tip.js"></script>
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/jquery.hashchange.js"></script>
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/jquery.contextMenu.js"></script>
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/jquery.modal2.js"></script>
+
+        <!-- Custom styles lib -->
+        <script type="text/javascript" src="/<?=$config ['appName']?>/reservation/resources/js/list.js"></script>
+
+        <!-- Plugins -->
+        <script  type="text/javascript" src="/<?=$config ['appName']?>/js/jquery.datepick.min.js"></script>
+        <script  type="text/javascript" src="/<?php echo $config ['appName']?>/js/room.js"></script>
+
+        <script type="text/javascript">
+
+            $(document).ready(function()
+            {
+                //$('.date-pick').datePicker({startDate: '01/01/1996'});
+
+                $('#btn_search').click(function() {
+                    window.location = '/<?=$config ['appName']?>/room/<?=$link?>?room='+$('#room').val()+'&date_from=' + $('#date_from').val() + '&date_to=' + $('#date_to').val();
+                });
+
+
+                $('.datepicker').datepick({
+                    alignment: 'bottom',
+                    showOtherMonths: true,
+                    selectOtherMonths: true,
+                    dateFormat: 'dd/mm/yyyy',
+                    renderer: {
+                        picker: '<div class="datepick block-border clearfix form"><div class="mini-calendar clearfix">' +
+                                '{months}</div></div>',
+                        monthRow: '{months}',
+                        month: '<div class="calendar-controls">' +
+                                '{monthHeader:M yyyy}' +
+                                '</div>' +
+                                '<table cellspacing="0">' +
+                                '<thead>{weekHeader}</thead>' +
+                                '<tbody>{weeks}</tbody></table>',
+                        weekHeader: '<tr>{days}</tr>',
+                        dayHeader: '<th>{day}</th>',
+                        week: '<tr>{days}</tr>',
+                        day: '<td>{day}</td>',
+                        monthSelector: '.month',
+                        daySelector: 'td',
+                        rtlClass: 'rtl',
+                        multiClass: 'multi',
+                        defaultClass: 'default',
+                        selectedClass: 'selected',
+                        highlightedClass: 'highlight',
+                        todayClass: 'today',
+                        otherMonthClass: 'other-month',
+                        weekendClass: 'week-end',
+                        commandClass: 'calendar',
+                        commandLinkClass: 'button',
+                        disabledClass: 'unavailable'
+                    }
+                });
+            });
+
+
+        </script>
+    </head>
+
+    <body>
+        <!-- The template uses conditional comments to add wrappers div for ie8 and ie7 - just add .ie or .ie7 prefix to your css selectors when needed -->
+        <!--[if lt IE 9]><div class="ie"><![endif]-->
+        <!--[if lt IE 8]><div class="ie7"><![endif]-->
+
+        <!-- Header -->
+        <header>
+            <div class="container_12">
+                <div class="align-left float-left">
+                    <img width="415" height="84" src="/<?=$config ['appName']?>/reservation/resources/images/oic_header.png" />
+                </div>
+            </div>
+        </header>
+        <!-- End server status -->
+        <nav id="main-nav"> </nav>
+
+
+        <!-- Status bar -->
+        <div id="status-bar">
+            <div class="container_12">
+                <div class="align-left float-left">
+                    <a href="/<?=$config ['appName']?>/room/index">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?=$config ['appName']?>/reservation/resources/images/icons/fugue/home.png">
+                            หน้าหลัก
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/booking-list/" title="My Booking">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/application-blog.png">
+                            รายการจองห้อง
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/booking-all/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/application-blog.png">
+                            รายการจองห้องทั้งหมด
+                        </div>
+                    </a>
+<?php
+if($policy->isRoomAdmin()){
+?>
+                    <a href="/<?php echo $config ['appName']?>/room/category-manage/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/pencil.png">
+							ประเภทห้อง/อุปกรณ์
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/room-manage/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/pencil.png">
+							ห้องประชุม/อุปกรณ์
+                        </div>
+                    </a>
+                    <a href="/<?php echo $config ['appName']?>/room/food-manage/" title="Booking List">
+                        <div class="button menu-opener">
+                            <img width="16" height="16" src="/<?php echo $config ['appName']?>/reservation/resources/images/icons/fugue/pencil.png">
+							รายการอาหาร
+                        </div>
+                    </a>
+<?php
+}
+?>
+                </div>
+            </div>
+        </div>
+        <!-- End status bar -->
+
+        <div id="header-shadow"></div>
+        <!-- End header -->
+
+        <!-- Content -->
+        <article class="container_12">
+
+            <section class="grid_12">
+                <div class="block-border"><form class="block-content form" id="table_form" method="post" action="#">
+                        <h1><?=$this->title?></h1>
+
+                        <div class="block-controls">
+                            <div class="controls-buttons">
+
+                                <ul class="controls-buttons">
+                                    <li><a onclick="openFoodDetail('NEW')" href="javascript:void(0)" title="Add Booking"><b><img src="/<?=$config ['appName']?>/images/icons/add.gif"> เพิ่มรายการอาหาร</b></a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                        <div class="no-margin">
+                            <table class="table" cellspacing="0" width="100%">
+
+                                <thead>
+                                    <tr>
+                                        <th scope="col" nowrap>รหัส</th>
+                                        <th scope="col" nowrap>ชื่อ</th>
+                                        <th scope="col" class="table-actions">&nbsp;</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <?php
+									foreach ($this->foods as $food)
+                                    {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $food['F_FOODCODE']; ?></td>
+                                            <td><?php echo $food['F_FOODNAME']; ?></td>
+                                            <td class="table-actions" nowrap>
+                                                <a href="javascript:void(0);" onclick="openFoodDetail('<?=$food['F_ROWID_FOOD']?>', '<?=$food['F_FOODNAME']?>');" title="Edit" class="with-tip"><img src="/<?=$config ['appName']?>/reservation/resources/images/icons/fugue/pencil.png" width="16" height="16"></a>
+
+                                                <a href="javascript:void(0);" onclick="if(confirm('ยืนยันการลบ')){window.location='/<?=$config ['appName']?>/room/delete-food/?id=<?=$food['F_ROWID_FOOD']?>';}" title="Delete" class="with-tip"><img src="/<?=$config ['appName']?>/reservation/resources/images/icons/fugue/cross-circle.png" width="16" height="16"></a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </tbody>
+
+                            </table></div>
+
+                        <ul class="message no-margin">
+                            <li>Results <?=count($this->foods);?></li>
+                        </ul>
+
+                    </form></div>
+            </section>
+
+        </article>
+
+        <!-- End content -->
+
+        <footer>
+            <div class="float-right">
+                <a href="#top" class="button"><img src="/<?=$config ['appName']?>/reservation/resources/images/icons/fugue/navigation-090.png" width="16" height="16"> Page top</a>
+            </div>
+        </footer>
+
+        <!--[if lt IE 8]></div><![endif]-->
+        <!--[if lt IE 9]></div><![endif]-->
+    </body>
+</html>
