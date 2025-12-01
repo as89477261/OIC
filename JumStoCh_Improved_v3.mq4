@@ -93,6 +93,11 @@ int G_magic_424;        // Sell Counter Magic
 bool G_Recovery_Mode = false;    // DD Recovery Mode Flag
 datetime G_Last_Hedge_Time = 0;  // Last Hedge Close Time
 
+// Adjusted values for SL, TP, Trailing (validated in OnInit)
+double G_SL;
+double G_TP;
+double G_Trailing;
+
 string Gs_428 = "+Improved+BuyTrend+";
 string Gs_436 = "+Improved+SellTrend+";
 string Gs_444 = "+Improved+BuyCounter+";
@@ -114,18 +119,22 @@ int OnInit()
 
    Gd_384 = MarketInfo(Symbol(), MODE_STOPLEVEL) / Li_0;
 
-   // Validate Settings
-   if(SL > 0.0 && SL < Gd_384) {
-      Print("StopLoss too tight, adjusting to minimum: ", Gd_384);
-      SL = Gd_384;
+   // Validate Settings and store in global variables
+   G_SL = SL;
+   G_TP = TP;
+   G_Trailing = Trailing;
+
+   if(G_SL > 0.0 && G_SL < Gd_384) {
+      Print("StopLoss too tight, adjusting from ", G_SL, " to minimum: ", Gd_384);
+      G_SL = Gd_384;
    }
-   if(TP > 0.0 && TP < Gd_384) {
-      Print("TakeProfit too tight, adjusting to minimum: ", Gd_384);
-      TP = Gd_384;
+   if(G_TP > 0.0 && G_TP < Gd_384) {
+      Print("TakeProfit too tight, adjusting from ", G_TP, " to minimum: ", Gd_384);
+      G_TP = Gd_384;
    }
-   if(Trailing < Gd_384) {
-      Print("Trailing too tight, adjusting to minimum: ", Gd_384);
-      Trailing = Gd_384;
+   if(G_Trailing < Gd_384) {
+      Print("Trailing too tight, adjusting from ", G_Trailing, " to minimum: ", Gd_384);
+      G_Trailing = Gd_384;
    }
 
    // Set Magic Numbers
@@ -246,16 +255,16 @@ void OnTick()
    if(!Close_Panic && current_dd < MaxDrawdown) {
       // Open first orders only if no positions exist
       if((!Close_Buy_Trend) && Buy_Trend && f0_13(G_magic_412) == 0 && f0_1(1) == -2)
-         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, Ask - SL * Gd_376, 0, Gs_428 + "0", G_magic_412, 0, clrLime);
+         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, Ask - G_SL * Gd_376, 0, Gs_428 + "0", G_magic_412, 0, clrLime);
 
       if((!Close_Sell_Trend) && Sell_Trend && f0_13(G_magic_416) == 0 && f0_1(1) == 2)
-         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, Bid + SL * Gd_376, 0, Gs_436 + "0", G_magic_416, 0, clrOrange);
+         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, Bid + G_SL * Gd_376, 0, Gs_436 + "0", G_magic_416, 0, clrOrange);
 
       if((!Close_Buy_Counter) && Buy_Counter && f0_13(G_magic_420) == 0 && f0_1(-1) == -2)
-         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, Ask - SL * Gd_376, 0, Gs_444 + "0", G_magic_420, 0, clrBlue);
+         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, Ask - G_SL * Gd_376, 0, Gs_444 + "0", G_magic_420, 0, clrBlue);
 
       if((!Close_Sell_Counter) && Sell_Counter && f0_13(G_magic_424) == 0 && f0_1(-1) == 2)
-         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, Bid + SL * Gd_376, 0, Gs_452 + "0", G_magic_424, 0, clrRed);
+         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, Bid + G_SL * Gd_376, 0, Gs_452 + "0", G_magic_424, 0, clrRed);
    }
 }
 
@@ -458,7 +467,7 @@ void f0_8(int A_magic_0, string As_4)
       double Ld_40 = order_open_price_20 - grid_range * Gd_376;
       if(cmd_16 == OP_BUY && Ask <= Ld_40) {
          double new_lot = f0_7(order_lots_28 * DiMarti);
-         G_ticket_408 = OrderSend(Symbol(), OP_BUY, new_lot, Ask, 3, Ask - SL * Gd_376, 0,
+         G_ticket_408 = OrderSend(Symbol(), OP_BUY, new_lot, Ask, 3, Ask - G_SL * Gd_376, 0,
                                   As_4 + IntegerToString(Li_12), A_magic_0, 0, clrGreen);
          if(G_ticket_408 > 0)
             Print("Grid BUY added: Level=", Li_12, " Lot=", new_lot);
@@ -467,7 +476,7 @@ void f0_8(int A_magic_0, string As_4)
       Ld_40 = order_open_price_20 + grid_range * Gd_376;
       if(cmd_16 == OP_SELL && Bid >= Ld_40) {
          double new_lot = f0_7(order_lots_28 * DiMarti);
-         G_ticket_408 = OrderSend(Symbol(), OP_SELL, new_lot, Bid, 3, Bid + SL * Gd_376, 0,
+         G_ticket_408 = OrderSend(Symbol(), OP_SELL, new_lot, Bid, 3, Bid + G_SL * Gd_376, 0,
                                   As_4 + IntegerToString(Li_12), A_magic_0, 0, clrYellow);
          if(G_ticket_408 > 0)
             Print("Grid SELL added: Level=", Li_12, " Lot=", new_lot);
@@ -482,7 +491,7 @@ void f0_9(int A_magic_0)
 {
    int Li_4 = f0_13(A_magic_0);
    if(Li_4 == 0) return;
-   if(Tp_from_Bep == 0.0 || TP == 0.0) return;
+   if(Tp_from_Bep == 0.0 || G_TP == 0.0) return;
 
    double Ld_8 = MathMax(f0_12(A_magic_0, OP_SELL), f0_12(A_magic_0, OP_BUY));
 
@@ -491,7 +500,7 @@ void f0_9(int A_magic_0)
          if(OrderSymbol() == Symbol() && OrderMagicNumber() == A_magic_0) {
             double price_16;
             if(Li_4 < Star_ModifTp_Bep)
-               price_16 = f0_11(OrderType(), TP, OrderOpenPrice());
+               price_16 = f0_11(OrderType(), G_TP, OrderOpenPrice());
             else
                price_16 = f0_11(OrderType(), Tp_from_Bep, Ld_8);
 
@@ -589,7 +598,7 @@ void f0_14(int A_magic_0)
             if(OrderType() == OP_BUY) {
                int Li_4 = NormalizeDouble((Bid - Ld_8) / Gd_376, 0);
                if(Li_4 >= StartTrail) {
-                  double price_24 = NormalizeDouble(Bid - Trailing * Gd_376, Digits);
+                  double price_24 = NormalizeDouble(Bid - G_Trailing * Gd_376, Digits);
                   if(OrderStopLoss() == 0.0 || price_24 > OrderStopLoss())
                      OrderModify(OrderTicket(), OrderOpenPrice(), price_24, OrderTakeProfit(), 0, clrAqua);
                }
@@ -597,7 +606,7 @@ void f0_14(int A_magic_0)
             else if(OrderType() == OP_SELL) {
                int Li_4 = NormalizeDouble((Ld_16 - Ask) / Gd_376, 0);
                if(Li_4 >= StartTrail) {
-                  double price_24 = NormalizeDouble(Ask + Trailing * Gd_376, Digits);
+                  double price_24 = NormalizeDouble(Ask + G_Trailing * Gd_376, Digits);
                   if(OrderStopLoss() == 0.0 || price_24 < OrderStopLoss())
                      OrderModify(OrderTicket(), OrderOpenPrice(), price_24, OrderTakeProfit(), 0, clrPink);
                }
