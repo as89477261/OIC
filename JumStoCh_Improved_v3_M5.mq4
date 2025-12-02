@@ -1,33 +1,37 @@
 //+------------------------------------------------------------------+
 //|                                    JumStoCh_Improved_v3_M5.mq4    |
-//|              M5 Scalping Version - High Frequency Trading         |
+//|              M5 Scalping Version - SAFE MODE (Profit Focused)     |
 //|                 Based on Jum+StoCh v2.5 + Low DD Improvements     |
 //+------------------------------------------------------------------+
-#property copyright "Improved by Claude AI - M5 Scalping Edition"
+#property copyright "Improved by Claude AI - M5 Safe Scalping Edition"
 #property link      ""
-#property version   "3.10"
+#property version   "3.20"
 #property strict
 
-// ⭐ OPTIMIZED FOR M5 TIMEFRAME - HIGH FREQUENCY TRADING ⭐
-// - Smaller Range (20 pips vs 30 pips)
-// - More aggressive filters (trade more frequently)
-// - Faster Hedge Closing (2 orders minimum)
-// - Suitable for Scalping strategies
+// ⭐ M5 SAFE MODE - PROFIT FOCUSED WITH RISK PROTECTION ⭐
+// v3.20 IMPROVEMENTS:
+// - Max Floating Loss Protection (Stop grid at 3% loss)
+// - Auto Breakeven (Move SL when profit > 50% TP)
+// - Faster Hedge Closing (Min 1 order, 0.3% target)
+// - Stricter Signal Filters (RSI 35/65, Stoch 30/70)
+// - Reduced DD Protection (8% Max DD, 5% Recovery Mode)
+// - Safer Grid Settings (Range 25 pips, Level 6, TP 20 pips)
 
 //--- Input Parameters
 input string Section1 = "=== Risk Management & DD Protection ===";
-input double MaxDrawdown = 12.0;              // Max DD % (Stop New Trades)
-input double DD_Recovery_Level = 8.0;         // DD % to activate Recovery Mode
+input double MaxDrawdown = 8.0;               // ⭐ M5: Max DD % 8% (SAFER!)
+input double DD_Recovery_Level = 5.0;         // ⭐ M5: DD % 5% to activate Recovery Mode
+input double Max_Floating_Loss_Percent = 3.0; // ⭐ Max Floating Loss % (Stop Grid)
 input bool   Risk_In_Money = FALSE;           // Use Fixed Risk Amount
 input double Risk_in_money = 500.0;           // Max Loss Amount
 input double Target_Persen = 3.0;             // Target Profit % (M5: Lower target, more trades)
 
 input string Section2 = "=== Hedge Pair Closing System ===";
 input bool   Enable_Hedge_Closing = TRUE;     // Enable Hedge Pair Closing
-input int    Min_Orders_For_Hedge = 2;        // ⭐ M5: Min 2 Orders (faster closing)
-input double Hedge_Profit_Target = 0.5;       // ⭐ M5: 0.5% target (close faster)
+input int    Min_Orders_For_Hedge = 1;        // ⭐ M5: Min 1 Order (FASTER closing)
+input double Hedge_Profit_Target = 0.3;       // ⭐ M5: 0.3% target (close quicker)
 input bool   Hedge_In_Money = FALSE;          // Use Money Instead of %
-input double Hedge_Profit_Money = 5.0;        // ⭐ M5: $5 target
+input double Hedge_Profit_Money = 3.0;        // ⭐ M5: $3 target (lower)
 
 input string Section3 = "=== Lot Management (Improved) ===";
 input string Lot_info = "Mode 1=Compound; Mode 2=Fix Lot";
@@ -38,13 +42,13 @@ input int    Magic = 65;                      // ⭐ M5: Different Magic (65 for
 
 input string Section4 = "=== Grid Settings (M5 Optimized) ===";
 input bool   Use_Dynamic_Range = TRUE;        // Use ATR for Dynamic Range
-input double Range = 20.0;                    // ⭐ M5: 20 pips (smaller for scalping)
+input double Range = 25.0;                    // ⭐ M5: 25 pips (SAFER spacing)
 input double DiMarti = 1.25;                  // ⭐ M5: 1.25 (safer for frequent trades)
-input int    Level_Max = 8;                   // ⭐ M5: 8 levels (more opportunities)
+input int    Level_Max = 6;                   // ⭐ M5: 6 levels (REDUCED for safety)
 input bool   Use_Stop_Loss = TRUE;            // ⭐ Enable/Disable Stop Loss
 input double SL = 100.0;                      // ⭐ M5: 100 pips SL (tighter)
 input bool   Use_Take_Profit = TRUE;          // ⭐ Enable/Disable Take Profit
-input double TP = 15.0;                       // ⭐ M5: 15 pips TP (scalping target)
+input double TP = 20.0;                       // ⭐ M5: 20 pips TP (better profit)
 
 input string Section5 = "=== Breakeven & Trailing ===";
 input int    Star_ModifTp_Bep = 3;            // Start Modify TP from Level
@@ -69,16 +73,16 @@ input string Section8 = "=== Indicators (M5 Fast Response) ===";
 input int    kperiod = 21;                    // ⭐ M5: Faster Stoch (21 vs 32)
 input int    dperiod = 8;                     // ⭐ M5: Faster (8 vs 12)
 input int    slowing = 8;                     // ⭐ M5: Faster (8 vs 12)
-input int    lo_level = 35;                   // ⭐ M5: Relaxed (35 vs 25)
-input int    up_level = 65;                   // ⭐ M5: Relaxed (65 vs 75)
+input int    lo_level = 30;                   // ⭐ M5: STRICTER (30 vs 35)
+input int    up_level = 70;                   // ⭐ M5: STRICTER (70 vs 65)
 input int    maPereode = 20;                  // ⭐ M5: Faster MA (20 vs 25)
 
-input string Section9 = "=== Additional Filters (Relaxed for M5) ===";
+input string Section9 = "=== Additional Filters (STRICTER for Safety) ===";
 input int    RSI_Period = 14;                 // RSI Period
-input double RSI_Oversold = 40;               // ⭐ M5: Very relaxed (40 vs 30)
-input double RSI_Overbought = 60;             // ⭐ M5: Very relaxed (60 vs 70)
+input double RSI_Oversold = 35;               // ⭐ M5: STRICTER (35 vs 40)
+input double RSI_Overbought = 65;             // ⭐ M5: STRICTER (65 vs 60)
 input int    ATR_Period = 14;                 // ATR Period
-input double ATR_Volatility_Filter = 4.0;     // ⭐ M5: Very relaxed (4.0 vs 2.5)
+input double ATR_Volatility_Filter = 3.0;     // ⭐ M5: STRICTER (3.0 vs 4.0)
 
 input string Section10 = "=== Manual Close Options ===";
 input bool   Close_Panic = FALSE;             // Close All Orders
@@ -153,20 +157,24 @@ int OnInit()
 
    if(Lot_mode == 2) G_lots_392 = f0_7(Fix_lot);
 
-   Print("===== Jum+StoCh M5 Scalping v3.10 Initialized =====");
-   Print("⭐ OPTIMIZED FOR M5 TIMEFRAME - HIGH FREQUENCY ⭐");
-   Print("Initial Balance: ", Gd_400);
-   Print("Range: ", Range, " pips");
-   Print("Stop Loss: ", Use_Stop_Loss ? "ENABLED (" + DoubleToString(G_SL, 1) + " pips)" : "DISABLED ⚠️");
-   Print("Take Profit: ", Use_Take_Profit ? "ENABLED (" + DoubleToString(G_TP, 1) + " pips)" : "DISABLED");
-   Print("Max DD Protection: ", MaxDrawdown, "%");
-   Print("Recovery Mode at: ", DD_Recovery_Level, "%");
-   Print("Hedge Closing: ", Enable_Hedge_Closing ? "ENABLED" : "DISABLED");
-   Print("Min Orders for Hedge: ", Min_Orders_For_Hedge, " | Target: ", Hedge_Profit_Target, "%");
-   Print("Martingale: ", DiMarti, " | Max Levels: ", Level_Max);
+   Print("===== Jum+StoCh M5 Scalping v3.20 SAFE MODE =====");
+   Print("⭐ PROFIT FOCUSED - IMPROVED RISK MANAGEMENT ⭐");
+   Print("Initial Balance: $", Gd_400);
+   Print("--- SAFETY FEATURES ---");
+   Print("Max DD Protection: ", MaxDrawdown, "% (REDUCED)");
+   Print("DD Recovery Mode: ", DD_Recovery_Level, "%");
+   Print("Max Floating Loss: ", Max_Floating_Loss_Percent, "% (NEW!)");
+   Print("Auto Breakeven: ENABLED (at 50% TP profit)");
+   Print("--- GRID SETTINGS ---");
+   Print("Range: ", Range, " pips | Levels: ", Level_Max, " | Martingale: ", DiMarti);
+   Print("Stop Loss: ", Use_Stop_Loss ? "ON (" + DoubleToString(G_SL, 1) + " pips)" : "OFF");
+   Print("Take Profit: ", Use_Take_Profit ? "ON (" + DoubleToString(G_TP, 1) + " pips)" : "OFF");
+   Print("--- HEDGE CLOSING ---");
+   Print("Min Orders: ", Min_Orders_For_Hedge, " | Target: ", Hedge_Profit_Target, "% (FASTER)");
+   Print("--- SIGNAL FILTERS (STRICTER) ---");
    Print("RSI: ", RSI_Oversold, "/", RSI_Overbought, " | Stoch: ", lo_level, "/", up_level);
    Print("ATR Filter: ", ATR_Volatility_Filter, "x");
-   Print("===================================================");
+   Print("==================================================");
 
    return(INIT_SUCCEEDED);
 }
@@ -257,6 +265,12 @@ void OnTick()
    f0_9(G_magic_420);
    f0_9(G_magic_424);
 
+   // === AUTO BREAKEVEN (Protect Profits) ===
+   f0_AutoBreakeven(G_magic_412);
+   f0_AutoBreakeven(G_magic_416);
+   f0_AutoBreakeven(G_magic_420);
+   f0_AutoBreakeven(G_magic_424);
+
    // === TRAILING STOP ===
    if(Dtrailing) {
       f0_14(G_magic_412);
@@ -300,6 +314,75 @@ double f0_GetCurrentDD()
 
    double dd = ((balance - equity) / balance) * 100.0;
    return MathMax(0, dd);
+}
+
+//+------------------------------------------------------------------+
+//| Get Current Floating Loss Percentage                              |
+//+------------------------------------------------------------------+
+double f0_GetFloatingLoss()
+{
+   double total_profit = 0;
+   for(int i = 0; i < OrdersTotal(); i++) {
+      if(OrderSelect(i, SELECT_BY_POS, MODE_TRADES)) {
+         if(OrderSymbol() == Symbol() && OrderType() <= OP_SELL) {
+            total_profit += OrderProfit() + OrderSwap() + OrderCommission();
+         }
+      }
+   }
+
+   double balance = AccountBalance();
+   if(balance <= 0) return 0;
+
+   // If losing (negative profit), calculate as % of balance
+   if(total_profit < 0) {
+      return (MathAbs(total_profit) / balance) * 100.0;
+   }
+
+   return 0;  // No floating loss
+}
+
+//+------------------------------------------------------------------+
+//| Auto Breakeven Management - Move SL to BE when in profit          |
+//+------------------------------------------------------------------+
+void f0_AutoBreakeven(int A_magic_0)
+{
+   // Only apply if SL is enabled
+   if(!Use_Stop_Loss) return;
+
+   double breakeven_buffer = 5.0;  // 5 pips buffer above/below BE
+
+   for(int pos = OrdersTotal() - 1; pos >= 0; pos--) {
+      if(OrderSelect(pos, SELECT_BY_POS, MODE_TRADES)) {
+         if(OrderSymbol() == Symbol() && OrderMagicNumber() == A_magic_0) {
+            if(OrderType() == OP_BUY) {
+               // Move SL to BE+buffer when profit > TP/2
+               double current_profit = (Bid - OrderOpenPrice()) / Gd_376;
+               if(current_profit >= G_TP * 0.5) {  // Profit > 50% of TP
+                  double new_sl = OrderOpenPrice() + breakeven_buffer * Gd_376;
+                  // Only move SL up, never down
+                  if(OrderStopLoss() == 0 || new_sl > OrderStopLoss()) {
+                     if(new_sl < Bid - Gd_384 * Gd_376) {  // Respect stop level
+                        OrderModify(OrderTicket(), OrderOpenPrice(), new_sl, OrderTakeProfit(), 0, clrBlue);
+                     }
+                  }
+               }
+            }
+            else if(OrderType() == OP_SELL) {
+               // Move SL to BE-buffer when profit > TP/2
+               double current_profit = (OrderOpenPrice() - Ask) / Gd_376;
+               if(current_profit >= G_TP * 0.5) {  // Profit > 50% of TP
+                  double new_sl = OrderOpenPrice() - breakeven_buffer * Gd_376;
+                  // Only move SL down, never up
+                  if(OrderStopLoss() == 0 || new_sl < OrderStopLoss()) {
+                     if(new_sl > Ask + Gd_384 * Gd_376) {  // Respect stop level
+                        OrderModify(OrderTicket(), OrderOpenPrice(), new_sl, OrderTakeProfit(), 0, clrRed);
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
 }
 
 //+------------------------------------------------------------------+
@@ -382,29 +465,41 @@ int f0_1(int Ai_0)
 
    // === TREND MODE ===
    if(Ai_0 == 1 && f0_0() == 1) {
-      // SELL Signal (More Strict)
-      if(Close[1] < ima_4 && istochastic_12 > lo_level && rsi > 45) {
+      // SELL Signal (STRICTER)
+      if(Close[1] < ima_4 && istochastic_12 > lo_level && rsi > 50) {
          if(istochastic_12 > istochastic_prev) {  // Stoch rising
-            return 2;
+            // Additional confirmation: Price should be below MA
+            if(Close[0] < ima_4) {
+               return 2;
+            }
          }
       }
-      // BUY Signal (More Strict)
-      if(Close[1] > ima_4 && istochastic_12 < up_level && rsi < 55) {
+      // BUY Signal (STRICTER)
+      if(Close[1] > ima_4 && istochastic_12 < up_level && rsi < 50) {
          if(istochastic_12 < istochastic_prev) {  // Stoch falling
-            return -2;
+            // Additional confirmation: Price should be above MA
+            if(Close[0] > ima_4) {
+               return -2;
+            }
          }
       }
    }
 
    // === COUNTER TREND MODE ===
    if(Ai_0 == -1 && f0_4() == 1) {
-      // SELL Signal - Overbought with confirmation
+      // SELL Signal - Overbought with STRICT confirmation
       if(istochastic_12 > up_level && rsi > RSI_Overbought) {
-         return 2;
+         // Additional: Check if Stoch is turning down
+         if(istochastic_12 < istochastic_prev) {
+            return 2;
+         }
       }
-      // BUY Signal - Oversold with confirmation
+      // BUY Signal - Oversold with STRICT confirmation
       if(istochastic_12 < lo_level && rsi < RSI_Oversold) {
-         return -2;
+         // Additional: Check if Stoch is turning up
+         if(istochastic_12 > istochastic_prev) {
+            return -2;
+         }
       }
    }
 
@@ -458,6 +553,19 @@ void f0_8(int A_magic_0, string As_4)
    // Don't add more orders if at max level or DD too high
    if(Li_12 >= Level_Max) return;
    if(f0_GetCurrentDD() >= MaxDrawdown * 0.8) return;  // Stop at 80% of max DD
+
+   // ⭐ NEW: Stop opening grid if floating loss exceeds limit
+   double current_floating_loss = f0_GetFloatingLoss();
+   if(current_floating_loss >= Max_Floating_Loss_Percent) {
+      if(Li_12 > 0) {  // Only print if we have existing orders
+         static datetime last_warning = 0;
+         if(TimeCurrent() - last_warning > 300) {  // Print once every 5 minutes
+            Print("⚠️ Floating Loss ", DoubleToString(current_floating_loss, 2), "% - Grid stopped for Magic ", A_magic_0);
+            last_warning = TimeCurrent();
+         }
+      }
+      return;
+   }
 
    if(Li_12 > 0 && Li_12 < Level_Max) {
       int cmd_16;
@@ -585,27 +693,30 @@ int f0_4()
 void f0_2()
 {
    double current_dd = f0_GetCurrentDD();
+   double floating_loss = f0_GetFloatingLoss();
    string recovery_status = G_Recovery_Mode ? "*** RECOVERY MODE ***" : "Normal";
 
    Comment(
-      "\n =========================================",
-      "\n  ⭐ Jum+StoCh M5 Scalping v3.10 ⭐",
-      "\n =========================================",
+      "\n ==========================================",
+      "\n  ⭐ Jum+StoCh M5 v3.20 SAFE MODE ⭐",
+      "\n ==========================================",
       "\n  Balance: $", DoubleToString(AccountBalance(), 2),
       "\n  Equity: $", DoubleToString(AccountEquity(), 2),
-      "\n  Current DD: ", DoubleToString(current_dd, 2), "%",
+      "\n  Floating P/L: $", DoubleToString(AccountEquity() - AccountBalance(), 2),
+      "\n ------------------------------------------",
+      "\n  Current DD: ", DoubleToString(current_dd, 2), "% / ", MaxDrawdown, "%",
+      "\n  Floating Loss: ", DoubleToString(floating_loss, 2), "% / ", Max_Floating_Loss_Percent, "%",
       "\n  Status: ", recovery_status,
-      "\n -----------------------------------------",
+      "\n ------------------------------------------",
       "\n  Buy Trend: ", f0_13(G_magic_412), " | Sell Trend: ", f0_13(G_magic_416),
       "\n  Buy Counter: ", f0_13(G_magic_420), " | Sell Counter: ", f0_13(G_magic_424),
-      "\n ----------------------------------------",
+      "\n ------------------------------------------",
       "\n  Profit Trend: $", DoubleToString(f0_6(G_magic_412) + f0_6(G_magic_416), 2),
       "\n  Profit Counter: $", DoubleToString(f0_6(G_magic_420) + f0_6(G_magic_424), 2),
-      "\n ----------------------------------------",
-      "\n  Lot Size: ", DoubleToString(G_lots_392, 2),
-      "\n  Martingale: ", DiMarti, " | Max Levels: ", Level_Max,
-      "\n  Hedge Closing: ", Enable_Hedge_Closing ? "ON" : "OFF",
-      "\n ========================================"
+      "\n ------------------------------------------",
+      "\n  Lot: ", DoubleToString(G_lots_392, 2), " | Range: ", Range,
+      "\n  Hedge: ", Enable_Hedge_Closing ? "ON" : "OFF", " | Auto BE: ", Use_Stop_Loss ? "ON" : "OFF",
+      "\n =========================================="
    );
 }
 
