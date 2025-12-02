@@ -35,7 +35,9 @@ input bool   Use_Dynamic_Range = TRUE;        // Use ATR for Dynamic Range
 input double Range = 30.0;                    // Grid Range (pips) - Increased
 input double DiMarti = 1.3;                   // Martingale Multiplier (Reduced!)
 input int    Level_Max = 6;                   // Max Grid Levels (Reduced!)
+input bool   Use_Stop_Loss = TRUE;            // Enable/Disable Stop Loss
 input double SL = 200.0;                      // Stop Loss (pips) - Reduced
+input bool   Use_Take_Profit = TRUE;          // Enable/Disable Take Profit
 input double TP = 25.0;                       // Take Profit (pips)
 
 input string Section5 = "=== Breakeven & Trailing ===";
@@ -253,18 +255,24 @@ void OnTick()
    // === NEW TRADE ENTRY ===
    // Don't open new trades if DD is too high or in panic mode
    if(!Close_Panic && current_dd < MaxDrawdown) {
+      // Calculate SL and TP (or 0 if disabled)
+      double buy_sl = Use_Stop_Loss ? Ask - G_SL * Gd_376 : 0;
+      double buy_tp = Use_Take_Profit ? Ask + G_TP * Gd_376 : 0;
+      double sell_sl = Use_Stop_Loss ? Bid + G_SL * Gd_376 : 0;
+      double sell_tp = Use_Take_Profit ? Bid - G_TP * Gd_376 : 0;
+
       // Open first orders only if no positions exist
       if((!Close_Buy_Trend) && Buy_Trend && f0_13(G_magic_412) == 0 && f0_1(1) == -2)
-         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, Ask - G_SL * Gd_376, 0, Gs_428 + "0", G_magic_412, 0, clrLime);
+         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, buy_sl, buy_tp, Gs_428 + "0", G_magic_412, 0, clrLime);
 
       if((!Close_Sell_Trend) && Sell_Trend && f0_13(G_magic_416) == 0 && f0_1(1) == 2)
-         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, Bid + G_SL * Gd_376, 0, Gs_436 + "0", G_magic_416, 0, clrOrange);
+         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, sell_sl, sell_tp, Gs_436 + "0", G_magic_416, 0, clrOrange);
 
       if((!Close_Buy_Counter) && Buy_Counter && f0_13(G_magic_420) == 0 && f0_1(-1) == -2)
-         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, Ask - G_SL * Gd_376, 0, Gs_444 + "0", G_magic_420, 0, clrBlue);
+         G_ticket_408 = OrderSend(Symbol(), OP_BUY, G_lots_392, Ask, 3, buy_sl, buy_tp, Gs_444 + "0", G_magic_420, 0, clrBlue);
 
       if((!Close_Sell_Counter) && Sell_Counter && f0_13(G_magic_424) == 0 && f0_1(-1) == 2)
-         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, Bid + G_SL * Gd_376, 0, Gs_452 + "0", G_magic_424, 0, clrRed);
+         G_ticket_408 = OrderSend(Symbol(), OP_SELL, G_lots_392, Bid, 3, sell_sl, sell_tp, Gs_452 + "0", G_magic_424, 0, clrRed);
    }
 }
 
@@ -467,19 +475,23 @@ void f0_8(int A_magic_0, string As_4)
       double Ld_40 = order_open_price_20 - grid_range * Gd_376;
       if(cmd_16 == OP_BUY && Ask <= Ld_40) {
          double new_lot = f0_7(order_lots_28 * DiMarti);
-         G_ticket_408 = OrderSend(Symbol(), OP_BUY, new_lot, Ask, 3, Ask - G_SL * Gd_376, 0,
+         double grid_buy_sl = Use_Stop_Loss ? Ask - G_SL * Gd_376 : 0;
+         double grid_buy_tp = Use_Take_Profit ? Ask + G_TP * Gd_376 : 0;
+         G_ticket_408 = OrderSend(Symbol(), OP_BUY, new_lot, Ask, 3, grid_buy_sl, grid_buy_tp,
                                   As_4 + IntegerToString(Li_12), A_magic_0, 0, clrGreen);
          if(G_ticket_408 > 0)
-            Print("Grid BUY added: Level=", Li_12, " Lot=", new_lot);
+            Print("Grid BUY added: Level=", Li_12, " Lot=", new_lot, " SL=", Use_Stop_Loss?"ON":"OFF", " TP=", Use_Take_Profit?"ON":"OFF");
       }
 
       Ld_40 = order_open_price_20 + grid_range * Gd_376;
       if(cmd_16 == OP_SELL && Bid >= Ld_40) {
          double new_lot = f0_7(order_lots_28 * DiMarti);
-         G_ticket_408 = OrderSend(Symbol(), OP_SELL, new_lot, Bid, 3, Bid + G_SL * Gd_376, 0,
+         double grid_sell_sl = Use_Stop_Loss ? Bid + G_SL * Gd_376 : 0;
+         double grid_sell_tp = Use_Take_Profit ? Bid - G_TP * Gd_376 : 0;
+         G_ticket_408 = OrderSend(Symbol(), OP_SELL, new_lot, Bid, 3, grid_sell_sl, grid_sell_tp,
                                   As_4 + IntegerToString(Li_12), A_magic_0, 0, clrYellow);
          if(G_ticket_408 > 0)
-            Print("Grid SELL added: Level=", Li_12, " Lot=", new_lot);
+            Print("Grid SELL added: Level=", Li_12, " Lot=", new_lot, " SL=", Use_Stop_Loss?"ON":"OFF", " TP=", Use_Take_Profit?"ON":"OFF");
       }
    }
 }
